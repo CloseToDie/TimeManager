@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.LoggerViewController">
+   <top>
+      <HBox prefHeight="139.0" prefWidth="400.0" styleClass="Navbar" stylesheets="@css/LoggerView.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="110.0" prefWidth="400.0">
+               <children>
+                  <JFXButton layoutX="260.0" layoutY="44.0" onMouseClicked="#logOutBtn" prefHeight="50.0" prefWidth="125.0" text="Log Out" textFill="#f4f4f4" />
+                  <JFXTextField fx:id="projectNameField" layoutX="14.0" layoutY="94.0" style="-fx-background-color: #f4f4f4;" />
+                  <ImageView fitHeight="71.0" fitWidth="182.0" layoutX="6.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="57.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0">
+                     <image>
+                        <Image url="@../../../../../../../Billeder/grumsen-logo-retina.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="MPHField" layoutX="153.0" layoutY="93.0" prefHeight="26.0" prefWidth="46.0" />
+               </children>
+            </AnchorPane>
+         </children></HBox>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="102.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton layoutX="43.0" layoutY="26.0" onMouseClicked="#startButton" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #333;" text="Start" textFill="#f4f4f4" />
+            <JFXButton layoutX="235.0" layoutY="26.0" onMouseClicked="#stopButton" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #333;" text="Stop" textFill="#f4f4f4" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TableView maxHeight="462.0" maxWidth="400.0" prefHeight="462.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="startedColumn" minWidth="100.0" prefWidth="75.0" text="Started" />
+          <TableColumn fx:id="stoppedColumn" minWidth="100.0" prefWidth="75.0" text="Stopped" />
+            <TableColumn fx:id="dateColumn" minWidth="100.0" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="usedColumn" minWidth="100.0" prefWidth="75.0" text="Used" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

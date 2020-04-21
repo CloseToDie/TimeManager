@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author andreasvillumsen
  */
-public class AppController implements Initializable {
+public class AdminViewController implements Initializable {
 
     /**
      * Initializes the controller class.

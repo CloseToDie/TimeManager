@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+
+.Navbar {
+    -fx-background-color: #333;
+}

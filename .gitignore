@@ -39,3 +39,7 @@ nbdist/
 
 # End of https://www.gitignore.io/api/java,netbeans
 DBSettings.txt
+nbproject/build-impl.xml
+nbproject/project.properties
+nbproject/genfiles.properties
+nbproject/project.xml
