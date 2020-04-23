@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.AdminViewController">
    <left>
       <AnchorPane prefHeight="500.0" prefWidth="70.0" style="-fx-background-color: #333;" BorderPane.alignment="CENTER">
@@ -17,17 +16,17 @@
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/stopwatch-solid.png" />
+                  <Image url="@../../../../assets/img/stopwatch-solid.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/users-solid.png" />
+                  <Image url="@../../../../assets/img/users-solid.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/chart-pie-solid.png" />
+                  <Image url="@../../../../assets/img/chart-pie-solid.png" />
                </image>
             </ImageView>
          </children>

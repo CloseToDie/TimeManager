@@ -21,17 +21,17 @@
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/stopwatch-solid.png" />
+                  <Image url="@../../../../assets/img/stopwatch-solid.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/users-solid.png" />
+                  <Image url="@../../../../assets/img/users-solid.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="15.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Billeder/Saved%20Pictures/chart-pie-solid.png" />
+                  <Image url="@../../../../assets/img/chart-pie-solid.png" />
                </image>
             </ImageView>
          </children>
