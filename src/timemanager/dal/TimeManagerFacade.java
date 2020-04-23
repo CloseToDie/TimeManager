@@ -5,6 +5,8 @@
  */
 package timemanager.dal;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author andreasvillumsen
