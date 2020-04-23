@@ -5,18 +5,36 @@
  */
 package timemanager.be;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author kaspe
  */
 public class Timer
 {
-    public void getStartTime
+
+    LocalDateTime startTime;
+    LocalDateTime stopTime;
+
+    public LocalDateTime getStartTime(LocalDateTime a)
     {
-        rer
+        return startTime;
     }
-    
 
+    public void setStartTime(LocalDateTime a)
+    {
 
-    
+        a = startTime;
+    }
+    public LocalDateTime getStopTime(LocalDateTime b)
+    {
+        return stopTime;
+    }
+
+    public void setStopTime(LocalDateTime b)
+    {
+
+        b = stopTime;
+    }
 }
