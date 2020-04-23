@@ -5,9 +5,11 @@
  */
 package timemanager.bll;
 
+
 import java.time.Duration;
 import java.time.LocalDateTime;
-import timemanager.be.Timer;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
@@ -17,7 +19,8 @@ public class TimeSaver
 {
     LocalDateTime startTime;
     LocalDateTime stopTime;
-    int timeSpent;
+    int spentTime;
+    static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
     public void startTime()
     {
@@ -31,9 +34,16 @@ public class TimeSaver
         
     }
 
-    public int timeSpent()
+    public int spentTime(int compareTo)
     {
-        timeSpent(stopTime.compareTo(startTime));
+        spentTime(stopTime.compareTo(startTime));
+        return spentTime;
         
     }
+
+    public void validator()
+    {
+        System.out.println(spentTime);
+    }
+
 }
