@@ -3,20 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timemanager.be;
+package timemanager.dal;
 
 /**
  *
- * @author kaspe
+ * @author andreasvillumsen
  */
-public class Timer
-{
-    public void getStartTime
-    {
-        rer
-    }
-    
-
-
+public interface TimeManagerFacade {
     
 }
