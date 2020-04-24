@@ -28,12 +28,5 @@ public class TimeSaver
     public void stopTime()
     {
         stopTime = LocalDateTime.now();
-        
-    }
-
-    public int timeSpent()
-    {
-        timeSpent(stopTime.compareTo(startTime));
-        
     }
 }

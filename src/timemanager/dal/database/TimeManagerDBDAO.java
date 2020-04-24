@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import timemanager.be.Timer;
 import timemanager.dal.TimeManagerFacade;
 
 /**
@@ -34,17 +35,17 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
      *
      * @return list of playlist or null
      */
-    public List<> getAllPlaylists() {
-        ArrayList<> playlists = new ArrayList<>();
+    public List<Timer> getAllPlaylists() {
+        ArrayList<Timer> playlists = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM playlist");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                playlists.add(new Playlist(id, name, 1, 1, "antoni"));
+                playlists.add(new Timer());
             }
             return playlists;
 
