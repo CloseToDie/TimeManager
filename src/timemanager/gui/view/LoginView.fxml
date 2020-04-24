@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.LoginViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@css/LoggerView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.AdminViewController">
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #333;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="70.0" style="-fx-background-color: #333;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="28.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image Here" wrappingWidth="53.336669921875" />
-         </children></AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="usernameButton" layoutX="65.0" layoutY="40.0" />
-            <TextField fx:id="passwordField" layoutX="65.0" layoutY="80.0" />
-            <Text layoutX="8.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-            <Text layoutX="10.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-            <Button fx:id="loginButton" layoutX="65.0" layoutY="121.0" mnemonicParsing="false" onAction="#LoginUser" prefHeight="25.0" prefWidth="55.0" text="Login" />
-            <Button fx:id="cancelButton" layoutX="148.0" layoutY="121.0" mnemonicParsing="false" onAction="#cancelLogin" prefHeight="25.0" prefWidth="55.0" text="Cancel" />
+            <ImageView fitHeight="50.0" fitWidth="70.0" layoutX="1.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../assets/img/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-   </right>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="28.0" layoutY="17.0" text="Login" textFill="#333333">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="28.0" layoutY="420.0" prefHeight="48.0" prefWidth="276.0" text="Login" />
+            <TextField layoutX="27.0" layoutY="175.0" prefHeight="35.0" prefWidth="277.0" />
+            <Text layoutX="29.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+            <PasswordField layoutX="27.0" layoutY="243.0" prefHeight="35.0" prefWidth="278.0" />
+            <Text layoutX="29.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>
