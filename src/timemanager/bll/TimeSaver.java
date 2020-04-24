@@ -6,9 +6,10 @@
 package timemanager.bll;
 
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -17,33 +18,39 @@ import java.time.format.DateTimeFormatter;
  */
 public class TimeSaver
 {
-    LocalDateTime startTime;
-    LocalDateTime stopTime;
-    int spentTime;
+    static LocalDateTime startTime;
+    static LocalDateTime stopTime;
+    double spentTime;
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
-    public void startTime()
+    public static void startTime()
     {
         startTime = LocalDateTime.now();
-        
     }
 
-    public void stopTime()
+    public static void stopTime()
     {
         stopTime = LocalDateTime.now();
-        
     }
 
-    public int spentTime(int compareTo)
+    public static double spentTime()
     {
-        spentTime(stopTime.compareTo(startTime));
-        return spentTime;
-        
+        return ChronoUnit.SECONDS.between(startTime, stopTime);
     }
 
     public void validator()
     {
         System.out.println(spentTime);
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        startTime();
+        
+        TimeUnit.SECONDS.sleep(5);
+        
+        stopTime();
+        
+        System.out.println("Time spent: " + spentTime());
     }
 
 }

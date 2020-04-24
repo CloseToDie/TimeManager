@@ -31,9 +31,9 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     }
     
     /**
-     * Get a list of all playlists from the database
+     * Get a list of all timelogs from the database
      *
-     * @return list of playlist or null
+     * @return list of  or null
      */
     public List<Timer> getAllPlaylists() {
         ArrayList<Timer> playlists = new ArrayList<>();
