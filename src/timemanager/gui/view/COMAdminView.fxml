@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.AdminViewController">
    <top>
-      <AnchorPane prefHeight="514.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="514.0" prefWidth="800.0" stylesheets="@css/COMAdminView.css" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="500.0" prefWidth="70.0" style="-fx-background-color: #333;">
                <children>
@@ -37,7 +37,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TableView layoutX="422.0" prefHeight="376.0" prefWidth="370.0">
+            <TableView layoutX="421.0" layoutY="23.0" prefHeight="376.0" prefWidth="370.0">
               <columns>
                 <TableColumn prefWidth="106.39996033906937" text="Customer Name" />
                 <TableColumn prefWidth="98.4000244140625" text="Project Name" />
@@ -45,21 +45,21 @@
                   <TableColumn prefWidth="88.0" text="Total Amount" />
               </columns>
             </TableView>
-            <Button layoutX="607.0" layoutY="405.0" mnemonicParsing="false" text="Create" />
-            <Button layoutX="670.0" layoutY="405.0" mnemonicParsing="false" text="Delete" />
-            <TextField layoutX="449.0" layoutY="405.0" />
-            <Button layoutX="730.0" layoutY="405.0" mnemonicParsing="false" text="Update" />
-            <TableView layoutX="86.0" prefHeight="376.0" prefWidth="330.0">
+            <Button layoutX="607.0" layoutY="431.0" mnemonicParsing="false" text="Create" />
+            <Button layoutX="668.0" layoutY="431.0" mnemonicParsing="false" text="Delete" />
+            <TextField layoutX="449.0" layoutY="431.0" />
+            <Button layoutX="730.0" layoutY="431.0" mnemonicParsing="false" text="Update" />
+            <TableView layoutX="86.0" layoutY="23.0" prefHeight="376.0" prefWidth="330.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Personal" />
                 <TableColumn prefWidth="143.20001220703125" text="Time Spend (month)" />
                   <TableColumn prefWidth="109.60000000000002" text="Salary (month)" />
               </columns>
             </TableView>
-            <TextField layoutX="86.0" layoutY="405.0" />
-            <Button layoutX="256.0" layoutY="405.0" mnemonicParsing="false" text="Create" />
-            <Button layoutX="314.0" layoutY="405.0" mnemonicParsing="false" text="Delete" />
-            <Button layoutX="372.0" layoutY="405.0" mnemonicParsing="false" text="Update" />
+            <TextField layoutX="86.0" layoutY="431.0" />
+            <Button layoutX="251.0" layoutY="431.0" mnemonicParsing="false" text="Create" />
+            <Button layoutX="315.0" layoutY="431.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="372.0" layoutY="431.0" mnemonicParsing="false" text="Update" />
          </children>
       </AnchorPane>
    </top>
