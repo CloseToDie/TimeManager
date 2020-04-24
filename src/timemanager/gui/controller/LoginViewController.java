@@ -26,13 +26,7 @@ public class LoginViewController implements Initializable
 {
 
     @FXML
-    private Button cancelButton;
-    @FXML
     private Button loginButton;
-    @FXML
-    private TextField usernameButton;
-    @FXML
-    private TextField passwordField;
 
     /**
      * Initializes the controller class.
@@ -46,20 +40,21 @@ public class LoginViewController implements Initializable
     @FXML
     private void LoginUser(ActionEvent event) throws Exception
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("timemanager/gui/view/LoggerView.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        Parent loader = FXMLLoader.load(getClass().getResource("timemanager/gui/view/LoggerView.fxml"));
+        
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        Scene scene = new Scene(loader);
+        
+        stage.setScene(scene);
         stage.show();
     }
 
-    @FXML
     private void cancelLogin(ActionEvent event) throws Exception
     {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/AdminView.fxml"));
+        Parent loader = FXMLLoader.load(getClass().getResource("gui/view/AdminView.fxml"));
         
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(loader);
         
         stage.setScene(scene);
         stage.show();
