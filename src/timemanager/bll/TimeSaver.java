@@ -7,25 +7,31 @@ package timemanager.bll;
 
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import timemanager.be.Timer;
 
 
 /**
  *
- * @author kaspe
+ * @author kaspe & andreasvillumsen
  */
 public class TimeSaver
 {
+    ArrayList<Timer> timers = new ArrayList<>();
+    
     static LocalDateTime startTime;
     static LocalDateTime stopTime;
     double spentTime;
-    static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
-    public static void startTime()
+    public void startTime()
     {
         startTime = LocalDateTime.now();
+        
+        if(timers.isEmpty()) {
+            timers.add(new Timer())
+        }
     }
 
     public static void stopTime()
@@ -38,11 +44,6 @@ public class TimeSaver
         return ChronoUnit.SECONDS.between(startTime, stopTime);
     }
 
-    public void validator()
-    {
-        System.out.println(spentTime);
-    }
-    
     public static void main(String[] args) throws InterruptedException {
         startTime();
         

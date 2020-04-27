@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import timemanager.be.Timer;
@@ -31,23 +32,27 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     }
     
     /**
-     * Get a list of all timelogs from the database
+     * Create a new playlist in the database
      *
-     * @return list of  or null
+     * @param playlist
+     * @return playlist or null
      */
-    public List<Timer> getAllPlaylists() {
-        ArrayList<Timer> playlists = new ArrayList<>();
-
+    public Timer createPlaylist(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog");
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO playlist "
+                    + "(name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, timer.getName());
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                playlists.add(new Timer());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                timer.setId((int) rs.getLong(1));
+            } else {
+                return null;
             }
-            return playlists;
+
+            return timer;
 
         } catch (SQLServerException ex) {
             ex.printStackTrace();
