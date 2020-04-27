@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@css/LoggerView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.AdminViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" stylesheets="@css/LoggerView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.LoginViewController">
    <left>
       <AnchorPane prefHeight="500.0" prefWidth="70.0" style="-fx-background-color: #333;" BorderPane.alignment="CENTER">
          <children>
@@ -31,7 +31,7 @@
                   <Font name="Arial" size="30.0" />
                </font>
             </Label>
-            <JFXButton layoutX="28.0" layoutY="420.0" prefHeight="48.0" prefWidth="276.0" text="Login" />
+            <JFXButton fx:id="loginButton" layoutX="28.0" layoutY="420.0" onAction="#LoginUser" prefHeight="48.0" prefWidth="276.0" text="Login" />
             <TextField layoutX="27.0" layoutY="175.0" prefHeight="35.0" prefWidth="277.0" />
             <Text layoutX="29.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
             <PasswordField layoutX="27.0" layoutY="243.0" prefHeight="35.0" prefWidth="278.0" />
