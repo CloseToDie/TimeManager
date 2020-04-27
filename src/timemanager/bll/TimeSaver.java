@@ -51,7 +51,7 @@ public class TimeSaver
         
         stopTime();
         
-        System.out.println("Time spent: " + spentTime());
+        System.out.println("Time spent: " + (int)spentTime());
     }
 
 }
