@@ -59,6 +59,7 @@ public class TimeManager {
             timer.setSpentTime(spent);
             
             tm.storeTimer(timer);
+            LOG.log(Level.INFO, "Timer for project {0} stopped", timer.getProjectId());
         }
     }
 
@@ -77,6 +78,7 @@ public class TimeManager {
      * @param timer 
      */
     void stopRunningTimer(Timer timer) {
+        LOG.log(Level.INFO, "Stopping current running timer for project {0}", timer.getProjectId());
         timer.setStopTime(LocalDateTime.now());
     }
     
@@ -95,7 +97,9 @@ public class TimeManager {
      */
     private boolean sameProjectId(int projectId) {
         int lastProjectId = getLastTimerInList().getProjectId();
-        return lastProjectId == projectId;
+        boolean match = (lastProjectId == projectId);
+        LOG.log(Level.INFO, "Checking if given project matches the old project, result: {0}", match);
+        return match;
     }
     
     /**
