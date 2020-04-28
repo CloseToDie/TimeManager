@@ -12,6 +12,7 @@ package timemanager.be;
 public class Project {
     private int id;
     private String name;
+    private double salary;
     private int clientId;
 
     /**
@@ -55,6 +56,22 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
+    
+    /**
+     * Get the project salary
+     * @return salary
+     */
+    public double getSalary() {
+        return salary;
+    }
+
+    /**
+     * Set the project salary
+     * @param salary 
+     */
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 
     /**
      * Get the project clientId
@@ -71,4 +88,5 @@ public class Project {
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
+
 }
