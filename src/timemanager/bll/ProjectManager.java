@@ -28,15 +28,44 @@ public class ProjectManager {
      * @return projects
      */
     public ArrayList<Project> getProjects() {
+        projects = pm.getProjects();
         return projects;
     }
     
     /**
-     * Get a project.
+     * Get a project
      * @param project
      * @return project
      */
     public Project getProject(Project project) {
         return pm.getProject(project);
     }
+    
+    /**
+     * Store a new project
+     * @param project
+     * @return boolean
+     */
+    public boolean storeProject(Project project) {
+        return pm.storeProject(project);
+    }
+    
+    /**
+     * Update a given project
+     * @param project
+     * @return boolean
+     */
+    public boolean updateProject(Project project) {
+        return pm.updateProject(project);
+    }
+    
+    /**
+     * Delete a given project
+     * @param project
+     * @return boolean
+     */
+    public boolean deleteProject(Project project) {
+        return pm.deleteProject(project);
+    }
+    
 }
