@@ -16,3 +16,16 @@ and open the template in the editor.
 .createUserBorder {
     -fx-border-color: #333;
 }
+
+.saveBtn {
+    -fx-background-color: #333;
+    -fx-text-fill: #fff;
+}
+
+.userComboBox {
+    -fx-border-color: #333;
+}
+
+.userInfoBox {
+    -fx-border-color: #333;
+}
