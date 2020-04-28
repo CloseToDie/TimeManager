@@ -5,12 +5,24 @@
  */
 package timemanager.dal;
 
-import java.time.LocalDateTime;
+import timemanager.be.Timer;
 
 /**
  *
  * @author andreasvillumsen
  */
 public interface TimeManagerFacade {
+    /**
+     * Store a new timer in the database
+     * @param timer
+     * @return boolean
+     */
+    public boolean storeTimer(Timer timer);
     
+    /**
+     * Update a timer in the database
+     * @param timer
+     * @return boolean
+     */
+    public boolean updateTimer(Timer timer);
 }
