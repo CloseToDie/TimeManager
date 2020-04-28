@@ -8,44 +8,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import timemanager.be.Project;
-import timemanager.dal.ProjectManagerFacade;
+import timemanager.be.Client;
+import timemanager.dal.ClientManagerFacade;
 
 /**
  *
  * @author andreasvillumsen
  */
-public class ProjectManagerDBDAO implements ProjectManagerFacade {
+public class ClientManagerDBDAO implements ClientManagerFacade{
     private final MSSQLDatabaseConnector dbCon;
 
     /**
-     * ProjectManagerDBDAO Constructor
-     * @throws IOException 
+     * ClientManagerDBDAO Constructor
+     * @throws java.io.IOException
      */
-    public ProjectManagerDBDAO() throws IOException {
+    public ClientManagerDBDAO() throws IOException {
         dbCon = new MSSQLDatabaseConnector();
     }
 
     /**
-     * Get a list of all projects
-     * @return projects
+     * Get a list of all clients
+     * @return clients
      */
     @Override
-    public ArrayList<Project> getProjects() {
-        ArrayList<Project> projects = new ArrayList<>();
+    public ArrayList<Client> getClients() {
+        ArrayList<Client> clients = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM project");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM clients");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                Double salary = rs.getDouble("salary");
-                int clientId = rs.getInt("clientId");
-                projects.add(new Project(id, name, salary, clientId));
+                clients.add(new Client(id, name));
             }
-            return projects;
+            return clients;
 
         } catch (SQLServerException ex) {
             ex.printStackTrace();
@@ -57,23 +55,21 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     }
 
     /**
-     * Get a project from a database by id
-     * @param project
-     * @return project
+     * Get a client
+     * @param client
+     * @return client
      */
     @Override
-    public Project getProject(Project project) {
+    public Client getClient(Client client) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM project WHERE id = ?");
-            ps.setInt(1, project.getId());
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM clients WHERE id = ?");
+            ps.setInt(1, client.getId());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                Double salary = rs.getDouble("salary");
-                int clientId = rs.getInt("clientId");
-                return new Project(id, name, salary, clientId);
+                return new Client(id, name);
             }
 
         } catch (SQLServerException ex) {
@@ -86,24 +82,22 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     }
 
     /**
-     * Store a new project to the database
-     * @param project
+     * Store a new client to the database
+     * @param client
      * @return boolean of success
      */
     @Override
-    public boolean storeProject(Project project) {
+    public boolean storeClient(Client client) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO project "
-                    + "(name, salary, clientId) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, project.getName());
-            ps.setDouble(2, project.getSalary());
-            ps.setInt(3, project.getClientId());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO client "
+                    + "(name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, client.getName());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                project.setId((int) rs.getLong(1));
+                client.setId((int) rs.getLong(1));
             } else {
                 return false;
             }
@@ -120,19 +114,17 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     }
 
     /**
-     * Update a given project's info in the database
-     * @param project
+     * Update a given client's info in the database
+     * @param client
      * @return boolean of success
      */
     @Override
-    public boolean updateProject(Project project) {
+    public boolean updateClient(Client client) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE project SET "
-                    + "name = ?, salary = ?, clientId = ? WHERE id = ?");
-            ps.setString(1, project.getName());
-            ps.setDouble(2, project.getSalary());
-            ps.setInt(3, project.getClientId());
-            ps.setInt(4, project.getId());
+            PreparedStatement ps = con.prepareStatement("UPDATE client SET "
+                    + "name = ? WHERE id = ?");
+            ps.setString(1, client.getName());
+            ps.setInt(2, client.getId());
             
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;
@@ -147,15 +139,15 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     }
 
     /**
-     * Delete a project in the database
-     * @param project
+     * Delete a client in the database
+     * @param client
      * @return boolean of success
      */
     @Override
-    public boolean deleteProject(Project project) {
+    public boolean deleteClient(Client client) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM project WHERE id = ?");
-            ps.setInt(1, project.getId());
+            PreparedStatement ps = con.prepareStatement("DELETE FROM client WHERE id = ?");
+            ps.setInt(1, client.getId());
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;
 
