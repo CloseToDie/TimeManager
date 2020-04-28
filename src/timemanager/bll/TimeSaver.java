@@ -4,6 +4,8 @@ package timemanager.bll;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import timemanager.be.Timer;
 import timemanager.dal.TimeManagerFacade;
 import timemanager.dal.database.TimeManagerDBDAO;
@@ -12,13 +14,13 @@ import timemanager.dal.database.TimeManagerDBDAO;
  *
  * @author kaspe & andreasvillumsen
  */
-public class TimeSaver
-{
+public class TimeSaver {
+
+    private static final Logger LOG = Logger.getLogger(TimeSaver.class.getName());
+    
     ArrayList<Timer> timers = new ArrayList<>();
     
     TimeManagerFacade tm;
-    
-    boolean paused = false;
 
     /**
      * TimeSaver Constructor. 
@@ -31,11 +33,15 @@ public class TimeSaver
 
     /**
      * Start a new timer if no timer is running.
+     * @param projectId
      */
-    public void startTime() {
-        if(timers.isEmpty() || noRunningTimer()) {
-            timers.add(new Timer(0, LocalDateTime.now(), null, 0));
+    public void startTime(int projectId) {
+        if(timers.isEmpty()) {
+            if(noRunningTimer() && sameProjectId(projectId)) {
+                timers.add(new Timer(0, LocalDateTime.now(), null, 0, projectId));
+            }
         }
+        LOG.log(Level.INFO, "Started a new timer for project with id {0}", projectId);
     }
 
     /**
@@ -45,7 +51,7 @@ public class TimeSaver
      */
     public void stopTime() {
         if(!noRunningTimer()) {
-            Timer timer = timers.get(timers.size() - 1);
+            Timer timer = getLastTimerInList();
             stopRunningTimer(timer);
             
             double spent = spentTime(timer.getStartTime(), timer.getStopTime());
@@ -53,19 +59,6 @@ public class TimeSaver
             timer.setSpentTime(spent);
             
             tm.storeTimer(timer);
-        }
-    }
-    
-    /**
-     * Not working yet, need attention.
-     */
-    public void pauseTime() {
-        paused = !paused;
-        
-        if(paused) {
-            stopTime();
-        } else {
-            startTime();
         }
     }
 
@@ -92,7 +85,25 @@ public class TimeSaver
      * @return boolean
      */
     boolean noRunningTimer() {
-        return timers.get(timers.size() - 1).getStopTime() != null;
+        return getLastTimerInList().getStopTime() != null;
+    }
+
+    /**
+     * Check if the last timers project id matches the new project id.
+     * @param projectId
+     * @return boolean
+     */
+    private boolean sameProjectId(int projectId) {
+        int lastProjectId = getLastTimerInList().getProjectId();
+        return lastProjectId == projectId;
+    }
+    
+    /**
+     * Get the last timer in the arraylist.
+     * @return last timer in arraylist
+     */
+    private Timer getLastTimerInList() {
+        return timers.get(timers.size() - 1);
     }
 
 }

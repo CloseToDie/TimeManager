@@ -6,6 +6,7 @@
 package timemanager.be;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Timer {
     private LocalDateTime startTime;
     private LocalDateTime stopTime;
     private double spentTime;
+    private int projectId;
 
     /**
      * Timer Constructor
@@ -23,12 +25,14 @@ public class Timer {
      * @param startTime
      * @param stopTime
      * @param spentTime 
+     * @param projectId 
      */
-    public Timer(int id, LocalDateTime startTime, LocalDateTime stopTime, double spentTime) {
+    public Timer(int id, LocalDateTime startTime, LocalDateTime stopTime, double spentTime, int projectId) {
         this.id = id;
         this.startTime = startTime;
         this.stopTime = stopTime;
         this.spentTime = spentTime;
+        this.projectId = projectId;
     }
 
     /**
@@ -93,6 +97,22 @@ public class Timer {
      */
     public void setStopTime(LocalDateTime stopTime) {
         this.stopTime = stopTime;
+    }
+
+    /**
+     * Get the timer projectId
+     * @return projectId
+     */
+    public int getProjectId() {
+        return projectId;
+    }
+
+    /**
+     * Set the timer's projectId
+     * @param projectId 
+     */
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
     
 }
