@@ -10,6 +10,8 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private byte[] salt;
+    private boolean isAdmin;
 
     /**
      * User Constructor
@@ -17,11 +19,13 @@ public class User {
      * @param name
      * @param email 
      */
-    public User(int id, String name, String email) {
+    public User(int id, String name, String email, String password, byte[] salt, boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.email = email;
-
+        this.password = password;
+        this.salt = salt;
+        this.isAdmin = isAdmin;
     }
 
     /**
@@ -86,6 +90,22 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }

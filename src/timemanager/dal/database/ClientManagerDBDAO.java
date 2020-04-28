@@ -35,7 +35,7 @@ public class ClientManagerDBDAO implements ClientManagerFacade{
         ArrayList<Client> clients = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM clients");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM client");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -62,7 +62,7 @@ public class ClientManagerDBDAO implements ClientManagerFacade{
     @Override
     public Client getClient(Client client) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM clients WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM client WHERE id = ?");
             ps.setInt(1, client.getId());
             ResultSet rs = ps.executeQuery();
 

@@ -15,6 +15,7 @@ public class AuthManagerDBDAO {
     public boolean login(String user, String pass) {
         // Find user from database.
         
+        
         // Verify password
         
         return true;
