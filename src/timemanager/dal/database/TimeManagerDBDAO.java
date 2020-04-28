@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import timemanager.be.Timer;
 import timemanager.dal.TimeManagerFacade;
 
@@ -23,6 +25,67 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
      */
     public TimeManagerDBDAO() throws Exception {
         dbCon = new MSSQLDatabaseConnector();
+    }
+    
+    /**
+     * Get a list of all timers
+     * @return timers
+     */
+    @Override
+    public ArrayList<Timer> getTimers() {
+        ArrayList<Timer> timers = new ArrayList<>();
+
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timer");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                LocalDateTime startTime = rs.getTimestamp("startTime").toLocalDateTime();
+                LocalDateTime stopTime = rs.getTimestamp("stopTime").toLocalDateTime();
+                double spentTime = rs.getDouble("spentTime");
+                int projectId = rs.getInt("projectId");
+                timers.add(new Timer(id, startTime, stopTime, spentTime, projectId));
+            }
+            return timers;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * Get a timer from the database
+     * @param timer
+     * @return timer
+     */
+    @Override
+    public Timer getTimer(Timer timer) {
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timer WHERE id = ?");
+            ps.setInt(1, timer.getId());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                LocalDateTime startTime = rs.getTimestamp("startTime").toLocalDateTime();
+                LocalDateTime stopTime = rs.getTimestamp("stopTime").toLocalDateTime();
+                double spentTime = rs.getDouble("spentTime");
+                int projectId = rs.getInt("projectId");
+                return new Timer(id, startTime, stopTime, spentTime, projectId);
+            }
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
     
     /**

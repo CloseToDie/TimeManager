@@ -1,5 +1,6 @@
 package timemanager.dal;
 
+import java.util.ArrayList;
 import timemanager.be.Timer;
 
 /**
@@ -7,6 +8,20 @@ import timemanager.be.Timer;
  * @author andreasvillumsen
  */
 public interface TimeManagerFacade {
+    
+    /**
+     * Get timers
+     * @return timers
+     */
+    public ArrayList<Timer> getTimers();
+    
+    /**
+     * Get a timer
+     * @param timer
+     * @return timer
+     */
+    public Timer getTimer(Timer timer);
+    
     /**
      * Store a new timer in the database
      * @param timer
