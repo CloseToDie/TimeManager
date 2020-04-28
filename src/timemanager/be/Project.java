@@ -19,10 +19,14 @@ public class Project {
      * Project Constructor
      * @param id
      * @param name 
+     * @param salary 
+     * @param clientId 
      */
-    public Project(int id, String name) {
+    public Project(int id, String name, double salary, int clientId) {    
         this.id = id;
         this.name = name;
+        this.salary = salary;
+        this.clientId = clientId;
     }
 
     /**
