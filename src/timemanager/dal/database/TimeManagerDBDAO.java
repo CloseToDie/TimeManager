@@ -11,8 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Timestamp;
 import timemanager.be.Timer;
 import timemanager.dal.TimeManagerFacade;
 
@@ -32,16 +31,17 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     }
     
     /**
-     * Create a new playlist in the database
-     *
-     * @param playlist
-     * @return playlist or null
+     * Store a timer to the database.
+     * @param timer
+     * @return boolean of success
      */
-    public Timer createPlaylist(Timer timer) {
+    public boolean storeTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO playlist "
-                    + "(name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, timer.getName());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO timer "
+                    + "(startTime, stopTime, spentTime) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setTimestamp(1, Timestamp.valueOf(timer.getStartTime()));
+            ps.setTimestamp(2, Timestamp.valueOf(timer.getStopTime()));
+            ps.setDouble(3, timer.getSpentTime());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -49,10 +49,10 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
             if (rs.next()) {
                 timer.setId((int) rs.getLong(1));
             } else {
-                return null;
+                return false;
             }
 
-            return timer;
+            return true;
 
         } catch (SQLServerException ex) {
             ex.printStackTrace();
@@ -60,7 +60,28 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
             ex.printStackTrace();
         }
 
-        return null;
+        return false;
+    }
+    
+    public boolean updateTimer(Timer timer) {
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE timer SET "
+                    + "startTime = ?, stopTime = ?, spentTime = ? WHERE id = ?");
+            ps.setTimestamp(1, Timestamp.valueOf(timer.getStartTime()));
+            ps.setTimestamp(2, Timestamp.valueOf(timer.getStopTime()));
+            ps.setDouble(3, timer.getSpentTime());
+            ps.setInt(4, timer.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
     
 }

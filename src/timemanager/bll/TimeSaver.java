@@ -11,7 +11,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import timemanager.be.Timer;
-
+import timemanager.dal.TimeManagerFacade;
+import timemanager.dal.database.TimeManagerDBDAO;
 
 /**
  *
@@ -21,37 +22,56 @@ public class TimeSaver
 {
     ArrayList<Timer> timers = new ArrayList<>();
     
-    static LocalDateTime startTime;
-    static LocalDateTime stopTime;
-    double spentTime;
+    TimeManagerFacade tm;
+    
+    boolean paused = false;
 
-    public void startTime()
-    {
-        startTime = LocalDateTime.now();
-        
-        if(timers.isEmpty()) {
-            timers.add(new Timer())
+    public TimeSaver() throws Exception {
+        tm = new TimeManagerDBDAO();
+    }
+
+    public void startTime() {
+        if(timers.isEmpty() || noRunningTimer()) {
+            timers.add(new Timer(0, LocalDateTime.now(), null, 0));
         }
     }
 
-    public static void stopTime()
-    {
-        stopTime = LocalDateTime.now();
+    public void stopTime() {
+        if(!noRunningTimer()) {
+            Timer timer = timers.get(timers.size() - 1);
+            stopRunningTimer(timer);
+            
+            double spent = spentTime(timer.getStartTime(), timer.getStopTime());
+            
+            timer.setSpentTime(spent);
+            
+            tm.storeTimer(timer);
+        }
+    }
+    
+    /**
+     * Not working yet, need attention.
+     */
+    public void pauseTime() {
+        paused = !paused;
+        
+        if(paused) {
+            stopTime();
+        } else {
+            startTime();
+        }
     }
 
-    public static double spentTime()
-    {
+    public double spentTime(LocalDateTime startTime, LocalDateTime stopTime) {
         return ChronoUnit.SECONDS.between(startTime, stopTime);
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        startTime();
-        
-        TimeUnit.SECONDS.sleep(5);
-        
-        stopTime();
-        
-        System.out.println("Time spent: " + (int)spentTime());
+    
+    void stopRunningTimer(Timer timer) {
+        timer.setStopTime(LocalDateTime.now());
+    }
+    
+    boolean noRunningTimer() {
+        return timers.get(timers.size() - 1).getStopTime() != null;
     }
 
 }
