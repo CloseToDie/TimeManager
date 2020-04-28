@@ -26,16 +26,29 @@ public class TimeSaver
     
     boolean paused = false;
 
+    /**
+     * TimeSaver Constructor. 
+     * Instantiate a new TimeManagerDBDAO.
+     * @throws Exception 
+     */
     public TimeSaver() throws Exception {
         tm = new TimeManagerDBDAO();
     }
 
+    /**
+     * Start a new timer if no timer is running.
+     */
     public void startTime() {
         if(timers.isEmpty() || noRunningTimer()) {
             timers.add(new Timer(0, LocalDateTime.now(), null, 0));
         }
     }
 
+    /**
+     * Stop the running timer, 
+     * calculate the time spent 
+     * and save it to database.
+     */
     public void stopTime() {
         if(!noRunningTimer()) {
             Timer timer = timers.get(timers.size() - 1);
@@ -62,14 +75,28 @@ public class TimeSaver
         }
     }
 
+    /**
+     * Calculate the time between two LocalDateTime.
+     * @param startTime
+     * @param stopTime
+     * @return double (time)
+     */
     public double spentTime(LocalDateTime startTime, LocalDateTime stopTime) {
         return ChronoUnit.SECONDS.between(startTime, stopTime);
     }
     
+    /**
+     * Stop the given running timer.
+     * @param timer 
+     */
     void stopRunningTimer(Timer timer) {
         timer.setStopTime(LocalDateTime.now());
     }
     
+    /**
+     * Check if the newest timer is running or not
+     * @return boolean
+     */
     boolean noRunningTimer() {
         return timers.get(timers.size() - 1).getStopTime() != null;
     }
