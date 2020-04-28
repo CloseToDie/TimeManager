@@ -35,6 +35,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
      * @param timer
      * @return boolean of success
      */
+    @Override
     public boolean storeTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO timer "
@@ -63,6 +64,12 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         return false;
     }
     
+    /**
+     * Update a given timer in the database
+     * @param timer
+     * @return boolean of success
+     */
+    @Override
     public boolean updateTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE timer SET "
@@ -72,6 +79,28 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
             ps.setDouble(3, timer.getSpentTime());
             ps.setInt(4, timer.getId());
             
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    /**
+     * Delete a given timer from the database.
+     * @param timer
+     * @return boolean of success
+     */
+    @Override
+    public boolean deleteTimer(Timer timer) {
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM timer WHERE id = ?");
+            ps.setInt(1, timer.getId());
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;
 

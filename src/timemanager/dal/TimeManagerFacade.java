@@ -25,4 +25,11 @@ public interface TimeManagerFacade {
      * @return boolean
      */
     public boolean updateTimer(Timer timer);
+    
+    /**
+     * Delete a timer in the database
+     * @param timer
+     * @return boolean
+     */
+    public boolean deleteTimer(Timer timer);
 }
