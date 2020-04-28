@@ -14,9 +14,9 @@ import timemanager.dal.database.TimeManagerDBDAO;
  *
  * @author kaspe & andreasvillumsen
  */
-public class TimeSaver {
+public class TimeManager {
 
-    private static final Logger LOG = Logger.getLogger(TimeSaver.class.getName());
+    private static final Logger LOG = Logger.getLogger(TimeManager.class.getName());
     
     ArrayList<Timer> timers = new ArrayList<>();
     
@@ -27,7 +27,7 @@ public class TimeSaver {
      * Instantiate a new TimeManagerDBDAO.
      * @throws Exception 
      */
-    public TimeSaver() throws Exception {
+    public TimeManager() throws Exception {
         tm = new TimeManagerDBDAO();
     }
 

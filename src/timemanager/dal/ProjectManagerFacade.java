@@ -16,7 +16,7 @@ public interface ProjectManagerFacade {
     public ArrayList<Project> getProjects();
     
     /**
-     * Get project
+     * Get a project
      * @param project
      * @return project
      */
