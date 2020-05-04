@@ -40,8 +40,7 @@ public class LoginViewController implements Initializable
     @FXML
     private void LoginUser(ActionEvent event) throws Exception
     {
-        Parent loader = FXMLLoader.load(getClass().getResource("timemanager/gui/view/LoggerView.fxml"));
-        
+        Parent loader = FXMLLoader.load(getClass().getResource("/timemanager/gui/view/LoggerView.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(loader);
         

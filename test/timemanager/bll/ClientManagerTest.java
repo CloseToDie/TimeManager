@@ -16,42 +16,47 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import timemanager.TestClass;
 import timemanager.be.Client;
 
 /**
  *
  * @author kaspe
  */
-public class ClientManagerTest
+public class ClientManagerTest extends TestClass
 {
     
-    
-    
-    public ClientManagerTest() throws IOException
+    public ClientManagerTest() throws IOException, Exception
     {
-        ClientManager cm = new ClientManager();
+        //ClientManager cm = new ClientManager();
     }
+/*
     
     @BeforeClass
     public static void setUpClass()
     {
     }
+//*
     
     @AfterClass
     public static void tearDownClass()
     {
     }
+//*
     
     @Before
     public void setUp()
     {
     }
+//*
     
     @After
     public void tearDown()
     {
     }
-
+//*
+    
+    @Override
     public ObservableList<Client> createClientData() throws IOException
     {
         ClientManager cm = new ClientManager();
@@ -69,13 +74,12 @@ public class ClientManagerTest
         return clients;
                
     }
-    
+    //*/
     @Test
     public void firstClientTest() throws IOException
     {
-        ClientManager cm = new ClientManager();
-        ObservableList<Client> clients = FXCollections.observableArrayList();
-        
+        //ClientManager cm = new ClientManager();
+        ObservableList<Client> clients = createClientData();//FXCollections.observableArrayList();
         Client client1 = clients.get(1);
         Client client2 = clients.get(2);
         Client client3 = clients.get(3);

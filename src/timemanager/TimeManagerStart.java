@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author andreasvillumsen
  */
-public class TimeManager extends Application {
+public class TimeManagerStart extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
