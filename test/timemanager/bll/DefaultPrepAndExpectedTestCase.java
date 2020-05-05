@@ -14,7 +14,7 @@ import java.util.Properties;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import timemanager.be.User;
 import timemanager.dal.UserManagerFacade;
@@ -86,8 +86,8 @@ public void testGetAllUsers()
 @Test
 public void testGetUser()
 {
-    User user = this.um.getUserById(1);
-    assertEquals( "name",user.getName());
+    User user = this.um.getUserByName("1234");
+    assertEquals( "username",user.getName());
 }
 
 }
