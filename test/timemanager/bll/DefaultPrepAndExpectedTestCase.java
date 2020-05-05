@@ -76,19 +76,19 @@ public class DefaultPrepAndExpectedTestCase
         return DatabaseOperation.NONE;
     }
     
-@Test
-public void testGetAllUsers()
-{
-    ArrayList<User> users = this.um.getUsers();
-    assertEquals( 1,users.size());
-}
+    @Test
+    public void testGetAllUsers()
+    {
+        ArrayList<User> users = this.um.getUsers();
+        assertEquals( 1,users.size());
+    }
 
-@Test
-public void testGetUser()
-{
-    User user = this.um.getUserByName("1234");
-    assertEquals( "username",user.getName());
-}
+    @Test
+    public void testGetUser()
+    {
+        User user = this.um.getUserByName("1234");
+        assertEquals( "username",user.getName());
+    }
 
 }
         
