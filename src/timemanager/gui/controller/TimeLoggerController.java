@@ -24,7 +24,7 @@ import timemanager.be.Project;
  *
  * @author andreasvillumsen
  */
-public class ClientController implements Initializable {
+public class TimeLoggerController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
 

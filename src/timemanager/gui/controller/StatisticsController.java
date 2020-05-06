@@ -9,11 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
@@ -24,7 +22,7 @@ import timemanager.be.Project;
  *
  * @author andreasvillumsen
  */
-public class ClientController implements Initializable {
+public class StatisticsController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
 
@@ -34,10 +32,6 @@ public class ClientController implements Initializable {
     private JFXButton timerButton;
     @FXML
     private Label timeSpent;
-    @FXML
-    private TableView<?> clientsTable;
-    @FXML
-    private JFXButton addClientButton;
 
     /**
      * Initializes the controller class.
@@ -72,12 +66,5 @@ public class ClientController implements Initializable {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
 
-    @FXML
-    private void startTimer(ActionEvent event) {
-    }
-
-    @FXML
-    private void openAddClient(ActionEvent event) {
-    }
     
 }

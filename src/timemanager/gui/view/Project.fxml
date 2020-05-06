@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="parent" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.TimeLoggerViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="parent" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.ProjectController">
    <children>
       <VBox layoutX="-16.0" layoutY="-31.0" prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +26,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../assets/img/grumsen-logo-retina.png" />
+                        <Image url="file:/Users/andreasvillumsen/NetBeansProjects/TimeManagerProject/assets/img/grumsen-logo-retina.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" top="5.0" />
@@ -35,12 +34,8 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#openTimeLogger" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="SEARCH" size="1.5em" text="">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Time Logger" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
@@ -62,10 +57,6 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e;" styleClass="sidebarButtons">
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="LIST" size="1.5em">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Projects" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
@@ -85,12 +76,8 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#openClients" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="BRIEFCASE" size="1.5em">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Clients" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
@@ -110,12 +97,8 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#openUsers" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="USERS" size="1.5em">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Users" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
@@ -135,38 +118,9 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox alignment="CENTER_LEFT" onMouseClicked="#openStatistics" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="SITEMAP" size="1.5em">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Statistics" textFill="WHITE">
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="492.0" styleClass="sidebarButtons">
-               <children>
-                  <FontAwesomeIcon fill="WHITE" iconName="COG" size="1.5em">
-                     <font>
-                        <Font size="23.0" />
-                     </font></FontAwesomeIcon>
-                  <Label prefHeight="17.0" prefWidth="142.0" text="Settings" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
                      </padding>
@@ -200,7 +154,7 @@
                      </font>
                   </Label>
                   <JFXComboBox fx:id="selectProject" focusColor="#435a9a" layoutX="508.0" layoutY="16.0" prefHeight="27.0" prefWidth="118.0" promptText="Select Project" />
-                  <JFXButton fx:id="timerButton" layoutX="641.0" layoutY="17.0" styleClass="startButton" text="START" />
+                  <JFXButton fx:id="timerButton" layoutX="641.0" layoutY="17.0" onAction="#toggleTimer" styleClass="startButton" text="START" />
                   <Label fx:id="timeSpent" layoutX="721.0" layoutY="16.0" text="00:00" textFill="#333333">
                      <font>
                         <Font size="26.0" />
@@ -212,7 +166,7 @@
                <children>
                   <TableView layoutX="20.0" layoutY="92.0" prefHeight="400.0" prefWidth="780.0" stylesheets="@css/tableview.css">
                     <placeholder>
-                        <Label text="You don't have any projects yet."/>
+                        <Label text="You don't have any projects yet." />
                     </placeholder>
                     <columns>
                       <TableColumn prefWidth="96.73112487792969" text="Name" />
@@ -224,8 +178,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton fx:id="timerButton1" layoutX="637.0" layoutY="28.0" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD PROJECT" />
-                  <FontAwesomeIcon iconName="PLUS_CIRCLE" layoutX="650.0" layoutY="54.0" size="1.5em" />
+                  <JFXButton fx:id="timerButton1" layoutX="637.0" layoutY="28.0" onMouseClicked="#openAddProject" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD PROJECT" />
                </children>
             </Pane>
          </children></VBox>

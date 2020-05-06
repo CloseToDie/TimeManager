@@ -10,15 +10,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import timemanager.TimeManagerStart;
+import timemanager.be.Project;
 
 /**
  *
  * @author andreasvillumsen
  */
 public class UserController implements Initializable {
+    
+    TimeManagerStart tms = new TimeManagerStart();
 
     @FXML
-    private JFXComboBox<?> selectProject;
+    private JFXComboBox<Project> selectProject;
     @FXML
     private JFXButton timerButton;
     @FXML
@@ -31,30 +36,35 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
 
+    @FXML
+    private void openTimeLogger(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
+    }
+
+    @FXML
+    private void openProjects(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "Project");
+    }
+    
+    @FXML
+    private void openClients(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
+    }
+
+    @FXML
+    private void openUsers(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "User");
+    }
+
+    @FXML
+    private void openStatistics(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
+    }
+    
     @FXML
     private void saveUser(ActionEvent event) {
         
-    }
-
-    @FXML
-    private void openTimeLogger(MouseEvent event) {
-    }
-
-    @FXML
-    private void openProjects(MouseEvent event) {
-    }
-
-    @FXML
-    private void openClients(MouseEvent event) {
-    }
-
-    @FXML
-    private void openStatistics(MouseEvent event) {
-    }
-
-    @FXML
-    private void openSettings(MouseEvent event) {
     }
 }

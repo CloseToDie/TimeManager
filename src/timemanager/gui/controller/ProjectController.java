@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
@@ -24,7 +23,7 @@ import timemanager.be.Project;
  *
  * @author andreasvillumsen
  */
-public class ClientController implements Initializable {
+public class ProjectController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
 
@@ -35,12 +34,12 @@ public class ClientController implements Initializable {
     @FXML
     private Label timeSpent;
     @FXML
-    private TableView<?> clientsTable;
-    @FXML
-    private JFXButton addClientButton;
+    private JFXButton timerButton1;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,11 +72,11 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    private void startTimer(ActionEvent event) {
+    private void toggleTimer(ActionEvent event) {
     }
 
     @FXML
-    private void openAddClient(ActionEvent event) {
+    private void openAddProject(MouseEvent event) {
     }
     
 }
