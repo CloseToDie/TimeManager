@@ -19,7 +19,7 @@ public class TimeManager extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/view/Client.fxml"));
         
         Scene scene = new Scene(root);
         

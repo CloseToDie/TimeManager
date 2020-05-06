@@ -7,9 +7,8 @@ package timemanager.gui.model;
 
 /**
  *
- * @author chri9
+ * @author andreasvillumsen
  */
-public class AdminModel
-{
+public class TimeLoggerModel {
     
 }

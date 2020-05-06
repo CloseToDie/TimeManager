@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="parent" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.TimeLoggerViewController">
+   <children>
+      <VBox layoutX="-16.0" layoutY="-31.0" prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="180.0" styleClass="logobar">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../assets/img/grumsen-logo-retina.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="SEARCH" size="1.5em" text="">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Time Logger" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="LIST" size="1.5em">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Projects" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="BRIEFCASE" size="1.5em">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Clients" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="USERS" size="1.5em">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Users" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e;" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="SITEMAP" size="1.5em">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Statistics" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="492.0" styleClass="sidebarButtons">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" iconName="COG" size="1.5em">
+                     <font>
+                        <Font size="23.0" />
+                     </font></FontAwesomeIcon>
+                  <Label prefHeight="17.0" prefWidth="142.0" text="Settings" textFill="WHITE">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="157.0" layoutY="-23.0" prefHeight="600.0" prefWidth="820.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="58.0" prefWidth="826.0" styleClass="navbar">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" color="#abaaaa" height="15.5" radius="5.875" width="10.0" />
+               </effect>
+               <children>
+                  <Label layoutX="24.0" layoutY="18.0" text="Users">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="selectProject" focusColor="#435a9a" layoutX="508.0" layoutY="16.0" prefHeight="27.0" prefWidth="118.0" promptText="Select Project" />
+                  <JFXButton fx:id="timerButton" layoutX="641.0" layoutY="17.0" styleClass="startButton" text="START" />
+                  <Label fx:id="timeSpent" layoutX="721.0" layoutY="16.0" text="00:00" textFill="#333333">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="545.0" prefWidth="620.0">
+               <children>
+                  <Pane layoutX="29.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
+                     <children>
+                        <Label layoutX="13.0" layoutY="11.0" text="Clients:">
+                           <font>
+                              <Font name="System Bold Italic" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="152.0" layoutY="10.0" text="0">
+                           <font>
+                              <Font size="61.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="288.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
+                     <children>
+                        <Label layoutX="13.0" layoutY="11.0" text="Projects:">
+                           <font>
+                              <Font name="System Bold Italic" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="152.0" layoutY="10.0" text="0">
+                           <font>
+                              <Font size="61.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="547.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
+                     <children>
+                        <Label layoutX="13.0" layoutY="11.0" text="Users:">
+                           <font>
+                              <Font name="System Bold Italic" size="27.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="152.0" layoutY="10.0" text="0">
+                           <font>
+                              <Font size="61.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="31.0" layoutY="155.0" prefHeight="335.0" prefWidth="374.0" styleClass="statBox">
+                     <children>
+                        <BarChart layoutX="10.0" layoutY="32.0" prefHeight="283.0" prefWidth="354.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </BarChart>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="421.0" layoutY="155.0" prefHeight="335.0" prefWidth="374.0" styleClass="statBox">
+                     <children>
+                        <AreaChart layoutX="10.0" layoutY="31.0" prefHeight="283.0" prefWidth="354.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children></VBox>
+   </children>
+</AnchorPane>

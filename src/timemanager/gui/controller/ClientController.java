@@ -6,18 +6,28 @@
 package timemanager.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
  *
  * @author andreasvillumsen
  */
-public class AdminViewController implements Initializable {
+public class ClientController implements Initializable {
+
+    @FXML
+    private JFXComboBox<?> selectProject;
+    @FXML
+    private JFXButton timerButton;
+    @FXML
+    private Label timeSpent;
+    @FXML
+    private JFXButton timerButton1;
 
     /**
      * Initializes the controller class.
@@ -26,5 +36,5 @@ public class AdminViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
 }
