@@ -89,6 +89,13 @@ public class DefaultPrepAndExpectedTestCase
         User user = this.um.getUserByName("1234");
         assertEquals( "username",user.getName());
     }
+    
+    @Test
+    public void testGetUserByID()
+    {
+        User user = this.um.getUserById(1);
+        assertEquals( 2,user.getId());
+    }
 
 }
         
