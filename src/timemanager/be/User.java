@@ -18,6 +18,9 @@ public class User {
      * @param id
      * @param name
      * @param email 
+     * @param password 
+     * @param salt 
+     * @param isAdmin 
      */
     public User(int id, String name, String email, String password, byte[] salt, boolean isAdmin) {
         this.id = id;
@@ -92,18 +95,34 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Get the salt
+     * @return salt
+     */
     public byte[] getSalt() {
         return salt;
     }
 
+    /**
+     * Set the salt
+     * @param salt 
+     */
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
 
+    /**
+     * Get user admin status
+     * @return isAdmin
+     */
     public boolean getIsAdmin() {
         return isAdmin;
     }
 
+    /**
+     * Set user admin status
+     * @param isAdmin 
+     */
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }

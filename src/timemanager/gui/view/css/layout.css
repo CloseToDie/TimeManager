@@ -1,0 +1,79 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29. apr. 2020, 13.06.50
+    Author     : andreasvillumsen
+*/
+
+.parent {
+    -fx-background-color: #f6f6f6;
+}
+
+.sidebar {
+    -fx-background-color: #435a9a;
+}
+
+.logobar {
+    -fx-background-color: #435a9a;
+}
+
+.sidebarButtons:hover {
+    -fx-background-color: #28479e;
+    -fx-cursor: hand;
+}
+
+.navbar {
+    -fx-background-color: #fff;
+}
+
+.startButton {
+    -fx-border-radius: 5px;
+    -fx-border-color: #333;
+}
+
+.startButton:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #f6f6f6;
+}
+
+.logList {
+    -fx-background-color: transparent;
+    -fx-border-radius: 5px;
+}
+
+.logList .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+}
+
+.logList .column-header {
+    -fx-background-color: transparent;
+}
+
+.statBox {
+    -fx-background-color: #fff;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #333;
+}
+
+.addUserForm {
+    -fx-background-color: #fff;
+    -fx-border-color: #cdcdcd;
+}
+
+.addUserFormButton {
+    -fx-background-color: #fff;
+    -fx-border-radius: 2px;
+    -fx-border-color: #000;
+}
+
+.addUserFormButton:hover {
+    -fx-background-color: #000;
+    -fx-border-radius: 2px;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}

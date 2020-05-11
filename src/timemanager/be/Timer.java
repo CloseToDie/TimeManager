@@ -1,7 +1,6 @@
 package timemanager.be;
 
 import java.time.LocalDateTime;
-import java.util.logging.Logger;
 
 /**
  *
