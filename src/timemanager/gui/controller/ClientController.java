@@ -2,8 +2,11 @@ package timemanager.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
 import timemanager.be.Project;
+import timemanager.gui.model.ClientModel;
 
 /**
  * FXML Controller class
@@ -22,6 +26,7 @@ import timemanager.be.Project;
 public class ClientController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
+    ClientModel cm;
 
     @FXML
     private JFXComboBox<Project> selectProject;
@@ -36,10 +41,16 @@ public class ClientController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //
+        try {
+            cm = new ClientModel();
+        } catch (IOException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
@@ -72,7 +83,8 @@ public class ClientController implements Initializable {
     }
 
     @FXML
-    private void openAddClient(ActionEvent event) {
+    private void openAddClient(ActionEvent event) throws IOException {
+        tms.popup("ClientCreate");
     }
     
 }

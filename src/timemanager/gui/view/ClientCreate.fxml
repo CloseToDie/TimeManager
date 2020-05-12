@@ -8,8 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="350.0" stylesheets="@css/layout.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="350.0" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.ClientCreateController">
    <children>
       <Label layoutX="10.0" layoutY="10.0" prefHeight="71.0" prefWidth="350.0" text="Create a new client">
          <font>
@@ -24,9 +23,9 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="31.0" layoutY="142.0" prefHeight="47.0" prefWidth="300.0" />
+      <TextField fx:id="clientName" layoutX="31.0" layoutY="142.0" prefHeight="47.0" prefWidth="300.0" />
       <Button fx:id="saveUserButton" layoutX="31.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Save" />
       <Line endX="100.0" layoutX="132.0" layoutY="64.0" startX="-100.0" stroke="#333333" />
-      <Button fx:id="saveUserButton1" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelSaveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
+      <Button fx:id="cancelSaveClient" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelSaveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
    </children>
 </AnchorPane>

@@ -37,6 +37,8 @@ public class UserController implements Initializable {
     private Button saveUserButton;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
