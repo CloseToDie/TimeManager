@@ -6,10 +6,12 @@
 package timemanager.bll;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import timemanager.be.User;
 import timemanager.dal.UserManagerFacade;
 import timemanager.dal.database.UserManagerDBDAO;
+import timemanager.utils.auth.Password;
 
 /**
  *
@@ -19,6 +21,7 @@ public class UserManager {
     public ArrayList<User> users = new ArrayList<>();
     
     UserManagerFacade um;
+    
     
     public UserManager() throws IOException {
         um = new UserManagerDBDAO();
@@ -37,7 +40,9 @@ public class UserManager {
         return um.getUserByName(name);
     }
     
-    public boolean storeUser(User user) {
+    public boolean storeUser(String name, String email, String password) throws NoSuchAlgorithmException {
+        byte[] salt = Password.getSalt();
+        User user = new User(0, name, email, Password.hash(password, salt, "SHA-512"), salt, false);
         return um.storeUser(user);
     }
     

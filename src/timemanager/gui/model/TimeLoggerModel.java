@@ -1,14 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package timemanager.gui.model;
+
+import timemanager.bll.TimeManager;
 
 /**
  *
  * @author andreasvillumsen
  */
 public class TimeLoggerModel {
+    private TimeManager tm;
+
+    public TimeLoggerModel() throws Exception {
+        tm = new TimeManager();
+    }
     
+    public void startTime(int projectId) {
+        tm.startTime(projectId);
+    }
+    
+    public void stopTime() {
+        tm.stopTime();
+    }
 }

@@ -2,8 +2,11 @@ package timemanager.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
 import timemanager.be.Project;
+import timemanager.gui.model.UserModel;
 
 /**
  *
@@ -21,6 +25,7 @@ import timemanager.be.Project;
 public class UserController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
+    UserModel um;
 
     @FXML
     private JFXComboBox<Project> selectProject;
@@ -35,7 +40,12 @@ public class UserController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            um = new UserModel();
+            // TODO
+        } catch (IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }   
 
     @FXML
@@ -65,6 +75,6 @@ public class UserController implements Initializable {
     
     @FXML
     private void saveUser(ActionEvent event) {
-        
+        um.storeUser("Andreas", "andreas@lortemail.dk", "password");
     }
 }

@@ -11,7 +11,7 @@ import java.security.SecureRandom;
  */
 public class Password {
     
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    /** public void main(String[] args) throws NoSuchAlgorithmException {
         String passwordToHash = "password";
         byte[] salt = getSalt();
          
@@ -20,7 +20,7 @@ public class Password {
         
         Boolean passwordMatches = verifyPassword(passwordToHash, securePassword, salt, "SHA-512");
         System.out.println("Password matches: " + passwordMatches);
-    }
+    }*/
     
     /**
      * Hash a given password
@@ -29,7 +29,7 @@ public class Password {
      * @param SHA
      * @return Hashed password
      */
-    private static String hash(String passwordToHash, byte[] salt, String SHA) {
+    public static String hash(String passwordToHash, byte[] salt, String SHA) {
         String generatedPassword = null;
         
         try {
@@ -65,7 +65,7 @@ public class Password {
      * @return salt
      * @throws NoSuchAlgorithmException 
      */
-    private static byte[] getSalt() throws NoSuchAlgorithmException {
+    public static byte[] getSalt() throws NoSuchAlgorithmException {
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[16];
         sr.nextBytes(salt);
