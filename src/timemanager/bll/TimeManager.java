@@ -109,5 +109,10 @@ public class TimeManager {
     private Timer getLastTimerInList() {
         return timers.get(timers.size() - 1);
     }
+    
+    public ArrayList<Timer> getTimers() {
+        timers = tm.getTimers();
+        return timers;
+    }
 
 }

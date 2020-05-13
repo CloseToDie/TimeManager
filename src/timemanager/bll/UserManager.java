@@ -42,6 +42,7 @@ public class UserManager {
     
     public boolean storeUser(String name, String email, String password) throws NoSuchAlgorithmException {
         byte[] salt = Password.getSalt();
+        System.out.println(salt);
         User user = new User(0, name, email, Password.hash(password, salt, "SHA-512"), salt, false);
         return um.storeUser(user);
     }

@@ -11,10 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
+import timemanager.be.Client;
 import timemanager.be.Project;
 import timemanager.gui.model.ClientModel;
 
@@ -35,9 +38,11 @@ public class ClientController implements Initializable {
     @FXML
     private Label timeSpent;
     @FXML
-    private TableView<?> clientsTable;
+    private TableView<Client> clientsTable;
     @FXML
     private JFXButton addClientButton;
+    @FXML
+    private TableColumn<Client, String> clientsNameCol;
 
     /**
      * Initializes the controller class.
@@ -47,10 +52,14 @@ public class ClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            cm = new ClientModel();
+            cm = ClientModel.getInstance();
         } catch (IOException ex) {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        clientsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        
+        clientsTable.setItems(cm.getClients());
     }    
 
     @FXML
@@ -63,7 +72,6 @@ public class ClientController implements Initializable {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Project");
     }
     
-    @FXML
     private void openClients(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }

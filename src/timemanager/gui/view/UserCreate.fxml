@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="350.0" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="360.0" stylesheets="@css/layout.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanager.gui.controller.UserCreateController">
    <children>
       <Label layoutX="10.0" layoutY="10.0" prefHeight="71.0" prefWidth="350.0" text="Create a new user">
          <font>
@@ -24,15 +25,27 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="31.0" layoutY="124.0" prefHeight="47.0" prefWidth="300.0" />
-      <Label layoutX="32.0" layoutY="195.0" text="Password">
+      <TextField fx:id="userName" layoutX="31.0" layoutY="124.0" prefHeight="47.0" prefWidth="300.0" />
+      <Label layoutX="32.0" layoutY="181.0" text="Password">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <PasswordField layoutX="31.0" layoutY="220.0" prefHeight="50.0" prefWidth="300.0" />
-      <Button fx:id="saveUserButton" layoutX="31.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Save" />
+      <PasswordField fx:id="userPassword" layoutX="31.0" layoutY="206.0" prefHeight="50.0" prefWidth="300.0" />
+      <Button fx:id="saveUserButton" layoutX="31.0" layoutY="459.0" mnemonicParsing="false" onAction="#saveUser" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Save" />
       <Line endX="100.0" layoutX="132.0" layoutY="64.0" startX="-100.0" stroke="#333333" />
-      <Button fx:id="saveUserButton1" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelSaveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
+      <Button fx:id="cancelSaveUser" layoutX="186.0" layoutY="459.0" mnemonicParsing="false" onAction="#cancelSaveUser" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
+      <Label layoutX="32.0" layoutY="353.0" text="Role">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="selectRole" layoutX="31.0" layoutY="379.0" prefHeight="49.0" prefWidth="300.0" promptText="Select Role" />
+      <Label layoutX="32.0" layoutY="267.0" text="Email">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userEmail" layoutX="31.0" layoutY="293.0" prefHeight="47.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

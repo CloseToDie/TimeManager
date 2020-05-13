@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
-import timemanager.be.Client;
-import timemanager.gui.model.ClientModel;
+import timemanager.be.Project;
+import timemanager.gui.model.ProjectModel;
 import timemanager.utils.validation.Validate;
 
 /**
@@ -22,35 +22,42 @@ import timemanager.utils.validation.Validate;
  *
  * @author andreasvillumsen
  */
-public class ClientCreateController implements Initializable {
+public class ProjectCreateController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
-    ClientModel cm;
+    ProjectModel pm;
     
     @FXML
-    private Button saveUserButton;
-    @FXML
-    private Button cancelSaveClient;
-    @FXML
-    private TextField clientName;
-    @FXML
     private Label errorLabel;
+    @FXML
+    private TextField projectName;
+    @FXML
+    private Button saveProjectButton;
+    @FXML
+    private Button cancelSaveProject;
+    @FXML
+    private TextField projectSalary;
+    @FXML
+    private TextField projectClientId;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            cm = ClientModel.getInstance();
+            pm = ProjectModel.getInstance();
         } catch (IOException ex) {
-            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     @FXML
-    private void saveClient(ActionEvent event) {
-        String name = clientName.getText();
+    private void saveProject(ActionEvent event) {
+        String name = projectName.getText();
+        double salary = Double.parseDouble(projectSalary.getText());
+        int clientId = Integer.parseInt(projectClientId.getText());
+        
         if(validateName(name)) {
-            cm.storeClient(new Client(0, name));
-            Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
+            pm.storeProject(new Project(0, name, salary, clientId));
+            Stage window = (Stage) (cancelSaveProject.getScene().getWindow());
             window.close();
         } else {
             errorLabel.setVisible(true);
@@ -58,8 +65,8 @@ public class ClientCreateController implements Initializable {
     }
 
     @FXML
-    private void cancelSaveClient(ActionEvent event) {
-        Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
+    private void cancelSaveProject(ActionEvent event) {
+        Stage window = (Stage) (cancelSaveProject.getScene().getWindow());
         window.close();
     }
     

@@ -87,5 +87,10 @@ public class Project {
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
 }

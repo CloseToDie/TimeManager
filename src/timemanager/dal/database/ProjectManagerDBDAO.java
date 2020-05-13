@@ -42,7 +42,7 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 Double salary = rs.getDouble("salary");
-                int clientId = rs.getInt("clientId");
+                int clientId = rs.getInt("client_id");
                 projects.add(new Project(id, name, salary, clientId));
             }
             return projects;
@@ -72,7 +72,7 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 Double salary = rs.getDouble("salary");
-                int clientId = rs.getInt("clientId");
+                int clientId = rs.getInt("client_id");
                 return new Project(id, name, salary, clientId);
             }
 
@@ -94,7 +94,7 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     public boolean storeProject(Project project) {
         try ( Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO project "
-                    + "(name, salary, clientId) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+                    + "(name, salary, client_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, project.getName());
             ps.setDouble(2, project.getSalary());
             ps.setInt(3, project.getClientId());
@@ -128,7 +128,7 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
     public boolean updateProject(Project project) {
         try ( Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE project SET "
-                    + "name = ?, salary = ?, clientId = ? WHERE id = ?");
+                    + "name = ?, salary = ?, client_id = ? WHERE id = ?");
             ps.setString(1, project.getName());
             ps.setDouble(2, project.getSalary());
             ps.setInt(3, project.getClientId());

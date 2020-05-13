@@ -126,5 +126,10 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+    
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 
 }

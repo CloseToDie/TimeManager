@@ -9,12 +9,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
-import timemanager.be.Client;
-import timemanager.gui.model.ClientModel;
+import timemanager.gui.model.UserModel;
 import timemanager.utils.validation.Validate;
 
 /**
@@ -22,48 +23,58 @@ import timemanager.utils.validation.Validate;
  *
  * @author andreasvillumsen
  */
-public class ClientCreateController implements Initializable {
+public class UserCreateController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
-    ClientModel cm;
+    UserModel um;
     
+    private Label errorLabel;
     @FXML
     private Button saveUserButton;
     @FXML
-    private Button cancelSaveClient;
+    private Button cancelSaveUser;
     @FXML
-    private TextField clientName;
+    private ComboBox<String> selectRole;
     @FXML
-    private Label errorLabel;
+    private TextField userName;
+    @FXML
+    private PasswordField userPassword;
+    @FXML
+    private TextField userEmail;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            cm = ClientModel.getInstance();
+            um = UserModel.getInstance();
         } catch (IOException ex) {
-            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        selectRole.setItems(um.getRoles());
     }
-    
     @FXML
-    private void saveClient(ActionEvent event) {
-        String name = clientName.getText();
-        if(validateName(name)) {
-            cm.storeClient(new Client(0, name));
-            Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
+    private void saveUser(ActionEvent event) {
+        String username = userName.getText();
+        String email = userEmail.getText();
+        String password = userPassword.getText();
+        
+        if(validateName(username)) {
+            um.storeUser(username, email, password);
+            Stage window = (Stage) (cancelSaveUser.getScene().getWindow());
             window.close();
         } else {
             errorLabel.setVisible(true);
         }
     }
-
     @FXML
-    private void cancelSaveClient(ActionEvent event) {
-        Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
+    private void cancelSaveUser(ActionEvent event) {
+        Stage window = (Stage) (cancelSaveUser.getScene().getWindow());
         window.close();
     }
     
     private boolean validateName(String name) {
         return !(Validate.isNull(name) || !Validate.containsAtLeast(name, 3));
     }
+    
+    
 }

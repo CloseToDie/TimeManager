@@ -27,5 +27,6 @@
       <Button fx:id="saveUserButton" layoutX="31.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Save" />
       <Line endX="100.0" layoutX="132.0" layoutY="64.0" startX="-100.0" stroke="#333333" />
       <Button fx:id="cancelSaveClient" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelSaveClient" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
+      <Label fx:id="errorLabel" layoutX="33.0" layoutY="192.0" prefHeight="17.0" prefWidth="300.0" text="Whooops!! Your input does not meet the requirements!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

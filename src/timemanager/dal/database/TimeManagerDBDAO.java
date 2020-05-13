@@ -36,7 +36,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         ArrayList<Timer> timers = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM timer");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -66,7 +66,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     @Override
     public Timer getTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM timer WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog WHERE id = ?");
             ps.setInt(1, timer.getId());
             ResultSet rs = ps.executeQuery();
 
@@ -96,7 +96,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     @Override
     public boolean storeTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO timer "
+            PreparedStatement ps = con.prepareStatement("INSERT INTO timelog "
                     + "(startTime, stopTime, spentTime) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(timer.getStartTime()));
             ps.setTimestamp(2, Timestamp.valueOf(timer.getStopTime()));
@@ -130,7 +130,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     @Override
     public boolean updateTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE timer SET "
+            PreparedStatement ps = con.prepareStatement("UPDATE timelog SET "
                     + "startTime = ?, stopTime = ?, spentTime = ? WHERE id = ?");
             ps.setTimestamp(1, Timestamp.valueOf(timer.getStartTime()));
             ps.setTimestamp(2, Timestamp.valueOf(timer.getStopTime()));
@@ -157,7 +157,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
     @Override
     public boolean deleteTimer(Timer timer) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM timer WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM timelog WHERE id = ?");
             ps.setInt(1, timer.getId());
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;

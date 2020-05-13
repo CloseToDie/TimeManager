@@ -10,12 +10,15 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
 import timemanager.be.Project;
+import timemanager.be.User;
 import timemanager.gui.model.UserModel;
 
 /**
@@ -34,7 +37,16 @@ public class UserController implements Initializable {
     @FXML
     private Label timeSpent;
     @FXML
-    private Button saveUserButton;
+    private JFXButton addUserButton;
+    @FXML
+    private TableView<User> userTable;
+    @FXML
+    private TableColumn<User, String> name;
+    @FXML
+    private TableColumn<User, String> role;
+    @FXML
+    private TableColumn<User, String> email;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -43,11 +55,16 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            um = new UserModel();
-            // TODO
+            um = UserModel.getInstance();
         } catch (IOException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        
+        userTable.setItems(um.getUsers());
+        
     }   
 
     @FXML
@@ -65,7 +82,6 @@ public class UserController implements Initializable {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
-    @FXML
     private void openUsers(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
@@ -74,9 +90,9 @@ public class UserController implements Initializable {
     private void openStatistics(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
-    
+
     @FXML
-    private void saveUser(ActionEvent event) {
-        um.storeUser("Andreas", "andreas@lortemail.dk", "password");
+    private void openAddUser(ActionEvent event) throws IOException {
+        tms.popup("UserCreate");
     }
 }
