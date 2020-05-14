@@ -44,9 +44,9 @@ public class UserModel {
         return users;
     }
     
-    public void storeUser(String name, String email, String password){
+    public void storeUser(String name, String email, String password, Boolean isAdmin){
         try {
-            um.storeUser(name, email, password);
+            um.storeUser(name, email, password, isAdmin);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
         }

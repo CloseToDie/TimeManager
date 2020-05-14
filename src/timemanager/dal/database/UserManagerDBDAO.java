@@ -64,7 +64,7 @@ public class UserManagerDBDAO implements UserManagerFacade {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("username");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 byte[] salt = rs.getBytes("salt");
@@ -84,13 +84,13 @@ public class UserManagerDBDAO implements UserManagerFacade {
     @Override
     public User getUserByName(String username) {
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM dbo.[user] WHERE name = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM dbo.[user] WHERE username = ?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("username");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 byte[] salt = rs.getBytes("salt");
@@ -142,7 +142,7 @@ public class UserManagerDBDAO implements UserManagerFacade {
     public boolean updateUser(User user) {
         try ( Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE dbo.[user] SET "
-                    + "name = ?, email = ?, password = ?, salt = ?, isAdmin = ? WHERE id = ?");
+                    + "username = ?, email = ?, password = ?, salt = ?, isAdmin = ? WHERE id = ?");
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());

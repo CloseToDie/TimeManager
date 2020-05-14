@@ -4,12 +4,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +22,10 @@ import timemanager.TimeManagerStart;
 import timemanager.be.Project;
 import timemanager.be.User;
 import timemanager.gui.model.UserModel;
+import timemanager.utils.auth.Password;
+import static timemanager.utils.auth.Password.getSalt;
+import static timemanager.utils.auth.Password.hash;
+import static timemanager.utils.auth.Password.verifyPassword;
 
 /**
  *
@@ -43,7 +49,7 @@ public class UserController implements Initializable {
     @FXML
     private TableColumn<User, String> name;
     @FXML
-    private TableColumn<User, String> role;
+    private TableColumn<User, Boolean> role;
     @FXML
     private TableColumn<User, String> email;
     
@@ -61,9 +67,13 @@ public class UserController implements Initializable {
         }
         
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        role.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         
         userTable.setItems(um.getUsers());
+        
+        User user = um.getUsers().get(0);
+        System.out.println("Password matches: " + verifyPassword("password", user.getPassword(), user.getSalt(), "SHA-512"));
         
     }   
 

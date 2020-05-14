@@ -13,6 +13,4 @@ import timemanager.be.User;
  */
 public interface AuthManagerFacade {
     public User login(String username, String pass);
-    public User getLoggedInUser();
-    public boolean logout();
 }

@@ -19,7 +19,6 @@ import timemanager.utils.auth.Password;
  */
 public class UserManager {
     public ArrayList<User> users = new ArrayList<>();
-    
     UserManagerFacade um;
     
     
@@ -40,11 +39,9 @@ public class UserManager {
         return um.getUserByName(name);
     }
     
-    public boolean storeUser(String name, String email, String password) throws NoSuchAlgorithmException {
+    public boolean storeUser(String name, String email, String password, Boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = Password.getSalt();
-        System.out.println(salt);
-        User user = new User(0, name, email, Password.hash(password, salt, "SHA-512"), salt, false);
-        return um.storeUser(user);
+        return um.storeUser(new User(0, name, email, Password.hash(password, salt, "SHA-512"), salt, isAdmin));
     }
     
     public boolean updateUser(User user) {

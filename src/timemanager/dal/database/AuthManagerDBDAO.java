@@ -32,25 +32,12 @@ public class AuthManagerDBDAO implements AuthManagerFacade{
     public User login(String username, String pass) {
         User user = um.getUserByName(username);
         
+        if(user == null) return null;
+        
         if(passMatches(user, pass)) {
             return user;
         } else {
             return null;
-        }
-    }
-    
-    @Override
-    public User getLoggedInUser() {
-        return user;
-    }
-    
-    @Override
-    public boolean logout() {
-        if(user != null){
-            user = null;
-            return true;
-        } else {
-            return false;
         }
     }
     

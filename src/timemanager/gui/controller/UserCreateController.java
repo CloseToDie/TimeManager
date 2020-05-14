@@ -1,5 +1,6 @@
 package timemanager.gui.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,19 +29,20 @@ public class UserCreateController implements Initializable {
     TimeManagerStart tms = new TimeManagerStart();
     UserModel um;
     
+    @FXML
     private Label errorLabel;
     @FXML
     private Button saveUserButton;
     @FXML
     private Button cancelSaveUser;
     @FXML
-    private ComboBox<String> selectRole;
-    @FXML
     private TextField userName;
     @FXML
     private PasswordField userPassword;
     @FXML
     private TextField userEmail;
+    @FXML
+    private JFXCheckBox isAdmin;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -49,17 +51,16 @@ public class UserCreateController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        selectRole.setItems(um.getRoles());
     }
     @FXML
     private void saveUser(ActionEvent event) {
         String username = userName.getText();
         String email = userEmail.getText();
         String password = userPassword.getText();
+        Boolean admin = isAdmin.isSelected();
         
         if(validateName(username)) {
-            um.storeUser(username, email, password);
+            um.storeUser(username, email, password, admin);
             Stage window = (Stage) (cancelSaveUser.getScene().getWindow());
             window.close();
         } else {

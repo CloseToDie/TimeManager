@@ -75,6 +75,11 @@
                </font>
             </Label>
             <Button fx:id="loginButton" layoutX="21.0" layoutY="354.0" mnemonicParsing="false" onAction="#login" prefHeight="51.0" prefWidth="310.0" styleClass="addUserFormButton" text="Login" />
+            <Label fx:id="errorLabel" layoutX="22.0" layoutY="276.0" prefHeight="20.0" prefWidth="310.0" text="We were unable to authenticate you!" textFill="RED" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
