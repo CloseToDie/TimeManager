@@ -17,7 +17,6 @@ public class UserModel {
     private static UserModel single_instance = null; 
     private UserManager um;
     private ObservableList<User> users;
-    private ObservableList<String> roles;
 
     public static UserModel getInstance() throws IOException {
         if (single_instance == null) 
@@ -29,9 +28,6 @@ public class UserModel {
     private UserModel() throws IOException {
         um = new UserManager();
         users = FXCollections.observableArrayList();
-        roles = FXCollections.observableArrayList();
-        roles.add("User");
-        roles.add("Admin");
     }
     
     public void refreshData() {
@@ -55,9 +51,5 @@ public class UserModel {
     
     public void updateUser(User user) {
         //TODO
-    }
-    
-    public ObservableList<String> getRoles() {
-        return roles;
     }
 }

@@ -39,9 +39,35 @@ public class TimeLoggerModel {
         tm.stopTime();
     }
     
+    public double getSpentTime() {
+        Timer timer = tm.getLastTimerInList();
+        if(timer == null) return 0.0;
+        return tm.spentTime(timer.getStartTime(), timer.getStopTime());
+    }
+    
     public ObservableList<Timer> getTimers() {
         refreshData();
         return timers;
+    }
+
+    public void start(int taskId) {
+        tm.start(taskId);
+    }
+    
+    public void stop() {
+        tm.stop();
+    }
+
+    public void pause() {
+        tm.pause();
+    }
+
+    public void unpause() {
+        tm.unpause();
+    }
+
+    public long totalSpentTime() {
+        return (long) tm.totalSpentTime();
     }
     
 }

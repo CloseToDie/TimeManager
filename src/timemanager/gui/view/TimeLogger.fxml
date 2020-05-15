@@ -153,13 +153,14 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="selectProject" focusColor="#435a9a" layoutX="508.0" layoutY="16.0" prefHeight="27.0" prefWidth="118.0" promptText="Select Project" />
-                  <JFXButton fx:id="timerButton" layoutX="641.0" layoutY="17.0" styleClass="startButton" text="START" />
-                  <Label fx:id="timeSpent" layoutX="721.0" layoutY="16.0" text="00:00" textFill="#333333">
+                  <JFXComboBox fx:id="selectProject" focusColor="#435a9a" layoutX="393.0" layoutY="16.0" prefHeight="27.0" prefWidth="118.0" promptText="Select Project" />
+                  <JFXButton fx:id="timerButton" layoutX="612.0" layoutY="17.0" styleClass="startButton" text="START" />
+                  <Label fx:id="timeSpent" layoutX="689.0" layoutY="16.0" text="00:00:00" textFill="#333333">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="pauseButton" disable="true" layoutX="536.0" layoutY="17.0" styleClass="startButton" text="PAUSE" />
                </children>
             </Pane>
             <Pane prefHeight="545.0" prefWidth="620.0">

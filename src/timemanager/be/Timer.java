@@ -3,7 +3,7 @@ package timemanager.be;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Timer BE Class
  * @author andreasvillumsen
  */
 public class Timer {
@@ -11,7 +11,7 @@ public class Timer {
     private LocalDateTime startTime;
     private LocalDateTime stopTime;
     private double spentTime;
-    private int projectId;
+    private int taskId;
 
     /**
      * Timer Constructor
@@ -19,14 +19,14 @@ public class Timer {
      * @param startTime
      * @param stopTime
      * @param spentTime 
-     * @param projectId 
+     * @param taskId 
      */
-    public Timer(int id, LocalDateTime startTime, LocalDateTime stopTime, double spentTime, int projectId) {
+    public Timer(int id, LocalDateTime startTime, LocalDateTime stopTime, double spentTime, int taskId) {
         this.id = id;
         this.startTime = startTime;
         this.stopTime = stopTime;
         this.spentTime = spentTime;
-        this.projectId = projectId;
+        this.taskId = taskId;
     }
 
     /**
@@ -94,19 +94,19 @@ public class Timer {
     }
 
     /**
-     * Get the timer projectId
-     * @return projectId
+     * Get the timer taskId
+     * @return taskId
      */
-    public int getProjectId() {
-        return projectId;
+    public int getTaskId() {
+        return taskId;
     }
 
     /**
-     * Set the timer's projectId
-     * @param projectId 
+     * Set the timer's taskId
+     * @param taskId 
      */
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+    public void setTaskId(int projectId) {
+        this.taskId = projectId;
     }
     
 }

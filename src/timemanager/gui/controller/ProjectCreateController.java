@@ -9,11 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import timemanager.TimeManagerStart;
+import timemanager.be.Client;
 import timemanager.be.Project;
+import timemanager.gui.model.ClientModel;
 import timemanager.gui.model.ProjectModel;
 import timemanager.utils.validation.Validate;
 
@@ -26,6 +29,7 @@ public class ProjectCreateController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
     ProjectModel pm;
+    ClientModel cm;
     
     @FXML
     private Label errorLabel;
@@ -38,22 +42,25 @@ public class ProjectCreateController implements Initializable {
     @FXML
     private TextField projectSalary;
     @FXML
-    private TextField projectClientId;
+    private ComboBox<Client> clientSelect;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             pm = ProjectModel.getInstance();
+            cm = ClientModel.getInstance();
         } catch (IOException ex) {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        clientSelect.setItems(cm.getClients());
     }
     
     @FXML
     private void saveProject(ActionEvent event) {
         String name = projectName.getText();
         double salary = Double.parseDouble(projectSalary.getText());
-        int clientId = Integer.parseInt(projectClientId.getText());
+        int clientId = clientSelect.getValue().getId();
         
         if(validateName(name)) {
             pm.storeProject(new Project(0, name, salary, clientId));
