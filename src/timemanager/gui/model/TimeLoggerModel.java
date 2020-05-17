@@ -53,6 +53,7 @@ public class TimeLoggerModel {
     }
     
     public void stop() {
+        refreshData(lastTimer().getTaskId());
         tm.stop();
     }
 

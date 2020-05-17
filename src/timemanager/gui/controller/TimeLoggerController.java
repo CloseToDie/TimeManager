@@ -252,7 +252,7 @@ public class TimeLoggerController implements Initializable {
         if(!selectTask.getSelectionModel().isEmpty()) {
             timeTable.setItems(tlm.getTimers(selectTask.getValue().getId()));
         } else {
-            timeTable.setItems(tlm.getTimers());
+            timeTable.setItems(null);
         }
     }
 
