@@ -15,6 +15,8 @@ public interface TimeManagerFacade {
      */
     public ArrayList<Timer> getTimers();
     
+    public ArrayList<Timer> getTimers(int projectId);
+    
     /**
      * Get a timer
      * @param timer

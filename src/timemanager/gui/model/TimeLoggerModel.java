@@ -13,6 +13,7 @@ public class TimeLoggerModel {
     private static TimeLoggerModel single_instance = null;
     private TimeManager tm;
     private ObservableList<Timer> timers;
+    private ObservableList<Timer> taskTimers;
     
     public static TimeLoggerModel getInstance() throws Exception {
         if (single_instance == null) 
@@ -24,6 +25,7 @@ public class TimeLoggerModel {
     private TimeLoggerModel() throws Exception {
         tm = new TimeManager();
         timers = FXCollections.observableArrayList();
+        taskTimers = FXCollections.observableArrayList();
     }
     
     public void refreshData() {
@@ -31,27 +33,23 @@ public class TimeLoggerModel {
         timers.addAll(tm.getTimers());
     }
     
-    public void startTime(int projectId) {
-        tm.startTime(projectId);
-    }
-    
-    public void stopTime() {
-        tm.stopTime();
-    }
-    
-    public double getSpentTime() {
-        Timer timer = tm.getLastTimerInList();
-        if(timer == null) return 0.0;
-        return tm.spentTime(timer.getStartTime(), timer.getStopTime());
+    public void refreshData(int taskId) {
+        taskTimers.clear();
+        taskTimers.addAll(tm.getTimers(taskId));
     }
     
     public ObservableList<Timer> getTimers() {
         refreshData();
         return timers;
     }
+    
+    public ObservableList<Timer> getTimers(int taskId) {
+        refreshData(taskId);
+        return taskTimers;
+    }
 
-    public void start(int taskId) {
-        tm.start(taskId);
+    public void start(int taskId, boolean isBillable, int user_id) {
+        tm.start(taskId, isBillable, user_id);
     }
     
     public void stop() {
@@ -68,6 +66,14 @@ public class TimeLoggerModel {
 
     public long totalSpentTime() {
         return (long) tm.totalSpentTime();
+    }
+    
+    public boolean timerRunning() {
+        return tm.timerRunning();
+    }
+    
+    public Timer lastTimer() {
+        return tm.lastTimer();
     }
     
 }

@@ -37,6 +37,12 @@ public class ProjectModel {
         return projects;
     }
     
+    public ObservableList<Project> getClientProjects(int clientId) {
+        ObservableList<Project> projectsForClient = FXCollections.observableArrayList();
+        projectsForClient.addAll(pm.getClientProjects(clientId));
+        return projectsForClient;
+    }
+    
     public void storeProject(Project project) {
         pm.storeProject(project);
         refreshData();

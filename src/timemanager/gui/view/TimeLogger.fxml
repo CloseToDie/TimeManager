@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -153,14 +154,32 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="selectProject" focusColor="#435a9a" layoutX="393.0" layoutY="16.0" prefHeight="27.0" prefWidth="118.0" promptText="Select Project" />
-                  <JFXButton fx:id="timerButton" layoutX="612.0" layoutY="17.0" styleClass="startButton" text="START" />
+                  <JFXComboBox fx:id="selectTask" disable="true" focusColor="#435a9a" layoutX="362.0" layoutY="20.0" onAction="#selectTask" prefHeight="27.0" prefWidth="100.0" promptText="Select Task" />
+                  <JFXButton fx:id="timerButton" layoutX="619.0" layoutY="17.0" styleClass="startButton" text="START" />
                   <Label fx:id="timeSpent" layoutX="689.0" layoutY="16.0" text="00:00:00" textFill="#333333">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="pauseButton" disable="true" layoutX="536.0" layoutY="17.0" styleClass="startButton" text="PAUSE" />
+                  <JFXButton fx:id="pauseButton" disable="true" layoutX="543.0" layoutY="17.0" minWidth="70.0" styleClass="startButton" text="PAUSE" />
+                  <JFXComboBox fx:id="selectProject" disable="true" focusColor="#435a9a" layoutX="249.0" layoutY="20.0" onAction="#selectProject" prefHeight="27.0" prefWidth="100.0" promptText="Select Project" />
+                  <JFXComboBox fx:id="selectClient" focusColor="#435a9a" layoutX="139.0" layoutY="20.0" onAction="#selectClient" prefHeight="27.0" prefWidth="100.0" promptText="Select Client" />
+                  <Label layoutX="139.0" layoutY="12.0" text="Client">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="250.0" layoutY="12.0" text="Project">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="362.0" layoutY="12.0" text="Task">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <JFXCheckBox fx:id="billable" checkedColor="#435a9a" layoutX="469.0" layoutY="24.0" selected="true" text="Billable" />
                </children>
             </Pane>
             <Pane prefHeight="545.0" prefWidth="620.0">

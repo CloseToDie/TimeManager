@@ -55,6 +55,38 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
 
         return null;
     }
+    
+    /**
+     * Get a list of projects for a client.
+     * @param clientId
+     * @return projects
+     */
+    @Override
+    public ArrayList<Project> getClientProjects(int clientId) {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM project WHERE client_id = ?");
+            ps.setInt(1, clientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                Double salary = rs.getDouble("salary");
+                int client_id = rs.getInt("client_id");
+                projects.add(new Project(id, name, salary, client_id));
+            }
+            return projects;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 
     /**
      * Get a project from a database by id

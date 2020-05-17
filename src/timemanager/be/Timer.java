@@ -1,5 +1,6 @@
 package timemanager.be;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -8,25 +9,49 @@ import java.time.LocalDateTime;
  */
 public class Timer {
     private int id;
+    private LocalDate date;
     private LocalDateTime startTime;
     private LocalDateTime stopTime;
     private double spentTime;
+    private boolean billable;
     private int taskId;
+    private int userId;
 
     /**
      * Timer Constructor
      * @param id
+     * @param date
      * @param startTime
      * @param stopTime
      * @param spentTime 
+     * @param billable 
      * @param taskId 
+     * @param userId 
      */
-    public Timer(int id, LocalDateTime startTime, LocalDateTime stopTime, double spentTime, int taskId) {
+    public Timer(int id, LocalDate date, LocalDateTime startTime, LocalDateTime stopTime, double spentTime, boolean billable, int taskId, int userId) {
         this.id = id;
+        this.date = date;
         this.startTime = startTime;
         this.stopTime = stopTime;
         this.spentTime = spentTime;
+        this.billable = billable;
         this.taskId = taskId;
+        this.userId = userId;
+    }
+    /**
+     * Get the date the timer was started.
+     * @return date
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
+     * Set the date the timer was started.
+     * @param date 
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
@@ -92,6 +117,22 @@ public class Timer {
     public void setStopTime(LocalDateTime stopTime) {
         this.stopTime = stopTime;
     }
+    
+    /**
+     * Get is billable
+     * @return billable
+     */
+    public boolean isBillable() {
+        return billable;
+    }
+
+    /**
+     * Set is billable
+     * @param billable 
+     */
+    public void setBillable(boolean billable) {
+        this.billable = billable;
+    }
 
     /**
      * Get the timer taskId
@@ -107,6 +148,14 @@ public class Timer {
      */
     public void setTaskId(int projectId) {
         this.taskId = projectId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
 }
