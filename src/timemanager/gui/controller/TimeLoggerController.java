@@ -181,9 +181,9 @@ public class TimeLoggerController implements Initializable {
     }
     
     private void setupTable() {
-        started.setCellValueFactory(new PropertyValueFactory<Timer, LocalDateTime>("startTime"));
-        ended.setCellValueFactory(new PropertyValueFactory<Timer, LocalDateTime>("stopTime"));
-        timespent.setCellValueFactory(new PropertyValueFactory<Timer, Double>("spentTime"));
+        started.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        ended.setCellValueFactory(new PropertyValueFactory<>("stopTime"));
+        timespent.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
     }
 
     private void setupTimeline() {
