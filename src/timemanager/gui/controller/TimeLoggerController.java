@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -181,7 +182,43 @@ public class TimeLoggerController implements Initializable {
     }
     
     private void setupTable() {
+        started.setCellFactory(column -> {
+            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
+
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        this.setText(formatter.format(item));
+
+                    }
+                }
+            };
+
+            return cell;
+        });
         started.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        ended.setCellFactory(column -> {
+            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
+
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        this.setText(formatter.format(item));
+
+                    }
+                }
+            };
+
+            return cell;
+        });
         ended.setCellValueFactory(new PropertyValueFactory<>("stopTime"));
         timespent.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
     }
