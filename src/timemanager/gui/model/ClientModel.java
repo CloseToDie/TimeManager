@@ -41,4 +41,14 @@ public class ClientModel {
         cm.storeClient(client);
         refreshData();
     }
+    
+    public void updateClient(Client client) {
+        cm.updateClient(client);
+        refreshData();
+    }
+    
+    public void deleteClient(Client client) {
+        cm.deleteClient(client);
+        refreshData();
+    }
 }

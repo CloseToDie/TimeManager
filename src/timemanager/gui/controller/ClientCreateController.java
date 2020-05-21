@@ -26,6 +26,7 @@ public class ClientCreateController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
     ClientModel cm;
+    Client client = null;
     
     @FXML
     private Button saveUserButton;
@@ -45,11 +46,22 @@ public class ClientCreateController implements Initializable {
         }
     }
     
+    public void setClient(Client client) {
+        this.client = client;
+        if(client != null) setupFields();
+    }
+    
     @FXML
     private void saveClient(ActionEvent event) {
         String name = clientName.getText();
         if(validateName(name)) {
-            cm.storeClient(new Client(0, name));
+            if(client != null) {
+                client.setName(name);
+                cm.updateClient(client);
+            } else {
+                cm.storeClient(new Client(0, name));
+            }
+            
             Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
             window.close();
         } else {
@@ -65,5 +77,9 @@ public class ClientCreateController implements Initializable {
     
     private boolean validateName(String name) {
         return !(Validate.isNull(name) || !Validate.containsAtLeast(name, 3));
+    }
+
+    private void setupFields() {
+        clientName.setText(client.getName());
     }
 }

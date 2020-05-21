@@ -5,8 +5,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import timemanager.be.Client;
+import timemanager.be.Project;
+import timemanager.gui.controller.ClientCreateController;
+import timemanager.gui.controller.ProjectController;
+import timemanager.gui.controller.TaskController;
+import timemanager.gui.controller.TaskCreateController;
+import timemanager.gui.controller.ProjectCreateController;
 
 /**
  *
@@ -31,6 +39,103 @@ public class TimeManagerStart extends Application {
         
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public void showProjects(Stage stage, Client client) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/Project.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        ProjectController projectController = loader.getController();
+        projectController.setClient(client);
+        
+        stage.show();
+    }
+    
+    public void showTasks(Stage stage, Project project) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/Task.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        TaskController taskController = loader.getController();
+        taskController.setProject(project);
+        
+        stage.show();
+    }
+    
+    public void showProjectsCreate(Client client) throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/ProjectCreate.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        ProjectCreateController projectCreateController = loader.getController();
+        projectCreateController.setClient(client);
+        
+        stage.showAndWait();
+    }
+    
+    public void showTasksCreate(Project project) throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/TaskCreate.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        TaskCreateController taskCreateController = loader.getController();
+        taskCreateController.setProject(project);
+        
+        stage.showAndWait();
+    }
+    
+    public void editClient(Client client) throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/ClientCreate.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        ClientCreateController clientCreateController = loader.getController();
+        clientCreateController.setClient(client);
+        
+        stage.showAndWait();
+    }
+    
+    public void editProject(Project project, Client client) throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/ProjectCreate.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        ProjectCreateController projectCreateController = loader.getController();
+        projectCreateController.setClient(client);
+        projectCreateController.setProject(project);
+        
+        stage.showAndWait();
     }
     
     public void popup(String view) throws IOException {

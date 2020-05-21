@@ -103,17 +103,6 @@ public class TimeLoggerController implements Initializable {
         setupTimeline();
         
         initStartTimeline();
-    }    
-
-    private void openTimeLogger(MouseEvent event) throws Exception {
-        timeline.stop();
-        tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
-    }
-
-    @FXML
-    private void openProjects(MouseEvent event) throws Exception {
-        timeline.stop();
-        tms.set((Stage) (selectProject.getScene().getWindow()), "Project");
     }
     
     @FXML
@@ -179,48 +168,6 @@ public class TimeLoggerController implements Initializable {
         pauseButton.setText("PAUSE");
         tlm.unpause();
         //timeline.play();
-    }
-    
-    private void setupTable() {
-        started.setCellFactory(column -> {
-            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
-
-                @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if(empty) {
-                        setText(null);
-                    }
-                    else {
-                        this.setText(formatter.format(item));
-
-                    }
-                }
-            };
-
-            return cell;
-        });
-        started.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        ended.setCellFactory(column -> {
-            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
-
-                @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if(empty) {
-                        setText(null);
-                    }
-                    else {
-                        this.setText(formatter.format(item));
-
-                    }
-                }
-            };
-
-            return cell;
-        });
-        ended.setCellValueFactory(new PropertyValueFactory<>("stopTime"));
-        timespent.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
     }
 
     private void setupTimeline() {
@@ -298,5 +245,48 @@ public class TimeLoggerController implements Initializable {
         selectProject.setDisable(b);
         selectTask.setDisable(b);
         billable.setDisable(b);
+    }
+    
+    private void setupTable() {
+        started.setCellFactory(column -> {
+            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
+
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        this.setText(formatter.format(item));
+
+                    }
+                }
+            };
+
+            return cell;
+        });
+        started.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        ended.setCellFactory(column -> {
+            TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {
+
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        this.setText(formatter.format(item));
+
+                    }
+                }
+            };
+
+            return cell;
+        });
+        ended.setCellValueFactory(new PropertyValueFactory<>("stopTime"));
+        timespent.setCellValueFactory(new PropertyValueFactory<>("spentTime"));
+        timeTable.setItems(tlm.getTimers());
     }
 }

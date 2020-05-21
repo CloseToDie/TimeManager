@@ -62,7 +62,12 @@ public class TimeManager {
      */
     public void stop() {
         if(timerRunning()) {
+            // Set stop time.
             lastTimer().setStopTime(LocalDateTime.now());
+            
+            // Calculate spent time.
+            lastTimer().setSpentTime(spentTime(lastTimer().getStartTime(), lastTimer().getStopTime()));
+            
             // Save last timer to db
             tm.storeTimer(lastTimer());
             System.out.println("timer stopped");
@@ -79,8 +84,12 @@ public class TimeManager {
      * but don't clear list.
      */
     public void pause() {
+        // Set stop time.
         lastTimer().setStopTime(LocalDateTime.now());
+        
+        // Calculate spent time.
         lastTimer().setSpentTime(spentTime(lastTimer().getStartTime(), lastTimer().getStopTime()));
+        
         // Save last timer to db
         tm.storeTimer(lastTimer());
         System.out.println("timer paused");

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import timemanager.be.Task;
 import timemanager.dal.TaskManagerFacade;
@@ -54,7 +55,30 @@ public class TaskManagerDBDAO implements TaskManagerFacade{
 
     @Override
     public boolean storeTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO task "
+                    + "(description, project_id) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, task.getDescription());
+            ps.setInt(2, task.getProjectId());
+
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                task.setId((int) rs.getLong(1));
+            } else {
+                return false;
+            }
+
+            return true;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

@@ -35,30 +35,9 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e#28479e;" styleClass="sidebarButtons">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e;" styleClass="sidebarButtons">
                <children>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Time Logger" textFill="WHITE">
-                     <padding>
-                        <Insets left="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#openProjects" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="142.0" text="Projects" textFill="WHITE">
                      <padding>
                         <Insets left="5.0" />
                      </padding>

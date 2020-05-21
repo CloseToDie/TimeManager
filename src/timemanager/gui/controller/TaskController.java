@@ -1,33 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package timemanager.gui.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -46,7 +41,7 @@ import timemanager.gui.model.TimeLoggerModel;
  *
  * @author andreasvillumsen
  */
-public class ClientController implements Initializable {
+public class TaskController implements Initializable {
     
     TimeManagerStart tms = new TimeManagerStart();
     TimeLoggerModel tlm;
@@ -57,30 +52,30 @@ public class ClientController implements Initializable {
     
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
+    
+    private Project project;
 
-    @FXML
-    private JFXComboBox<Project> selectProject;
-    @FXML
-    private TableView<Client> clientsTable;
-    @FXML
-    private TableColumn<Client, String> clientsNameCol;
     @FXML
     private JFXComboBox<Task> selectTask;
     @FXML
+    private JFXButton timerButton;
+    @FXML
+    private Label timeSpent;
+    @FXML
     private JFXButton pauseButton;
+    @FXML
+    private JFXComboBox<Project> selectProject;
     @FXML
     private JFXComboBox<Client> selectClient;
     @FXML
     private JFXCheckBox billable;
     @FXML
-    private JFXButton timerButton;
+    private TableColumn<Task, String> description;
     @FXML
-    private Label timeSpent;
+    private TableView<Task> taskTable;
 
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,94 +89,29 @@ public class ClientController implements Initializable {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ContextMenu tcm = new ContextMenu();
-        
-        //Show Projects
-        MenuItem showItem = new MenuItem("Show Projects");
-        showItem.setOnAction((action) -> {
-            try {
-                Client client = clientsTable.getSelectionModel().getSelectedItem();
-                tms.showProjects((Stage) (selectProject.getScene().getWindow()), client);
-            } catch (Exception ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(showItem);
-        
-        // Edit Client
-        MenuItem editItem = new MenuItem("Edit");
-        editItem.setOnAction((action) -> {
-            try {
-                Client client = clientsTable.getSelectionModel().getSelectedItem();
-                tms.editClient(client);
-            } catch (Exception ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(editItem);
-        
-        // Delete client
-        MenuItem deleteItem = new MenuItem("Delete");
-        deleteItem.setOnAction((action) -> {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Delete Client");
-            alert.setHeaderText("Are you sure you want to delete the client?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                try {
-                    Client client = clientsTable.getSelectionModel().getSelectedItem();
-                    cm.deleteClient(client);
-                } catch (Exception ex) {
-                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        tcm.getItems().add(deleteItem);
-        
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
         
-        clientsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
-        clientsTable.setRowFactory( tv -> {
-            TableRow<Client> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Client rowData = row.getItem();
-                    try {
-                        tms.showProjects((Stage) (selectProject.getScene().getWindow()), rowData);
-                        
-                    } catch (Exception ex) {
-                        Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            return row ;
-        });
-        
-        clientsTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                if(t.getButton() == MouseButton.SECONDARY) {
-                    tcm.show(clientsTable, t.getScreenX(), t.getScreenY());
-                }
-            }
-        });
-        
-        clientsTable.setItems(cm.getClients());
-        
         setupTimeline();
         
         initStartTimeline();
-    }    
+    }  
+    
+    public void setProject(Project project) {
+        this.project = project;
+        setupTable();
+    }
 
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
+    }
+    
+    @FXML
+    private void openClients(MouseEvent event) throws Exception {
+        tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
     @FXML
@@ -193,11 +123,12 @@ public class ClientController implements Initializable {
     private void openStatistics(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
-    @FXML
-    private void openAddClient(ActionEvent event) throws IOException {
-        tms.popup("ClientCreate");
-    }
 
+    @FXML
+    private void addTask(ActionEvent event) throws Exception {
+        tms.showTasksCreate(project);
+    }
+    
     private void toggleTimer() {
         if(timerButton.getText().equals("START")) {
             if(!selected(selectClient) || !selected(selectProject) || !selected(selectTask)) return;
@@ -314,6 +245,17 @@ public class ClientController implements Initializable {
         selectProject.setDisable(b);
         selectTask.setDisable(b);
         billable.setDisable(b);
+    }
+
+    @FXML
+    private void openAddProject(MouseEvent event) {
+    }
+
+    private void setupTable() {
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        if(project != null) {
+            taskTable.setItems(tm.getTasks(project.getId()));
+        }
     }
     
 }

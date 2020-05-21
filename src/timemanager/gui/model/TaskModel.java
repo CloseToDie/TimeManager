@@ -41,5 +41,10 @@ public class TaskModel {
         refreshData(projectId);
         return tasks;
     }
+
+    public void storeTask(Task task) {
+        tm.storeTask(task);
+        refreshData(task.getProjectId());
+    }
     
 }

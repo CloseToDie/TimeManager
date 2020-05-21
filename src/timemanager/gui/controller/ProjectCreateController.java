@@ -31,6 +31,9 @@ public class ProjectCreateController implements Initializable {
     ProjectModel pm;
     ClientModel cm;
     
+    Client client;
+    Project project;
+    
     @FXML
     private Label errorLabel;
     @FXML
@@ -56,6 +59,16 @@ public class ProjectCreateController implements Initializable {
         clientSelect.setItems(cm.getClients());
     }
     
+    public void setClient(Client client) {
+        this.client = client;
+        clientSelect.setValue(client);
+    }
+    
+    public void setProject(Project project) {
+        this.project = project;
+        if(project != null) setupFields();
+    }
+    
     @FXML
     private void saveProject(ActionEvent event) {
         String name = projectName.getText();
@@ -63,7 +76,15 @@ public class ProjectCreateController implements Initializable {
         int clientId = clientSelect.getValue().getId();
         
         if(validateName(name)) {
-            pm.storeProject(new Project(0, name, salary, clientId));
+            if(project != null) {
+                project.setClientId(clientId);
+                project.setName(name);
+                project.setSalary(salary);
+                pm.updateProject(project);
+            } else {
+                pm.storeProject(new Project(0, name, salary, clientId));
+            }
+            
             Stage window = (Stage) (cancelSaveProject.getScene().getWindow());
             window.close();
         } else {
@@ -79,5 +100,10 @@ public class ProjectCreateController implements Initializable {
     
     private boolean validateName(String name) {
         return !(Validate.isNull(name) || !Validate.containsAtLeast(name, 3));
+    }
+
+    private void setupFields() {
+        projectName.setText(project.getName());
+        projectSalary.setText(String.valueOf(project.getSalary()));
     }
 }

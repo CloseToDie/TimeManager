@@ -33,11 +33,13 @@ public class ProjectManager {
     }
     
     /**
-     * Get projects for a client from DAL
+     * Get all projects for a client from DAL
+     * @param clientId
      * @return projects
      */
-    public ArrayList<Project> getClientProjects(int clientId) {
-        return pm.getClientProjects(clientId);
+    public ArrayList<Project> getProjects(int clientId) {
+        projects = pm.getProjects(clientId);
+        return projects;
     }
     
     /**

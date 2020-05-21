@@ -62,7 +62,7 @@ public class ProjectManagerDBDAO implements ProjectManagerFacade {
      * @return projects
      */
     @Override
-    public ArrayList<Project> getClientProjects(int clientId) {
+    public ArrayList<Project> getProjects(int clientId) {
         ArrayList<Project> projects = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {

@@ -13,7 +13,7 @@ import timemanager.bll.ProjectManager;
 public class ProjectModel {
     private static ProjectModel single_instance = null;
     private ProjectManager pm;
-    private ObservableList<Project> projects;
+    private ObservableList<Project> projectsForClient;
     
     public static ProjectModel getInstance() throws IOException {
         if (single_instance == null)
@@ -24,27 +24,31 @@ public class ProjectModel {
     
     private ProjectModel() throws IOException {
         pm = new ProjectManager();
-        projects = FXCollections.observableArrayList();
+        projectsForClient = FXCollections.observableArrayList();
     }
     
-    public void refreshData() {
-        projects.clear();
-        projects.addAll(pm.getProjects());
-    }
-    
-    public ObservableList<Project> getProjects() {
-        refreshData();
-        return projects;
+    public void refreshData(int clientId) {
+        projectsForClient.clear();
+        projectsForClient.addAll(pm.getProjects(clientId));
     }
     
     public ObservableList<Project> getClientProjects(int clientId) {
-        ObservableList<Project> projectsForClient = FXCollections.observableArrayList();
-        projectsForClient.addAll(pm.getClientProjects(clientId));
+        refreshData(clientId);
         return projectsForClient;
     }
     
     public void storeProject(Project project) {
         pm.storeProject(project);
-        refreshData();
+        refreshData(project.getClientId());
+    }
+    
+    public void updateProject(Project project) {
+        pm.updateProject(project);
+        refreshData(project.getClientId());
+    }
+
+    public void deleteProject(Project project) {
+        pm.deleteProject(project);
+        refreshData(project.getClientId());
     }
  }

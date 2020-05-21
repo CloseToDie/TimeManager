@@ -25,4 +25,8 @@ public class TaskManager {
     public ArrayList<Task> getTasks(int projectId) {
         return tm.getTasks(projectId);
     }
+
+    public void storeTask(Task task) {
+        tm.storeTask(task);
+    }
 }
