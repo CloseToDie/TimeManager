@@ -57,6 +57,8 @@ public class ClientController implements Initializable {
     
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
+    
+    ContextMenu tcm = new ContextMenu();
 
     @FXML
     private JFXComboBox<Project> selectProject;
@@ -94,85 +96,12 @@ public class ClientController implements Initializable {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ContextMenu tcm = new ContextMenu();
-        
-        //Show Projects
-        MenuItem showItem = new MenuItem("Show Projects");
-        showItem.setOnAction((action) -> {
-            try {
-                Client client = clientsTable.getSelectionModel().getSelectedItem();
-                tms.showProjects((Stage) (selectProject.getScene().getWindow()), client);
-            } catch (Exception ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(showItem);
-        
-        // Edit Client
-        MenuItem editItem = new MenuItem("Edit");
-        editItem.setOnAction((action) -> {
-            try {
-                Client client = clientsTable.getSelectionModel().getSelectedItem();
-                tms.editClient(client);
-            } catch (Exception ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(editItem);
-        
-        // Delete client
-        MenuItem deleteItem = new MenuItem("Delete");
-        deleteItem.setOnAction((action) -> {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Delete Client");
-            alert.setHeaderText("Are you sure you want to delete the client?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                try {
-                    Client client = clientsTable.getSelectionModel().getSelectedItem();
-                    cm.deleteClient(client);
-                } catch (Exception ex) {
-                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        tcm.getItems().add(deleteItem);
-        
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
         
-        clientsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
-        clientsTable.setRowFactory( tv -> {
-            TableRow<Client> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Client rowData = row.getItem();
-                    try {
-                        tms.showProjects((Stage) (selectProject.getScene().getWindow()), rowData);
-                        
-                    } catch (Exception ex) {
-                        Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            return row ;
-        });
-        
-        clientsTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                if(t.getButton() == MouseButton.SECONDARY) {
-                    tcm.show(clientsTable, t.getScreenX(), t.getScreenY());
-                }
-            }
-        });
-        
-        clientsTable.setItems(cm.getClients());
+        setupTable();
         
         setupTimeline();
         
@@ -193,6 +122,7 @@ public class ClientController implements Initializable {
     private void openStatistics(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
+    
     @FXML
     private void openAddClient(ActionEvent event) throws IOException {
         tms.popup("ClientCreate");
@@ -314,6 +244,81 @@ public class ClientController implements Initializable {
         selectProject.setDisable(b);
         selectTask.setDisable(b);
         billable.setDisable(b);
+    }
+
+    private void setupTable() {
+        //Show Projects
+        MenuItem showItem = new MenuItem("Show Projects");
+        showItem.setOnAction((action) -> {
+            try {
+                Client client = clientsTable.getSelectionModel().getSelectedItem();
+                tms.showProjects((Stage) (selectProject.getScene().getWindow()), client);
+            } catch (Exception ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(showItem);
+        
+        // Edit Client
+        MenuItem editItem = new MenuItem("Edit");
+        editItem.setOnAction((action) -> {
+            try {
+                Client client = clientsTable.getSelectionModel().getSelectedItem();
+                tms.editClient(client);
+            } catch (Exception ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(editItem);
+        
+        // Delete client
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction((action) -> {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Client");
+            alert.setHeaderText("Are you sure you want to delete the client?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                try {
+                    Client client = clientsTable.getSelectionModel().getSelectedItem();
+                    cm.deleteClient(client);
+                } catch (Exception ex) {
+                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        tcm.getItems().add(deleteItem);
+        
+        clientsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        
+        clientsTable.setRowFactory( tv -> {
+            TableRow<Client> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Client rowData = row.getItem();
+                    try {
+                        tms.showProjects((Stage) (selectProject.getScene().getWindow()), rowData);
+                        
+                    } catch (Exception ex) {
+                        Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            return row ;
+        });
+        
+        clientsTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getButton() == MouseButton.SECONDARY) {
+                    tcm.show(clientsTable, t.getScreenX(), t.getScreenY());
+                }
+            }
+        });
+        
+        clientsTable.setItems(cm.getClients());
     }
     
 }

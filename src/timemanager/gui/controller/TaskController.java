@@ -60,6 +60,8 @@ public class TaskController implements Initializable {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
     
+    ContextMenu tcm = new ContextMenu();
+    
     private Project project;
 
     @FXML
@@ -96,53 +98,10 @@ public class TaskController implements Initializable {
             Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ContextMenu tcm = new ContextMenu();
-        
-        // Edit Client
-        MenuItem editItem = new MenuItem("Edit");
-        editItem.setOnAction((action) -> {
-            try {
-                Task task = taskTable.getSelectionModel().getSelectedItem();
-                tms.editTask(task, project);
-            } catch (Exception ex) {
-                Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(editItem);
-        
-        // Delete client
-        MenuItem deleteItem = new MenuItem("Delete");
-        deleteItem.setOnAction((action) -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Task");
-            alert.setHeaderText("Are you sure you want to delete the task?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                try {
-                    Task task = taskTable.getSelectionModel().getSelectedItem();
-                    tm.deleteTask(task);
-                } catch (Exception ex) {
-                    Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        tcm.getItems().add(deleteItem);
-        
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
-        
-        taskTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                if(t.getButton() == MouseButton.SECONDARY) {
-                    tcm.show(taskTable, t.getScreenX(), t.getScreenY());
-                }
-            }
-        });
         
         setupTimeline();
         
@@ -303,6 +262,48 @@ public class TaskController implements Initializable {
 
     private void setupTable() {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
+        
+        // Edit Client
+        MenuItem editItem = new MenuItem("Edit");
+        editItem.setOnAction((action) -> {
+            try {
+                Task task = taskTable.getSelectionModel().getSelectedItem();
+                tms.editTask(task, project);
+            } catch (Exception ex) {
+                Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(editItem);
+        
+        // Delete client
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction((action) -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Task");
+            alert.setHeaderText("Are you sure you want to delete the task?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                try {
+                    Task task = taskTable.getSelectionModel().getSelectedItem();
+                    tm.deleteTask(task);
+                } catch (Exception ex) {
+                    Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        tcm.getItems().add(deleteItem);
+        
+        taskTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getButton() == MouseButton.SECONDARY) {
+                    tcm.show(taskTable, t.getScreenX(), t.getScreenY());
+                }
+            }
+        });
+        
         if(project != null) {
             taskTable.setItems(tm.getTasks(project.getId()));
         }

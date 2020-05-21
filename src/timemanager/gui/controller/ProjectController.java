@@ -57,7 +57,9 @@ public class ProjectController implements Initializable {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
     
-    private Client client;
+    ContextMenu tcm = new ContextMenu();
+    
+    Client client;
 
     @FXML
     private JFXComboBox<Project> selectProject;
@@ -99,65 +101,10 @@ public class ProjectController implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ContextMenu tcm = new ContextMenu();
-        
-        //Show Projects
-        MenuItem showItem = new MenuItem("Show Tasks");
-        showItem.setOnAction((action) -> {
-            try {
-                Project project = projectTable.getSelectionModel().getSelectedItem();
-                tms.showTasks((Stage) (selectProject.getScene().getWindow()), project);
-            } catch (Exception ex) {
-                Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(showItem);
-        
-        // Edit Client
-        MenuItem editItem = new MenuItem("Edit");
-        editItem.setOnAction((action) -> {
-            try {
-                Project project = projectTable.getSelectionModel().getSelectedItem();
-                tms.editProject(project, client);
-            } catch (Exception ex) {
-                Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        tcm.getItems().add(editItem);
-        
-        // Delete client
-        MenuItem deleteItem = new MenuItem("Delete");
-        deleteItem.setOnAction((action) -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Delete Project");
-            alert.setHeaderText("Are you sure you want to delete the project?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                try {
-                    Project project = projectTable.getSelectionModel().getSelectedItem();
-                    pm.deleteProject(project);
-                } catch (Exception ex) {
-                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        tcm.getItems().add(deleteItem);
-        
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
-        
-        projectTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                if(t.getButton() == MouseButton.SECONDARY) {
-                    tcm.show(projectTable, t.getScreenX(), t.getScreenY());
-                }
-            }
-        });
         
         setupTimeline();
         
@@ -167,10 +114,6 @@ public class ProjectController implements Initializable {
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
-    }
-
-    private void openProjects(MouseEvent event) throws Exception {
-        tms.set((Stage) (selectProject.getScene().getWindow()), "Project");
     }
     
     @FXML
@@ -187,7 +130,6 @@ public class ProjectController implements Initializable {
     private void openStatistics(MouseEvent event) throws Exception {
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
-
 
     @FXML
     private void openAddProject(MouseEvent event) throws IOException, Exception {
@@ -318,9 +260,6 @@ public class ProjectController implements Initializable {
     }
 
     private void setupTable() {
-        System.out.println("Client in setup: ");
-        System.out.println(client);
-        
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         salary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         
@@ -338,6 +277,59 @@ public class ProjectController implements Initializable {
                 }
             });
             return row ;
+        });
+        
+        //Show Projects
+        MenuItem showItem = new MenuItem("Show Tasks");
+        showItem.setOnAction((action) -> {
+            try {
+                Project project = projectTable.getSelectionModel().getSelectedItem();
+                tms.showTasks((Stage) (selectProject.getScene().getWindow()), project);
+            } catch (Exception ex) {
+                Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(showItem);
+        
+        // Edit Client
+        MenuItem editItem = new MenuItem("Edit");
+        editItem.setOnAction((action) -> {
+            try {
+                Project project = projectTable.getSelectionModel().getSelectedItem();
+                tms.editProject(project, client);
+            } catch (Exception ex) {
+                Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(editItem);
+        
+        // Delete client
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction((action) -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Project");
+            alert.setHeaderText("Are you sure you want to delete the project?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                try {
+                    Project project = projectTable.getSelectionModel().getSelectedItem();
+                    pm.deleteProject(project);
+                } catch (Exception ex) {
+                    Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        tcm.getItems().add(deleteItem);
+        
+        projectTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getButton() == MouseButton.SECONDARY) {
+                    tcm.show(projectTable, t.getScreenX(), t.getScreenY());
+                }
+            }
         });
         
         if(client != null) {

@@ -7,18 +7,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -50,6 +57,8 @@ public class UserController implements Initializable {
     
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
+    
+    ContextMenu tcm = new ContextMenu();
 
     @FXML
     private JFXComboBox<Project> selectProject;
@@ -92,16 +101,12 @@ public class UserController implements Initializable {
             Logger.getLogger(TimeLoggerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        role.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
-        email.setCellValueFactory(new PropertyValueFactory<>("email"));
-        
-        userTable.setItems(um.getUsers());
-        
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
+        
+        setupTable();
         
         setupTimeline();
         
@@ -254,5 +259,54 @@ public class UserController implements Initializable {
         selectProject.setDisable(b);
         selectTask.setDisable(b);
         billable.setDisable(b);
+    }
+
+    private void setupTable() {
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        role.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        
+        // Edit user
+        MenuItem editItem = new MenuItem("Edit");
+        editItem.setOnAction((action) -> {
+            try {
+                User user = userTable.getSelectionModel().getSelectedItem();
+                tms.editUser(user);
+            } catch (Exception ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(editItem);
+        
+        // Delete user
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction((action) -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete User");
+            alert.setHeaderText("Are you sure you want to delete the user?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                try {
+                    User user = userTable.getSelectionModel().getSelectedItem();
+                    um.deleteUser(user);
+                } catch (Exception ex) {
+                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        tcm.getItems().add(deleteItem);
+        
+        userTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getButton() == MouseButton.SECONDARY) {
+                    tcm.show(userTable, t.getScreenX(), t.getScreenY());
+                }
+            }
+        });
+        
+        userTable.setItems(um.getUsers());
     }
 }

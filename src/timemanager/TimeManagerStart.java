@@ -11,11 +11,13 @@ import javafx.stage.Stage;
 import timemanager.be.Client;
 import timemanager.be.Project;
 import timemanager.be.Task;
+import timemanager.be.User;
 import timemanager.gui.controller.ClientCreateController;
 import timemanager.gui.controller.ProjectController;
 import timemanager.gui.controller.TaskController;
 import timemanager.gui.controller.TaskCreateController;
 import timemanager.gui.controller.ProjectCreateController;
+import timemanager.gui.controller.UserCreateController;
 
 /**
  *
@@ -153,6 +155,23 @@ public class TimeManagerStart extends Application {
         TaskCreateController taskCreateController = loader.getController();
         taskCreateController.setTask(task);
         taskCreateController.setProject(project);
+        
+        stage.showAndWait();
+    }
+    
+    public void editUser(User user) throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/UserCreate.fxml"));
+        
+        Region root = loader.load();
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        
+        UserCreateController userCreateController = loader.getController();
+        userCreateController.setUser(user);
         
         stage.showAndWait();
     }

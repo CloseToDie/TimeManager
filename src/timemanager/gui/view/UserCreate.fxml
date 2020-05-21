@@ -46,7 +46,7 @@
          </font>
       </Label>
       <TextField fx:id="userEmail" layoutX="31.0" layoutY="293.0" prefHeight="47.0" prefWidth="300.0" />
-      <JFXCheckBox fx:id="isAdmin" layoutX="32.0" layoutY="375.0" prefHeight="47.0" prefWidth="294.0" text="Administrator" />
+      <JFXCheckBox fx:id="isAdmin" checkedColor="#435a9a" layoutX="32.0" layoutY="375.0" prefHeight="47.0" prefWidth="294.0" text="Administrator" />
       <Label fx:id="errorLabel" layoutX="33.0" layoutY="418.0" prefHeight="20.0" prefWidth="294.0" text="Your input does not meet the requirements!" textFill="RED" visible="false">
          <font>
             <Font size="16.0" />
