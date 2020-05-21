@@ -11,18 +11,25 @@ import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -86,13 +93,56 @@ public class TaskController implements Initializable {
             tm = TaskModel.getInstance();
             lm = LoginModel.getInstance();
         } catch (Exception ex) {
-            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        ContextMenu tcm = new ContextMenu();
+        
+        // Edit Client
+        MenuItem editItem = new MenuItem("Edit");
+        editItem.setOnAction((action) -> {
+            try {
+                Task task = taskTable.getSelectionModel().getSelectedItem();
+                tms.editTask(task, project);
+            } catch (Exception ex) {
+                Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tcm.getItems().add(editItem);
+        
+        // Delete client
+        MenuItem deleteItem = new MenuItem("Delete");
+        deleteItem.setOnAction((action) -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Task");
+            alert.setHeaderText("Are you sure you want to delete the task?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                try {
+                    Task task = taskTable.getSelectionModel().getSelectedItem();
+                    tm.deleteTask(task);
+                } catch (Exception ex) {
+                    Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        tcm.getItems().add(deleteItem);
         
         timerButton.setOnAction(e -> toggleTimer());
         pauseButton.setOnAction(e -> pauseTimer());
         
         selectClient.setItems(cm.getClients());
+        
+        taskTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                if(t.getButton() == MouseButton.SECONDARY) {
+                    tcm.show(taskTable, t.getScreenX(), t.getScreenY());
+                }
+            }
+        });
         
         setupTimeline();
         

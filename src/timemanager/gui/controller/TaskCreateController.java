@@ -35,6 +35,7 @@ public class TaskCreateController implements Initializable {
     TaskModel tm;
     ProjectModel pm;
     private Project project;
+    private Task task;
     
     @FXML
     private Label errorLabel;
@@ -61,6 +62,11 @@ public class TaskCreateController implements Initializable {
         projectSelect.setItems(pm.getClientProjects(project.getClientId()));
         projectSelect.setValue(project);
     }
+    
+    public void setTask(Task task) {
+        this.task = task;
+        if(task != null) setupFields();
+    }
 
     @FXML
     private void saveTask(ActionEvent event) {
@@ -68,7 +74,14 @@ public class TaskCreateController implements Initializable {
         int projectId = projectSelect.getValue().getId();
         
         if(validateDescription(desc)) {
-            tm.storeTask(new Task(0, desc, projectId));
+            if(task != null) {
+                task.setDescription(desc);
+                task.setProjectId(projectId);
+                tm.updateTask(task);
+            } else {
+                tm.storeTask(new Task(0, desc, projectId));
+            }
+            
             Stage window = (Stage) (errorLabel.getScene().getWindow());
             window.close();
         } else {
@@ -84,5 +97,9 @@ public class TaskCreateController implements Initializable {
     
     private boolean validateDescription(String desc) {
         return !(Validate.isNull(desc) || !Validate.containsAtLeast(desc, 3));
+    }
+
+    private void setupFields() {
+        description.setText(task.getDescription());
     }
 }

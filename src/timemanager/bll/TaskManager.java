@@ -29,4 +29,12 @@ public class TaskManager {
     public void storeTask(Task task) {
         tm.storeTask(task);
     }
+
+    public void updateTask(Task task) {
+        tm.updateTask(task);
+    }
+
+    public void deleteTask(Task task) {
+        tm.deleteTask(task);
+    }
 }

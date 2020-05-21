@@ -46,5 +46,15 @@ public class TaskModel {
         tm.storeTask(task);
         refreshData(task.getProjectId());
     }
+
+    public void updateTask(Task task) {
+        tm.updateTask(task);
+        refreshData(task.getProjectId());
+    }
+    
+    public void deleteTask(Task task) {
+        tm.deleteTask(task);
+        refreshData(task.getProjectId());
+    }
     
 }

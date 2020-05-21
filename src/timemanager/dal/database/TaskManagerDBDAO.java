@@ -83,12 +83,40 @@ public class TaskManagerDBDAO implements TaskManagerFacade{
 
     @Override
     public boolean updateTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE task SET "
+                    + "description = ?, project_id = ? WHERE id = ?");
+            ps.setString(1, task.getDescription());
+            ps.setInt(2, task.getProjectId());
+            ps.setInt(3, task.getId());
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override
     public boolean deleteTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM task WHERE id = ?");
+            ps.setInt(1, task.getId());
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
     
 }
