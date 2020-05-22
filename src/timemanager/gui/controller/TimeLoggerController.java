@@ -48,6 +48,8 @@ public class TimeLoggerController implements Initializable {
     TaskModel tm;
     LoginModel lm;
     
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    
     Timeline timeline;
 
     @FXML
