@@ -1,5 +1,6 @@
 package timemanager.gui.model;
 
+import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanager.be.Timer;
@@ -66,7 +67,19 @@ public class TimeLoggerModel {
     }
 
     public long totalSpentTime() {
-        return (long) tm.totalSpentTime();
+        return tm.totalSpentTime();
+    }
+    
+    public long spentTime(LocalDateTime startTime, LocalDateTime stopTime) {
+        return tm.spentTime(startTime, stopTime);
+    }
+    
+    public String totalSpentTimeString() {
+        return tm.getTotalSpentTimeString();
+    }
+    
+    public String spentTimeString(LocalDateTime startTime, LocalDateTime stopTime) {
+        return tm.getSpentTimeString(startTime, stopTime);
     }
     
     public boolean timerRunning() {

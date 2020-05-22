@@ -27,7 +27,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="170.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="file:/Users/andreasvillumsen/NetBeansProjects/TimeManagerProject/assets/img/grumsen-logo-retina.png" />
+                        <Image url="@../../assets/img/grumsen-logo-retina.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="5.0" right="5.0" top="5.0" />

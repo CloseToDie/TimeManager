@@ -3,6 +3,8 @@ package timemanager.bll;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import timemanager.dal.database.TimeManagerDBDAO;
 public class TimeManager {
 
     private static final Logger LOG = Logger.getLogger(TimeManager.class.getName());
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     
     ArrayList<Timer> timers = new ArrayList<>();
     ArrayList<Timer> timersFromDB = new ArrayList<>();
@@ -139,7 +142,7 @@ public class TimeManager {
      * @param stopTime
      * @return double (time)
      */
-    public double spentTime(LocalDateTime startTime, LocalDateTime stopTime) {
+    public long spentTime(LocalDateTime startTime, LocalDateTime stopTime) {
         if(stopTime == null) stopTime = LocalDateTime.now();
         return ChronoUnit.SECONDS.between(startTime, stopTime);
     }
@@ -149,8 +152,8 @@ public class TimeManager {
      * for all timers in list
      * @return spentTime
      */
-    public double totalSpentTime() {
-        double spentTime = 0;
+    public long totalSpentTime() {
+        long spentTime = 0;
         System.out.println("Timers running: " + timers.size());
         for (Timer timer : timers) {
             LocalDateTime stopTime;
@@ -166,7 +169,26 @@ public class TimeManager {
         }
         return spentTime;
     }
-
+    
+    /**
+     * Get Spent Time in String
+     * @param startTime
+     * @param stopTime
+     * @return 
+     */
+    public String getSpentTimeString(LocalDateTime startTime, LocalDateTime stopTime) {
+        return LocalTime.ofSecondOfDay(spentTime(startTime, stopTime)).format(formatter);
+    }
+    
+    public String getTotalSpentTimeString() {
+        return LocalTime.ofSecondOfDay(totalSpentTime()).format(formatter);
+    }
+    
+    /**
+     * Get timers
+     * @param taskId
+     * @return 
+     */
     public ArrayList<Timer> getTimers(int taskId) {
         return tm.getTimers(taskId);
     }

@@ -55,7 +55,6 @@ public class ClientController implements Initializable {
     TaskModel tm;
     LoginModel lm;
     
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
     
     ContextMenu tcm = new ContextMenu();
@@ -178,7 +177,7 @@ public class ClientController implements Initializable {
     private void setupTimeline() {
         timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
-                timeSpent.setText(LocalTime.ofSecondOfDay(tlm.totalSpentTime()).format(formatter));
+                timeSpent.setText(tlm.totalSpentTimeString());
             })
         );
         timeline.setCycleCount(Timeline.INDEFINITE);

@@ -55,7 +55,6 @@ public class UserController implements Initializable {
     LoginModel lm;
     UserModel um;
     
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     Timeline timeline;
     
     ContextMenu tcm = new ContextMenu();
@@ -193,7 +192,7 @@ public class UserController implements Initializable {
     private void setupTimeline() {
         timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
-                timeSpent.setText(LocalTime.ofSecondOfDay(tlm.totalSpentTime()).format(formatter));
+                timeSpent.setText(tlm.totalSpentTimeString());
             })
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
