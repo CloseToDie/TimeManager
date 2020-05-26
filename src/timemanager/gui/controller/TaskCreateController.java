@@ -52,8 +52,8 @@ public class TaskCreateController implements Initializable {
         try {
             tm = TaskModel.getInstance();
             pm = ProjectModel.getInstance();
-        } catch (IOException ex) {
-            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TaskCreateController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     

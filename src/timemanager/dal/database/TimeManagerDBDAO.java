@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import timemanager.be.Timer;
+import timemanager.be.User;
 import timemanager.dal.TimeManagerFacade;
 
 /**
@@ -212,6 +213,40 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         }
 
         return false;
+    }
+
+    @Override
+    public ArrayList<Timer> getStatTimers(int taskId, User user, LocalDate start, LocalDate end) {
+        ArrayList<Timer> timers = new ArrayList<>();
+
+        try ( Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog WHERE user_id = ? AND task_id = ? AND date BETWEEN ? AND ?");
+            ps.setInt(1, user.getId());
+            ps.setInt(2, taskId);
+            ps.setDate(3, Date.valueOf(start));
+            ps.setDate(4, Date.valueOf(end));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                LocalDateTime startTime = rs.getTimestamp("start").toLocalDateTime();
+                LocalDateTime stopTime = rs.getTimestamp("stop").toLocalDateTime();
+                double spentTime = rs.getDouble("spent_time");
+                boolean billable = rs.getBoolean("billable");
+                int task_id = rs.getInt("task_id");
+                int user_id = rs.getInt("user_id");
+                timers.add(new Timer(id, date, startTime, stopTime, spentTime, billable, task_id, user_id));
+            }
+            return timers;
+
+        } catch (SQLServerException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
     
 }

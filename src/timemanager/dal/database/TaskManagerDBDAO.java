@@ -12,8 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import timemanager.be.Project;
 import timemanager.be.Task;
+import timemanager.be.Timer;
+import timemanager.be.User;
 import timemanager.dal.TaskManagerFacade;
 
 /**

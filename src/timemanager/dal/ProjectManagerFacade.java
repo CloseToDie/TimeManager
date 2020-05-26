@@ -15,6 +15,11 @@ public interface ProjectManagerFacade {
      */
     public ArrayList<Project> getProjects();
     
+    /**
+     * Get all projects for a client.
+     * @param clientId
+     * @return 
+     */
     public ArrayList<Project> getProjects(int clientId);
     
     /**

@@ -1,8 +1,11 @@
 package timemanager.bll;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import timemanager.be.Project;
+import timemanager.be.Timer;
+import timemanager.be.User;
 import timemanager.dal.ProjectManagerFacade;
 import timemanager.dal.database.ProjectManagerDBDAO;
 
@@ -28,8 +31,7 @@ public class ProjectManager {
      * @return projects
      */
     public ArrayList<Project> getProjects() {
-        projects = pm.getProjects();
-        return projects;
+        return pm.getProjects();
     }
     
     /**

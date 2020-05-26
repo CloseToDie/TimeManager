@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,6 +32,7 @@ public class TimeManagerStart extends Application {
         
         Scene scene = new Scene(root);
         
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("assets/img/logo.png")));
         stage.setScene(scene);
         stage.show();
     }

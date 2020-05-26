@@ -1,7 +1,10 @@
 package timemanager.dal;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import timemanager.be.Timer;
+import timemanager.be.User;
 
 /**
  *
@@ -15,7 +18,7 @@ public interface TimeManagerFacade {
      */
     public ArrayList<Timer> getTimers();
     
-    public ArrayList<Timer> getTimers(int projectId);
+    public ArrayList<Timer> getTimers(int taskId);
     
     /**
      * Get a timer
@@ -44,4 +47,14 @@ public interface TimeManagerFacade {
      * @return boolean
      */
     public boolean deleteTimer(Timer timer);
+
+    /**
+     * Get timers for statistics
+     * @param taskId
+     * @param user
+     * @param start
+     * @param end
+     * @return timers
+     */
+    public ArrayList<Timer> getStatTimers(int taskId, User user, LocalDate start, LocalDate end);
 }

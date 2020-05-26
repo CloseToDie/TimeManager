@@ -3,8 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -143,14 +143,14 @@
                      </font>
                   </Label>
                   <JFXButton fx:id="pauseButton" disable="true" layoutX="543.0" layoutY="17.0" minWidth="70.0" styleClass="startButton" text="PAUSE" />
-                  <JFXComboBox fx:id="selectProject" disable="true" focusColor="#435a9a" layoutX="249.0" layoutY="20.0" onAction="#selectProject" prefHeight="27.0" prefWidth="100.0" promptText="Select Project" />
-                  <JFXComboBox fx:id="selectClient" focusColor="#435a9a" layoutX="139.0" layoutY="20.0" onAction="#selectClient" prefHeight="27.0" prefWidth="100.0" promptText="Select Client" />
-                  <Label layoutX="139.0" layoutY="12.0" text="Client">
+                  <JFXComboBox fx:id="selectProject" disable="true" focusColor="#435a9a" layoutX="241.0" layoutY="20.0" onAction="#selectProject" prefHeight="27.0" prefWidth="108.0" promptText="Select Project" />
+                  <JFXComboBox fx:id="selectClient" focusColor="#435a9a" layoutX="132.0" layoutY="20.0" onAction="#selectClient" prefHeight="27.0" prefWidth="100.0" promptText="Select Client" />
+                  <Label layoutX="132.0" layoutY="12.0" text="Client">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label layoutX="250.0" layoutY="12.0" text="Project">
+                  <Label layoutX="243.0" layoutY="12.0" text="Project">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -165,72 +165,44 @@
             </Pane>
             <Pane prefHeight="545.0" prefWidth="620.0">
                <children>
-                  <Pane layoutX="29.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
-                     <children>
-                        <Label layoutX="13.0" layoutY="11.0" text="Clients:">
-                           <font>
-                              <Font name="System Bold Italic" size="27.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="152.0" layoutY="10.0" text="0">
-                           <font>
-                              <Font size="61.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="288.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
-                     <children>
-                        <Label layoutX="13.0" layoutY="11.0" text="Projects:">
-                           <font>
-                              <Font name="System Bold Italic" size="27.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="152.0" layoutY="10.0" text="0">
-                           <font>
-                              <Font size="61.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="547.0" layoutY="52.0" prefHeight="94.0" prefWidth="248.0" styleClass="statBox">
-                     <children>
-                        <Label layoutX="13.0" layoutY="11.0" text="Users:">
-                           <font>
-                              <Font name="System Bold Italic" size="27.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="152.0" layoutY="10.0" text="0">
-                           <font>
-                              <Font size="61.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="31.0" layoutY="155.0" prefHeight="335.0" prefWidth="374.0" styleClass="statBox">
-                     <children>
-                        <BarChart layoutX="10.0" layoutY="32.0" prefHeight="283.0" prefWidth="354.0">
-                           <xAxis>
-                              <CategoryAxis side="BOTTOM" />
-                           </xAxis>
-                           <yAxis>
-                              <NumberAxis side="LEFT" />
-                           </yAxis>
-                        </BarChart>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="421.0" layoutY="155.0" prefHeight="335.0" prefWidth="374.0" styleClass="statBox">
-                     <children>
-                        <AreaChart layoutX="10.0" layoutY="31.0" prefHeight="283.0" prefWidth="354.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </AreaChart>
-                     </children>
-                  </Pane>
+                  <JFXDatePicker fx:id="startDate" defaultColor="#435a9a" layoutX="236.0" layoutY="24.0" onAction="#startDateEvent" prefHeight="29.0" prefWidth="153.0" />
+                  <JFXComboBox fx:id="statSelectProject" layoutX="630.0" layoutY="26.0" onAction="#selectProjectEvent" prefHeight="27.0" prefWidth="153.0" promptText="Select Project" />
+                  <BarChart fx:id="barChart" layoutX="14.0" layoutY="72.0" prefHeight="417.0" prefWidth="782.0" style="-fx-bar-fill: blue;">
+                    <xAxis>
+                      <CategoryAxis fx:id="categoryAxis" label="Date" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="numberAxis" label="Time" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <JFXComboBox fx:id="selectUser" layoutX="53.0" layoutY="26.0" onAction="#selectUserEvent" prefHeight="27.0" prefWidth="128.0" promptText="Employee" />
+                  <Label layoutX="236.0" layoutY="18.0" text="Start Date">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="18.0" text="Employee">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <JFXDatePicker fx:id="endDate" defaultColor="#435a9a" layoutX="408.0" layoutY="24.0" onAction="#endDateEvent" prefHeight="29.0" prefWidth="153.0" />
+                  <Label layoutX="408.0" layoutY="18.0" text="End Date">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="631.0" layoutY="18.0" text="Project">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="472.0" prefHeight="17.0" prefWidth="122.0" text="Total Billable Earned:" />
+                  <Label fx:id="totalBillableEarned" layoutX="207.0" layoutY="472.0" prefHeight="17.0" prefWidth="153.0" />
+                  <Label layoutX="59.0" layoutY="489.0" prefHeight="17.0" prefWidth="153.0" text="Total Non Billable Earned:" />
+                  <Label fx:id="totalNonBillableEarned" layoutX="207.0" layoutY="489.0" prefHeight="17.0" prefWidth="153.0" />
+                  <Label layoutX="59.0" layoutY="506.0" prefHeight="17.0" prefWidth="153.0" text="Total Hours Used:" />
+                  <Label fx:id="totalHoursUsed" layoutX="207.0" layoutY="506.0" prefHeight="17.0" prefWidth="153.0" />
                </children>
             </Pane>
          </children></VBox>

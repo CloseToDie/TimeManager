@@ -6,9 +6,13 @@
 package timemanager.gui.model;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timemanager.be.Project;
 import timemanager.be.Task;
+import timemanager.be.Timer;
+import timemanager.be.User;
 import timemanager.bll.TaskManager;
 
 /**
@@ -20,14 +24,14 @@ public class TaskModel {
     private TaskManager tm;
     private ObservableList<Task> tasks;
     
-    public static TaskModel getInstance() throws IOException {
+    public static TaskModel getInstance() throws Exception {
         if (single_instance == null) 
             single_instance = new TaskModel(); 
   
         return single_instance; 
     }
 
-    private TaskModel() throws IOException {
+    private TaskModel() throws Exception {
         tm = new TaskManager();
         tasks = FXCollections.observableArrayList();
     }
@@ -55,6 +59,16 @@ public class TaskModel {
     public void deleteTask(Task task) {
         tm.deleteTask(task);
         refreshData(task.getProjectId());
+    }
+    
+    public ObservableList<Timer> getProjectTimers(Project project, User user, LocalDate start, LocalDate end) {
+        ObservableList<Timer> timers;
+        timers = FXCollections.observableArrayList();
+        
+        timers.clear();
+        timers.addAll(tm.getProjectTimers(project, user, start, end));
+        
+        return timers;
     }
     
 }

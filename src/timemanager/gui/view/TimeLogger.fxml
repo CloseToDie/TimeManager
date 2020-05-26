@@ -128,7 +128,7 @@
                   <DropShadow blurType="ONE_PASS_BOX" color="#abaaaa" height="15.5" radius="5.875" width="10.0" />
                </effect>
                <children>
-                  <Label layoutX="24.0" layoutY="18.0" text="Time Logger">
+                  <Label layoutX="21.0" layoutY="18.0" text="Time Logger">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -141,14 +141,14 @@
                      </font>
                   </Label>
                   <JFXButton fx:id="pauseButton" disable="true" layoutX="543.0" layoutY="17.0" minWidth="70.0" styleClass="startButton" text="PAUSE" />
-                  <JFXComboBox fx:id="selectProject" disable="true" focusColor="#435a9a" layoutX="249.0" layoutY="20.0" onAction="#selectProject" prefHeight="27.0" prefWidth="100.0" promptText="Select Project" />
-                  <JFXComboBox fx:id="selectClient" focusColor="#435a9a" layoutX="139.0" layoutY="20.0" onAction="#selectClient" prefHeight="27.0" prefWidth="100.0" promptText="Select Client" />
-                  <Label layoutX="139.0" layoutY="12.0" text="Client">
+                  <JFXComboBox fx:id="selectProject" disable="true" focusColor="#435a9a" layoutX="242.0" layoutY="20.0" onAction="#selectProject" prefHeight="27.0" prefWidth="108.0" promptText="Select Project" />
+                  <JFXComboBox fx:id="selectClient" focusColor="#435a9a" layoutX="132.0" layoutY="20.0" onAction="#selectClient" prefHeight="27.0" prefWidth="100.0" promptText="Select Client" />
+                  <Label layoutX="133.0" layoutY="12.0" text="Client">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <Label layoutX="250.0" layoutY="12.0" text="Project">
+                  <Label layoutX="244.0" layoutY="12.0" text="Project">
                      <font>
                         <Font size="10.0" />
                      </font>
