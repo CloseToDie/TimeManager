@@ -6,186 +6,138 @@
 package timemanager.bll;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import timemanager.be.Timer;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author andreasvillumsen
+ * @author chri9
  */
-public class TimeManagerTest {
+public class TimeManagerTest
+{
     
-    public TimeManagerTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
+    public TimeManagerTest()
+    {
     }
 
     /**
      * Test of getTimers method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testGetTimers_0args() throws Exception {
-        System.out.println("getTimers");
-        TimeManager instance = new TimeManager();
-        ArrayList<Timer> expResult = null;
-        ArrayList<Timer> result = instance.getTimers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetTimers_0args()
+    {
     }
 
     /**
      * Test of start method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testStart() throws Exception {
-        System.out.println("start");
-        int taskId = 0;
-        boolean isBillable = false;
-        int user_id = 0;
-        TimeManager instance = new TimeManager();
-        instance.start(taskId, isBillable, user_id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testStart()
+    {
     }
 
     /**
      * Test of stop method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testStop() throws Exception {
-        System.out.println("stop");
-        TimeManager instance = new TimeManager();
-        instance.stop();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testStop()
+    {
     }
 
     /**
      * Test of pause method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testPause() throws Exception {
-        System.out.println("pause");
-        TimeManager instance = new TimeManager();
-        instance.pause();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testPause()
+    {
     }
 
     /**
      * Test of unpause method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testUnpause() throws Exception {
-        System.out.println("unpause");
+    public void testUnpause() throws Exception
+    {
         TimeManager instance = new TimeManager();
-        instance.unpause();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of lastTimer method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testLastTimer() throws Exception {
-        System.out.println("lastTimer");
+    public void testLastTimer() throws Exception
+    {
         TimeManager instance = new TimeManager();
-        Timer expResult = null;
-        Timer result = instance.lastTimer();
+        instance.start(2, true, 3);
+        instance.pause();
+        instance.unpause();
+        boolean expResult = true;
+        boolean result = instance.lastTimer().getStopTime() == null;
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of timerRunning method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testTimerRunning() throws Exception {
-        System.out.println("timerRunning");
+    public void testTimerRunning() throws Exception
+    {
         TimeManager instance = new TimeManager();
-        boolean expResult = false;
+        instance.start(1, true, 5);
+        boolean expResult = true;
         boolean result = instance.timerRunning();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of spentTime method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testSpentTime() throws Exception {
-        System.out.println("spentTime");
-        LocalDateTime startTime = null;
-        LocalDateTime stopTime = null;
+    public void testSpentTime() throws Exception
+    {
         TimeManager instance = new TimeManager();
-        double expResult = 0.0;
-        double result = instance.spentTime(startTime, stopTime);
+        double expResult = 10;
+        double result = instance.spentTime(LocalDateTime.now(), LocalDateTime.now().plusSeconds(10));
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of totalSpentTime method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testTotalSpentTime() throws Exception {
-        System.out.println("totalSpentTime");
+    public void testTotalSpentTime()
+    {
+    }
+
+    /**
+     * Test of getSpentTimeString method, of class TimeManager.
+     */
+    @Test
+    public void testGetSpentTimeString() throws Exception
+    {
         TimeManager instance = new TimeManager();
-        double expResult = 0.0;
-        double result = instance.totalSpentTime();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "01:05:00";
+        String result = instance.getSpentTimeString(LocalDateTime.now(), LocalDateTime.now().plusMinutes(65));
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getTotalSpentTimeString method, of class TimeManager.
+     */
+    @Test
+    public void testGetTotalSpentTimeString() throws Exception
+    {
+        TimeManager instance = new TimeManager();
+        
+        
     }
 
     /**
      * Test of getTimers method, of class TimeManager.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testGetTimers_int() throws Exception {
-        System.out.println("getTimers");
-        int taskId = 0;
-        TimeManager instance = new TimeManager();
-        ArrayList<Timer> expResult = null;
-        ArrayList<Timer> result = instance.getTimers(taskId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetTimers_int()
+    {
     }
     
 }
