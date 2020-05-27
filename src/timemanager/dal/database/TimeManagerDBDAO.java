@@ -220,7 +220,7 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         ArrayList<Timer> timers = new ArrayList<>();
 
         try ( Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog WHERE user_id = ? AND task_id = ? AND date BETWEEN ? AND ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM timelog WHERE user_id = ? AND task_id = ? AND date BETWEEN ? AND ? ORDER BY date");
             ps.setInt(1, user.getId());
             ps.setInt(2, taskId);
             ps.setDate(3, Date.valueOf(start));

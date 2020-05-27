@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import timemanager.TimeManagerStart;
@@ -76,6 +77,14 @@ public class TimeLoggerController implements Initializable {
     private JFXComboBox<Client> selectClient;
     @FXML
     private JFXCheckBox billable;
+    @FXML
+    private HBox timeLoggerLink;
+    @FXML
+    private HBox clientsLink;
+    @FXML
+    private HBox usersLink;
+    @FXML
+    private HBox statisticsLink;
 
     /**
      * Initializes the controller class.
@@ -104,6 +113,27 @@ public class TimeLoggerController implements Initializable {
         setupTimeline();
         
         initStartTimeline();
+        
+        isAdmin();
+    }
+    
+    private void isAdmin() {
+        if(lm.getLoggedInUser().getIsAdmin() == true) {
+            timeLoggerLink.setDisable(false);
+            timeLoggerLink.setVisible(true);
+            clientsLink.setDisable(false);
+            clientsLink.setVisible(true);
+            usersLink.setDisable(false);
+            usersLink.setVisible(true);
+            statisticsLink.setDisable(false);
+            statisticsLink.setVisible(true);
+            
+        } else {
+            usersLink.setDisable(true);
+            usersLink.setVisible(false);
+            statisticsLink.setDisable(true);
+            statisticsLink.setVisible(false);
+        }
     }
     
     @FXML

@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import timemanager.TimeManagerStart;
@@ -77,6 +78,14 @@ public class ClientController implements Initializable {
     private JFXButton timerButton;
     @FXML
     private Label timeSpent;
+    @FXML
+    private HBox timeLoggerLink;
+    @FXML
+    private HBox clientsLink;
+    @FXML
+    private HBox usersLink;
+    @FXML
+    private HBox statisticsLink;
 
     /**
      * Initializes the controller class.
@@ -105,20 +114,44 @@ public class ClientController implements Initializable {
         setupTimeline();
         
         initStartTimeline();
+        
+        isAdmin();
     }    
+    
+    private void isAdmin() {
+        if(lm.getLoggedInUser().getIsAdmin() == true) {
+            timeLoggerLink.setDisable(false);
+            timeLoggerLink.setVisible(true);
+            clientsLink.setDisable(false);
+            clientsLink.setVisible(true);
+            usersLink.setDisable(false);
+            usersLink.setVisible(true);
+            statisticsLink.setDisable(false);
+            statisticsLink.setVisible(true);
+            
+        } else {
+            usersLink.setDisable(true);
+            usersLink.setVisible(false);
+            statisticsLink.setDisable(true);
+            statisticsLink.setVisible(false);
+        }
+    }
 
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
     }
 
     @FXML
     private void openUsers(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
 
     @FXML
     private void openStatistics(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
     
@@ -287,7 +320,10 @@ public class ClientController implements Initializable {
                 }
             }
         });
-        tcm.getItems().add(deleteItem);
+        
+        if(lm.getLoggedInUser().getIsAdmin() == true){
+            tcm.getItems().add(deleteItem);
+        }
         
         clientsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         

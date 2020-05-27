@@ -37,7 +37,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#openTimeLogger" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox fx:id="timeLoggerLink" alignment="CENTER_LEFT" onMouseClicked="#openTimeLogger" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Time Logger" textFill="WHITE">
                      <padding>
@@ -58,7 +58,7 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#openClients" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox fx:id="clientsLink" alignment="CENTER_LEFT" onMouseClicked="#openClients" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Clients" textFill="WHITE">
                      <padding>
@@ -79,7 +79,7 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" onMouseClicked="#openUsers" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
+            <HBox fx:id="usersLink" alignment="CENTER_LEFT" onMouseClicked="#openUsers" prefHeight="50.0" prefWidth="200.0" styleClass="sidebarButtons">
                <children>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Users" textFill="WHITE">
                      <padding>
@@ -100,7 +100,7 @@
                   <Insets left="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e;" styleClass="sidebarButtons">
+            <HBox fx:id="statisticsLink" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #28479e;" styleClass="sidebarButtons">
                <children>
                   <Label prefHeight="17.0" prefWidth="142.0" text="Statistics" textFill="WHITE">
                      <padding>
@@ -165,9 +165,9 @@
             </Pane>
             <Pane prefHeight="545.0" prefWidth="620.0">
                <children>
-                  <JFXDatePicker fx:id="startDate" defaultColor="#435a9a" layoutX="236.0" layoutY="24.0" onAction="#startDateEvent" prefHeight="29.0" prefWidth="153.0" />
-                  <JFXComboBox fx:id="statSelectProject" layoutX="630.0" layoutY="26.0" onAction="#selectProjectEvent" prefHeight="27.0" prefWidth="153.0" promptText="Select Project" />
-                  <BarChart fx:id="barChart" layoutX="14.0" layoutY="72.0" prefHeight="417.0" prefWidth="782.0" style="-fx-bar-fill: blue;">
+                  <JFXDatePicker fx:id="startDate" defaultColor="#435a9a" layoutX="236.0" layoutY="24.0" onAction="#refreshData" prefHeight="29.0" prefWidth="153.0" />
+                  <JFXComboBox fx:id="statSelectProject" layoutX="630.0" layoutY="26.0" onAction="#refreshData" prefHeight="27.0" prefWidth="153.0" promptText="Select Project" />
+                  <BarChart fx:id="barChart" layoutX="14.0" layoutY="72.0" prefHeight="417.0" prefWidth="782.0">
                     <xAxis>
                       <CategoryAxis fx:id="categoryAxis" label="Date" side="BOTTOM" />
                     </xAxis>
@@ -175,7 +175,7 @@
                       <NumberAxis fx:id="numberAxis" label="Time" side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <JFXComboBox fx:id="selectUser" layoutX="53.0" layoutY="26.0" onAction="#selectUserEvent" prefHeight="27.0" prefWidth="128.0" promptText="Employee" />
+                  <JFXComboBox fx:id="selectUser" layoutX="53.0" layoutY="26.0" onAction="#refreshData" prefHeight="27.0" prefWidth="128.0" promptText="Employee" />
                   <Label layoutX="236.0" layoutY="18.0" text="Start Date">
                      <font>
                         <Font size="10.0" />
@@ -186,7 +186,7 @@
                         <Font size="10.0" />
                      </font>
                   </Label>
-                  <JFXDatePicker fx:id="endDate" defaultColor="#435a9a" layoutX="408.0" layoutY="24.0" onAction="#endDateEvent" prefHeight="29.0" prefWidth="153.0" />
+                  <JFXDatePicker fx:id="endDate" defaultColor="#435a9a" layoutX="408.0" layoutY="24.0" onAction="#refreshData" prefHeight="29.0" prefWidth="153.0" />
                   <Label layoutX="408.0" layoutY="18.0" text="End Date">
                      <font>
                         <Font size="10.0" />

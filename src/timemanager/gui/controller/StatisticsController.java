@@ -5,10 +5,10 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -26,6 +26,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import timemanager.TimeManagerStart;
@@ -40,6 +41,8 @@ import timemanager.gui.model.ProjectModel;
 import timemanager.gui.model.TaskModel;
 import timemanager.gui.model.TimeLoggerModel;
 import timemanager.gui.model.UserModel;
+import timemanager.utils.text.Formatter;
+import timemanager.utils.time.TimeConverter;
 
 /**
  * FXML Controller class
@@ -92,9 +95,19 @@ public class StatisticsController implements Initializable {
     private Label totalNonBillableEarned;
     @FXML
     private Label totalHoursUsed;
+    @FXML
+    private HBox timeLoggerLink;
+    @FXML
+    private HBox clientsLink;
+    @FXML
+    private HBox usersLink;
+    @FXML
+    private HBox statisticsLink;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -126,28 +139,49 @@ public class StatisticsController implements Initializable {
         
         barChart.setLegendVisible(false);
         categoryAxis.setAnimated(false);
+        
+        isAdmin();
     }    
+    
+    private void isAdmin() {
+        if(lm.getLoggedInUser().getIsAdmin() == true) {
+            timeLoggerLink.setDisable(false);
+            timeLoggerLink.setVisible(true);
+            clientsLink.setDisable(false);
+            clientsLink.setVisible(true);
+            usersLink.setDisable(false);
+            usersLink.setVisible(true);
+            statisticsLink.setDisable(false);
+            statisticsLink.setVisible(true);
+            
+        } else {
+            usersLink.setDisable(true);
+            usersLink.setVisible(false);
+            statisticsLink.setDisable(true);
+            statisticsLink.setVisible(false);
+        }
+    }
 
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
-    }
-
-    private void openProjects(MouseEvent event) throws Exception {
-        tms.set((Stage) (selectProject.getScene().getWindow()), "Project");
     }
     
     @FXML
     private void openClients(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
     @FXML
     private void openUsers(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
 
     private void openStatistics(MouseEvent event) throws Exception {
+        timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
 
@@ -269,6 +303,7 @@ public class StatisticsController implements Initializable {
         billable.setDisable(b);
     }
     
+    @FXML
     private void refreshData() throws ParseException {
         if(!inputFilled()) return;
         
@@ -285,23 +320,16 @@ public class StatisticsController implements Initializable {
         
         Map<LocalDate, List<Timer>> filteredTimers = filterTimersForChart(timers);
         
-        for (Map.Entry<LocalDate, List<Timer>> entry : filteredTimers.entrySet()) {
-            LocalDate key = entry.getKey();
-            List<Timer> value = entry.getValue();
-            
+        filteredTimers.entrySet().forEach((entry) -> {
             double spentTime = 0;
-            for (Timer timer : value) {
-                spentTime += timer.getSpentTime();
-            }
+            spentTime = entry.getValue().stream().map((timer) -> timer.getSpentTime()).reduce(spentTime, (accumulator, _item) -> accumulator + _item);
             
-            series1.getData().add(new XYChart.Data(key.toString(), (spentTime / 60 / 60)));
-            
-        }
+            series1.getData().add(new XYChart.Data(entry.getKey().toString(), TimeConverter.secondsToHours(spentTime)));
+        });
         
         barChart.getData().addAll(series1);
         
-        calcTotalTime(filteredTimers);
-        calcTotalMoneyEarned(filteredTimers);
+        calcTotalTimeAndMoneyEarned(filteredTimers);
     }
     
     private boolean inputFilled() {
@@ -311,34 +339,8 @@ public class StatisticsController implements Initializable {
                 endDate.getValue() != null;
     }
 
-    @FXML
-    private void startDateEvent(ActionEvent event) throws ParseException {
+    private void refreshData(ActionEvent event) throws ParseException {
         refreshData();
-    }
-
-    @FXML
-    private void selectProjectEvent(ActionEvent event) throws ParseException {
-        refreshData();
-    }
-
-    @FXML
-    private void selectUserEvent(ActionEvent event) throws ParseException {
-        refreshData();
-    }
-
-    @FXML
-    private void endDateEvent(ActionEvent event) throws ParseException {
-        refreshData();
-    }
-    
-    private void filter() {
-        ArrayList<Timer> timers = new ArrayList<>();
-        
-        ArrayList<LocalDate> dates = new ArrayList<>();
-        
-        for (Timer timer : timers) {
-            dates.add(timer.getDate());
-        }
     }
     
     private Map<LocalDate, List<Timer>> filterTimersForChart(List<Timer> timers) throws ParseException {
@@ -348,33 +350,25 @@ public class StatisticsController implements Initializable {
         return timersPerDate;
     }
 
-    private void calcTotalTime(Map<LocalDate, List<Timer>> filteredTimers) {
+    private void calcTotalTimeAndMoneyEarned(Map<LocalDate, List<Timer>> filteredTimers) {
+        double totalMoneyEarned = 0;
+        double totalNonBillable = 0;
         double totalSpentTime = 0;
+        
         for (Map.Entry<LocalDate, List<Timer>> entry : filteredTimers.entrySet()) {
             for (Timer timer : entry.getValue()) {
                 totalSpentTime += timer.getSpentTime();
-            }
-        }
-        
-        totalHoursUsed.setText(String.format("%,.2f", (totalSpentTime / 60 / 60)) + " Hours");
-    }
-
-    private void calcTotalMoneyEarned(Map<LocalDate, List<Timer>> filteredTimers) {
-        double totalMoneyEarned = 0;
-        double totalNonBillable = 0;
-        for (Map.Entry<LocalDate, List<Timer>> entry : filteredTimers.entrySet()) {
-            for (Timer timer : entry.getValue()) {
                 if(timer.isBillable()) {
-                    totalMoneyEarned += statSelectProject.getValue().getSalary() * (timer.getSpentTime() / 60 / 60);
+                    totalMoneyEarned += statSelectProject.getValue().getSalary() * TimeConverter.secondsToHours(timer.getSpentTime());
                 } else {
-                    totalNonBillable += statSelectProject.getValue().getSalary() * (timer.getSpentTime() / 60 / 60);
+                    totalNonBillable += statSelectProject.getValue().getSalary() * TimeConverter.secondsToHours(timer.getSpentTime());
                 }
             }
         }
         
-        totalBillableEarned.setText(String.format("%,.2f", totalMoneyEarned) + " Kr.");
-        totalNonBillableEarned.setText(String.format("%,.2f", totalNonBillable) + " Kr.");
+        totalHoursUsed.setText(Formatter.doubleTo2f(TimeConverter.secondsToHours(totalSpentTime), "Hours."));
+        totalBillableEarned.setText(Formatter.doubleTo2f(totalMoneyEarned, "Kr."));
+        totalNonBillableEarned.setText(Formatter.doubleTo2f(totalNonBillable, "Kr."));
     }
-
     
 }
