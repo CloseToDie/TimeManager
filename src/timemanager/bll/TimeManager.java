@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import timemanager.be.Timer;
 import timemanager.dal.TimeManagerFacade;
 import timemanager.dal.database.TimeManagerDBDAO;
@@ -18,7 +17,6 @@ import timemanager.dal.database.TimeManagerDBDAO;
  */
 public class TimeManager {
 
-    private static final Logger LOG = Logger.getLogger(TimeManager.class.getName());
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     
     ArrayList<Timer> timers = new ArrayList<>();

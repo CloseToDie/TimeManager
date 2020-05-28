@@ -12,5 +12,11 @@ import timemanager.be.User;
  * @author andreasvillumsen
  */
 public interface AuthManagerFacade {
+    /**
+     * Login the user with username and password
+     * @param username
+     * @param pass
+     * @return User
+     */
     public User login(String username, String pass);
 }

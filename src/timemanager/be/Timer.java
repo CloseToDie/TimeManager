@@ -146,14 +146,22 @@ public class Timer {
      * Set the timer's taskId
      * @param taskId 
      */
-    public void setTaskId(int projectId) {
-        this.taskId = projectId;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
+    /**
+     * Get the task users id
+     * @return userId
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * Set the task users id
+     * @param userId 
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }

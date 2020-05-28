@@ -2,7 +2,6 @@ package timemanager.dal;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import timemanager.be.Timer;
 import timemanager.be.User;
 

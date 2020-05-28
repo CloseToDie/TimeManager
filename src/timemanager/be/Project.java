@@ -88,6 +88,10 @@ public class Project {
         this.clientId = clientId;
     }
     
+    /**
+     * Class toString method
+     * @return name
+     */
     @Override
     public String toString() {
         return this.getName();

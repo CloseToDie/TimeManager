@@ -174,7 +174,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton layoutX="637.0" layoutY="28.0" onAction="#addTask" onMouseClicked="#openAddProject" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD TASK" />
+                  <JFXButton layoutX="637.0" layoutY="28.0" onAction="#addTask" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD TASK" />
                </children>
             </Pane>
          </children></VBox>

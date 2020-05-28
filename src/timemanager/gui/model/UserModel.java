@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanager.be.User;
@@ -17,7 +16,6 @@ import timemanager.bll.UserManager;
 public class UserModel {
     private static UserModel single_instance = null; 
     private UserManager um;
-    private LoginModel lm;
     private ObservableList<User> users;
 
     public static UserModel getInstance() throws IOException {

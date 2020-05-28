@@ -26,6 +26,11 @@ import timemanager.gui.controller.UserCreateController;
  */
 public class TimeManagerStart extends Application {
     
+    /**
+     * Start the application
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/Login.fxml"));
@@ -37,6 +42,12 @@ public class TimeManagerStart extends Application {
         stage.show();
     }
     
+    /**
+     * Set the view to a given view resource
+     * @param stage
+     * @param view
+     * @throws Exception 
+     */
     public void set(Stage stage, String view) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("gui/view/" + view + ".fxml"));
         
@@ -46,6 +57,12 @@ public class TimeManagerStart extends Application {
         stage.show();
     }
     
+    /**
+     * Show the projects view
+     * @param stage
+     * @param client
+     * @throws Exception 
+     */
     public void showProjects(Stage stage, Client client) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/Project.fxml"));
         
@@ -60,6 +77,12 @@ public class TimeManagerStart extends Application {
         stage.show();
     }
     
+    /**
+     * Show tasks view
+     * @param stage
+     * @param project
+     * @throws Exception 
+     */
     public void showTasks(Stage stage, Project project) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gui/view/Task.fxml"));
         
@@ -74,6 +97,11 @@ public class TimeManagerStart extends Application {
         stage.show();
     }
     
+    /**
+     * Show Projects create view
+     * @param client
+     * @throws Exception 
+     */
     public void showProjectsCreate(Client client) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -91,6 +119,11 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Show Tasks create view
+     * @param project
+     * @throws Exception 
+     */
     public void showTasksCreate(Project project) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -108,6 +141,11 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Show Edit Client View
+     * @param client
+     * @throws Exception 
+     */
     public void editClient(Client client) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -125,6 +163,12 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Show Edit Project View
+     * @param project
+     * @param client
+     * @throws Exception 
+     */
     public void editProject(Project project, Client client) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -143,6 +187,12 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Show Edit Tasks View
+     * @param task
+     * @param project
+     * @throws Exception 
+     */
     public void editTask(Task task, Project project) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -161,6 +211,11 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Show Edit User View
+     * @param user
+     * @throws Exception 
+     */
     public void editUser(User user) throws Exception {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -178,6 +233,11 @@ public class TimeManagerStart extends Application {
         stage.showAndWait();
     }
     
+    /**
+     * Popup a view from a given resource
+     * @param view
+     * @throws IOException 
+     */
     public void popup(String view) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

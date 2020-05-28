@@ -11,17 +11,6 @@ import java.security.SecureRandom;
  */
 public class Password {
     
-    /** public void main(String[] args) throws NoSuchAlgorithmException {
-        String passwordToHash = "password";
-        byte[] salt = getSalt();
-         
-        String securePassword = hash(passwordToHash, salt, "SHA-512");
-        System.out.println(securePassword);
-        
-        Boolean passwordMatches = verifyPassword(passwordToHash, securePassword, salt, "SHA-512");
-        System.out.println("Password matches: " + passwordMatches);
-    }*/
-    
     /**
      * Hash a given password
      * @param passwordToHash

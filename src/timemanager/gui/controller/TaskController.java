@@ -287,10 +287,6 @@ public class TaskController implements Initializable {
         billable.setDisable(b);
     }
 
-    @FXML
-    private void openAddProject(MouseEvent event) {
-    }
-
     private void setupTable() {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         

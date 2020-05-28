@@ -127,6 +127,10 @@ public class User {
         this.isAdmin = isAdmin;
     }
     
+    /**
+     * Class toString method
+     * @return name
+     */
     @Override
     public String toString() {
         return this.getName();

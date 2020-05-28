@@ -50,6 +50,10 @@ public class Client {
         this.name = name;
     }
     
+    /**
+     * Class toString method
+     * @return name
+     */
     @Override
     public String toString() {
         return this.getName();
