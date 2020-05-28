@@ -66,8 +66,6 @@ public class ProjectController implements Initializable {
     @FXML
     private Label timeSpent;
     @FXML
-    private JFXButton timerButton1;
-    @FXML
     private TableView<Project> projectTable;
     @FXML
     private TableColumn<Project, String> name;
@@ -292,8 +290,12 @@ public class ProjectController implements Initializable {
 
     private void setupTable() {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        salary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        
+        if(lm.getLoggedInUser().getIsAdmin() == true) {
+            salary.setVisible(true);
+            salary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        } else {
+            salary.setVisible(false);
+        }
         projectTable.setRowFactory( tv -> {
             TableRow<Project> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -332,7 +334,10 @@ public class ProjectController implements Initializable {
                 Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        tcm.getItems().add(editItem);
+        
+        if(lm.getLoggedInUser().getIsAdmin() == true) {
+            tcm.getItems().add(editItem);
+        }
         
         // Delete client
         MenuItem deleteItem = new MenuItem("Delete");

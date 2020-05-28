@@ -171,7 +171,6 @@
                       <TableColumn fx:id="started" prefWidth="96.73112487792969" text="Started" />
                       <TableColumn fx:id="ended" prefWidth="199.00003051757812" text="Ended" />
                         <TableColumn fx:id="timespent" prefWidth="199.9998779296875" text="Time Spent" />
-                        <TableColumn fx:id="project" prefWidth="189.52349853515625" text="Project" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

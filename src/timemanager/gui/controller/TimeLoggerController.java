@@ -67,8 +67,6 @@ public class TimeLoggerController implements Initializable {
     @FXML
     private TableColumn<Timer, Double> timespent;
     @FXML
-    private TableColumn<Project, String> project;
-    @FXML
     private JFXButton pauseButton;
     @FXML
     private JFXComboBox<Task> selectTask;
