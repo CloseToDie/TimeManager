@@ -18,7 +18,7 @@ There sould be multiple sql files in the project folder structure, you can impor
 ### Connecting to the database
 - Create a file in the root of the project named "DBSettings.txt"
 - Open this file, and input the following data.
--- server=10.176.111.31
--- user=(Your db username here)
--- password=(Your db username here)
--- database=TimeManager (Or your chosen database name)
+  - server=10.176.111.31
+  - user=(Your db username here)
+  - password=(Your db username here)
+  - database=TimeManager (Or your chosen database name)
