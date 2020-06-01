@@ -1,1 +1,3 @@
 # TimeManager
+
+## Install Guide
