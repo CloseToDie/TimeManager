@@ -23,10 +23,11 @@ There sould be multiple sql files in the "db" folder in the project folder struc
 ### Connecting to the database
 - Create a file in the root of the project named "DBSettings.txt"
 - Open the DBSettings.txt file, and input the following data.
-  - server=10.176.111.31
+  - server=(Your database IP)
   - user=(Your db username here)
   - password=(Your db username here)
   - database=TimeManager (Or your chosen database name)
+- Please note that there should not be any parentheses in the final DBSettings.txt file.
   
 ### Running the program
 After having gone through alle the steps, and installed the project, you should be good to go. Now go to Netbeans, and click the Clean and Build button, and then click the green Run Project button next to it. The project should start, and you should be able to use it.
