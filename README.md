@@ -1,7 +1,5 @@
 # TimeManager
-<p align="center">
-<img src="https://imgur.com/IwmnF3N" alt="Icon">
-</p>
+![alt text](https://imgur.com/IwmnF3N)
 
 This program is build to track time for customers.
 
