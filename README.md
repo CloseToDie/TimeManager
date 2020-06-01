@@ -1,6 +1,6 @@
 # TimeManager
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<img src="https://imgur.com/IwmnF3N" alt="Icon">
 </p>
 
 This program is build to track time for customers.
