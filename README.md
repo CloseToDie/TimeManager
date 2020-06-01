@@ -13,7 +13,7 @@ This program is build to track time for customers.
 ### Setting up the database
 In your desired database software, please create a new database for the project.
 
-There sould be multiple sql files in the project folder structure, you can import these files into your database. Please rename the database names to your database name.
+There sould be multiple sql files in the "db" folder in the project folder structure, you can import these files into your database. Please rename the database names to your database name.
 
 ### Connecting to the database
 - Create a file in the root of the project named "DBSettings.txt"
