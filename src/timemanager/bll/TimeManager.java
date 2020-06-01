@@ -178,6 +178,10 @@ public class TimeManager {
         return LocalTime.ofSecondOfDay(spentTime(startTime, stopTime)).format(formatter);
     }
     
+    /**
+     * Get total spent time in String
+     * @return 
+     */
     public String getTotalSpentTimeString() {
         return LocalTime.ofSecondOfDay(totalSpentTime()).format(formatter);
     }

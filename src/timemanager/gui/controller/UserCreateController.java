@@ -56,6 +56,10 @@ public class UserCreateController implements Initializable {
         }
     }
     
+    /**
+     * Set the user variable if updating user
+     * @param user 
+     */
     public void setUser(User user) {
         this.user = user;
         if(user != null) setupFields();
@@ -89,6 +93,7 @@ public class UserCreateController implements Initializable {
             errorLabel.setVisible(true);
         }
     }
+    
     @FXML
     private void cancelSaveUser(ActionEvent event) {
         Stage window = (Stage) (cancelSaveUser.getScene().getWindow());

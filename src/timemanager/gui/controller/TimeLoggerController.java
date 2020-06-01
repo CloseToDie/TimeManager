@@ -115,7 +115,7 @@ public class TimeLoggerController implements Initializable {
     }
     
     private void isAdmin() {
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
             timeLoggerLink.setVisible(true);
             clientsLink.setDisable(false);

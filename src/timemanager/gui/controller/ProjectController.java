@@ -118,7 +118,7 @@ public class ProjectController implements Initializable {
     }  
     
     private void isAdmin() {
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
             timeLoggerLink.setVisible(true);
             clientsLink.setDisable(false);
@@ -232,6 +232,7 @@ public class ProjectController implements Initializable {
 
     private void initStartTimeline() {
         timeline.play();
+        
         if(tlm.timerRunning() && tlm.lastTimer() != null) {
             timerButton.setText("STOP");
             pauseButton.setText("PAUSE");
@@ -290,7 +291,7 @@ public class ProjectController implements Initializable {
 
     private void setupTable() {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             salary.setVisible(true);
             salary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         } else {
@@ -335,7 +336,7 @@ public class ProjectController implements Initializable {
             }
         });
         
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             tcm.getItems().add(editItem);
         }
         
@@ -357,7 +358,7 @@ public class ProjectController implements Initializable {
             }
         });
         
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             tcm.getItems().add(deleteItem);
         }
         

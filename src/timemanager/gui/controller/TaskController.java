@@ -117,7 +117,7 @@ public class TaskController implements Initializable {
     }  
     
     private void isAdmin() {
-        if(lm.getLoggedInUser().getIsAdmin() == true) {
+        if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
             timeLoggerLink.setVisible(true);
             clientsLink.setDisable(false);
@@ -320,7 +320,7 @@ public class TaskController implements Initializable {
             }
         });
         
-        if(lm.getLoggedInUser().getIsAdmin() == true){
+        if(lm.getLoggedInUser().getIsAdmin()){
             tcm.getItems().add(deleteItem);
         }
         
