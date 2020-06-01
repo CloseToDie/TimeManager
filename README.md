@@ -3,7 +3,7 @@
 
 This program is build to track time for customers.
 
-## Install Guide
+## Installation Guide
 
 ### Downloading the project
 - Download the github repo to your local machine.
