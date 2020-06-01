@@ -1,4 +1,7 @@
 # TimeManager
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+</p>
 
 This program is build to track time for customers.
 
@@ -17,8 +20,9 @@ There sould be multiple sql files in the "db" folder in the project folder struc
 
 ### Connecting to the database
 - Create a file in the root of the project named "DBSettings.txt"
-- Open this file, and input the following data.
+- Open the DBSettings.txt file, and input the following data.
   - server=10.176.111.31
   - user=(Your db username here)
   - password=(Your db username here)
   - database=TimeManager (Or your chosen database name)
+
