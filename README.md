@@ -11,6 +11,10 @@ This program is build to track time for customers.
 - Start Netbeans, and click the "Open Project".
 - Now choose the project from where you placed it from before.
 
+### Required libraries
+- MSSQL Driver
+- JFoenix 9.0.8
+
 ### Setting up the database
 In your desired database software, please create a new database for the project.
 
@@ -23,4 +27,7 @@ There sould be multiple sql files in the "db" folder in the project folder struc
   - user=(Your db username here)
   - password=(Your db username here)
   - database=TimeManager (Or your chosen database name)
+  
+### Running the program
+After having gone through alle the steps, and installed the project, you should be good to go. Now go to Netbeans, and click the Clean and Build button, and then click the green Run Project button next to it. The project should start, and you should be able to use it.
 
