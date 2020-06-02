@@ -8,7 +8,7 @@ import timemanager.dal.database.ProjectManagerDBDAO;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class ProjectManager {
     public ArrayList<Project> projects = new ArrayList<>();

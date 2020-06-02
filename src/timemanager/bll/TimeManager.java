@@ -13,7 +13,7 @@ import timemanager.dal.database.TimeManagerDBDAO;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TimeManager {
 

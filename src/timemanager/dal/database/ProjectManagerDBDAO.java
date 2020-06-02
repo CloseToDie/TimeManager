@@ -13,7 +13,7 @@ import timemanager.dal.ProjectManagerFacade;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class ProjectManagerDBDAO implements ProjectManagerFacade {
     private final MSSQLDatabaseConnector dbCon;

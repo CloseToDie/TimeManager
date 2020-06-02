@@ -5,7 +5,7 @@ import timemanager.be.Client;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public interface ClientManagerFacade {
     

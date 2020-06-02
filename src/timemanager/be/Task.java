@@ -7,7 +7,7 @@ package timemanager.be;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class Task {
     private int id;

@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  * @link https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  */
 public class Password {

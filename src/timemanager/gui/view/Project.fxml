@@ -176,6 +176,11 @@
                      </columnResizePolicy>
                   </TableView>
                   <JFXButton fx:id="timerButton1" layoutX="637.0" layoutY="28.0" onMouseClicked="#openAddProject" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD PROJECT" />
+                  <Label fx:id="clientName" layoutX="22.0" layoutY="35.0" prefHeight="24.0" prefWidth="450.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children></VBox>

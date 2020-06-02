@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -45,7 +44,7 @@ import timemanager.gui.model.TimeLoggerModel;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TaskController implements Initializable {
     
@@ -88,6 +87,8 @@ public class TaskController implements Initializable {
     private HBox usersLink;
     @FXML
     private HBox statisticsLink;
+    @FXML
+    private Label projectName;
 
     /**
      * Initializes the controller class.
@@ -114,8 +115,13 @@ public class TaskController implements Initializable {
         initStartTimeline();
         
         isAdmin();
+        
+        setupTableMenus();
     }  
     
+    /**
+     * Setup sidebar links according to admin status
+     */
     private void isAdmin() {
         if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
@@ -135,40 +141,73 @@ public class TaskController implements Initializable {
         }
     }
     
+    /**
+     * Set the task projects, and setup table with tasks under this project
+     * @param project 
+     */
     public void setProject(Project project) {
         this.project = project;
+        projectName.setText(project.getName());
         setupTable();
     }
 
+    /**
+     * TimeLogger view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
     }
     
+    /**
+     * Client view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openClients(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
+    /** 
+     * User view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openUsers(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
 
+    /**
+     * Statistics view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openStatistics(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
 
+    /**
+     * Create a new task popup
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void addTask(ActionEvent event) throws Exception {
         tms.showTasksCreate(project);
     }
     
+    /**
+     * Toggle the timer, start / stop timer
+     */
     private void toggleTimer() {
         if(timerButton.getText().equals("START")) {
             if(!selected(selectClient) || !selected(selectProject) || !selected(selectTask)) return;
@@ -178,6 +217,9 @@ public class TaskController implements Initializable {
         }
     }
     
+    /**
+     * Pause the timer
+     */
     private void pauseTimer() {
         if(pauseButton.getText().equals("PAUSE")) {
             pause();
@@ -186,36 +228,46 @@ public class TaskController implements Initializable {
         }
     }
     
+    /**
+     * Start the timer
+     */
     private void start() {
         timerButton.setText("STOP");
         pauseButton.setDisable(false);
         tlm.start(selectTask.getValue().getId(), billable.isSelected(), lm.getLoggedInUser().getId());
         disableCombos(true);
-        
-        //timeline.play();
     }
     
+    /**
+     * Stop the timer
+     */
     private void stop() {
         timerButton.setText("START");
         pauseButton.setText("PAUSE");
         pauseButton.setDisable(true);
         tlm.stop();
         disableCombos(false);
-        //timeline.stop();
     }
     
+    /**
+     * Pause the timer
+     */
     private void pause() {
         pauseButton.setText("RESUME");
         tlm.pause();
-        //timeline.pause();
     }
     
+    /**
+     * Resume running timer
+     */
     private void resume() {
         pauseButton.setText("PAUSE");
         tlm.unpause();
-        //timeline.play();
     }
 
+    /**
+     * Setup the timeline, to update time spent.
+     */
     private void setupTimeline() {
         timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
@@ -225,10 +277,18 @@ public class TaskController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
     
+    /**
+     * Check JFXComboBox selected status
+     * @param combo
+     * @return boolean
+     */
     private boolean selected(JFXComboBox combo) {
         return combo.getValue() != null;
     }
 
+    /**
+     * Initialize timeline according to if a timer is running or paused.
+     */
     private void initStartTimeline() {
         timeline.play();
         if(tlm.timerRunning() && tlm.lastTimer() != null) {
@@ -247,6 +307,10 @@ public class TaskController implements Initializable {
         
     }
 
+    /**
+     * Select a client
+     * @param event 
+     */
     @FXML
     private void selectClient(ActionEvent event) {
         System.out.println(selectClient.getValue());
@@ -261,6 +325,10 @@ public class TaskController implements Initializable {
         }
     }
 
+    /**
+     * Select a project
+     * @param event 
+     */
     @FXML
     private void selectProject(ActionEvent event) {
         System.out.println(selectProject.getValue());
@@ -269,17 +337,27 @@ public class TaskController implements Initializable {
         if(!selectProject.getSelectionModel().isEmpty()) {
             selectTask.setDisable(false);
             selectTask.setItems(tm.getTasks(selectProject.getValue().getId()));
+            setProject(selectProject.getValue());
         } else {
             selectTask.setDisable(true);
         }
     }
 
+    /**
+     * Select a task
+     * @param event 
+     */
     @FXML
     private void selectTask(ActionEvent event) {
         System.out.println(selectTask.getValue());
         System.out.println(selectTask.getSelectionModel().isEmpty());
     }
 
+    /**
+     * Mass setDisable for ComboBoxes
+     * Set combobox disable status to given boolean.
+     * @param b 
+     */
     private void disableCombos(boolean b) {
         selectClient.setDisable(b);
         selectProject.setDisable(b);
@@ -287,9 +365,21 @@ public class TaskController implements Initializable {
         billable.setDisable(b);
     }
 
+    /**
+     * Setup table
+     */
     private void setupTable() {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         
+        if(project != null) {
+            taskTable.setItems(tm.getTasks(project.getId()));
+        }
+    }
+    
+    /**
+     * Setup table menus
+     */
+    private void setupTableMenus() {
         // Edit Client
         MenuItem editItem = new MenuItem("Edit");
         editItem.setOnAction((action) -> {
@@ -324,19 +414,11 @@ public class TaskController implements Initializable {
             tcm.getItems().add(deleteItem);
         }
         
-        taskTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent t) {
-                if(t.getButton() == MouseButton.SECONDARY) {
-                    tcm.show(taskTable, t.getScreenX(), t.getScreenY());
-                }
+        taskTable.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent t) -> {
+            if(t.getButton() == MouseButton.SECONDARY) {
+                tcm.show(taskTable, t.getScreenX(), t.getScreenY());
             }
         });
-        
-        if(project != null) {
-            taskTable.setItems(tm.getTasks(project.getId()));
-        }
     }
     
 }

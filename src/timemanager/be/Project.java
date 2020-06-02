@@ -2,7 +2,7 @@ package timemanager.be;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class Project {
     private int id;

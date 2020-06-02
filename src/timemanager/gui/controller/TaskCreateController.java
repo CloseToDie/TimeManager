@@ -26,7 +26,7 @@ import timemanager.utils.validation.Validate;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TaskCreateController implements Initializable {
 
@@ -56,23 +56,35 @@ public class TaskCreateController implements Initializable {
         }
     }    
     
+    /**
+     * Set the task project
+     * @param project 
+     */
     public void setProject(Project project) {
         this.project = project;
         projectSelect.setItems(pm.getClientProjects(project.getClientId()));
         projectSelect.setValue(project);
     }
     
+    /**
+     * Set the task variable if we are updating a task
+     * @param task 
+     */
     public void setTask(Task task) {
         this.task = task;
         if(task != null) setupFields();
     }
 
+    /**
+     * Create or Update task
+     * @param event 
+     */
     @FXML
     private void saveTask(ActionEvent event) {
         String desc = description.getText();
         int projectId = projectSelect.getValue().getId();
         
-        if(validateDescription(desc)) {
+        if(validateDescription(desc) && validateProject(projectId)) {
             if(task != null) {
                 task.setDescription(desc);
                 task.setProjectId(projectId);
@@ -88,16 +100,37 @@ public class TaskCreateController implements Initializable {
         }
     }
 
+    /**
+     * Close the window
+     * @param event 
+     */
     @FXML
     private void cancelSaveTask(ActionEvent event) {
         Stage window = (Stage) (errorLabel.getScene().getWindow());
         window.close();
     }
     
+    /**
+     * Validate the description
+     * @param desc
+     * @return boolean
+     */
     private boolean validateDescription(String desc) {
         return !(Validate.isNull(desc) || !Validate.containsAtLeast(desc, 3));
     }
+    
+    /**
+     * Validate the select project
+     * @param projectId
+     * @return boolean
+     */
+    private boolean validateProject(Integer projectId) {
+        return projectId != null;
+    }
 
+    /**
+     * Setup fields if we are updating task
+     */
     private void setupFields() {
         description.setText(task.getDescription());
     }

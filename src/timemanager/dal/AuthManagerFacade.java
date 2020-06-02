@@ -9,7 +9,7 @@ import timemanager.be.User;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public interface AuthManagerFacade {
     /**

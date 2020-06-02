@@ -22,7 +22,7 @@ import timemanager.gui.controller.UserCreateController;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TimeManagerStart extends Application {
     

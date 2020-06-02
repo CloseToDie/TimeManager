@@ -13,7 +13,7 @@ import timemanager.dal.ClientManagerFacade;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class ClientManagerDBDAO implements ClientManagerFacade{
     private final MSSQLDatabaseConnector dbCon;

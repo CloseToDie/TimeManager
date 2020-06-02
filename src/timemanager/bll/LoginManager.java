@@ -12,15 +12,25 @@ import timemanager.dal.database.AuthManagerDBDAO;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class LoginManager {
     AuthManagerFacade am;
     
+    /**
+     * LoginManager constructor
+     * @throws IOException 
+     */
     public LoginManager() throws IOException {
         am = new AuthManagerDBDAO();
     }
     
+    /**
+     * Login the user with given username and password
+     * @param username
+     * @param password
+     * @return user
+     */
     public User login(String username, String password) {
         return am.login(username, password);
     }

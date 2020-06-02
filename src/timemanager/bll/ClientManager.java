@@ -8,7 +8,7 @@ import timemanager.dal.database.ClientManagerDBDAO;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class ClientManager {
     public ArrayList<Client> clients = new ArrayList<>();

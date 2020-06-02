@@ -19,7 +19,7 @@ import timemanager.gui.model.LoginModel;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class LoginController implements Initializable {
     
@@ -50,6 +50,12 @@ public class LoginController implements Initializable {
         password.setText(null);
     }    
 
+    /**
+     * Login the user by given username and password
+     * @param event
+     * @throws IOException
+     * @throws Exception 
+     */
     @FXML
     private void login(ActionEvent event) throws IOException, Exception {
         if(lm.login(username.getText(), password.getText()) != null) {
@@ -61,10 +67,18 @@ public class LoginController implements Initializable {
         }
     }
     
+    /**
+     * Check if the username is valid
+     * @return boolean
+     */
     private boolean checkUsernameIsValid() {
         return username != null;
     }
     
+    /**
+     * Check if the password is valid
+     * @return boolean
+     */
     private boolean checkPasswordIsValid() {
         return password != null;
     }

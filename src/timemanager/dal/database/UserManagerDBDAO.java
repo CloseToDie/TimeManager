@@ -18,15 +18,23 @@ import timemanager.dal.UserManagerFacade;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class UserManagerDBDAO implements UserManagerFacade {
     private final MSSQLDatabaseConnector dbCon;
 
+    /**
+     * UserManagerDBDAO constructor
+     * @throws IOException 
+     */
     public UserManagerDBDAO() throws IOException {
         dbCon = new MSSQLDatabaseConnector();
     }
 
+    /**
+     * Get all users
+     * @return users
+     */
     @Override
     public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
@@ -55,6 +63,11 @@ public class UserManagerDBDAO implements UserManagerFacade {
         return null;
     }
 
+    /**
+     * Get a user by its id
+     * @param userId
+     * @return user
+     */
     @Override
     public User getUserById(int userId) {
         try ( Connection con = dbCon.getConnection()) {
@@ -81,6 +94,11 @@ public class UserManagerDBDAO implements UserManagerFacade {
         return null;
     }
 
+    /**
+     * Get a user by its username
+     * @param username
+     * @return user
+     */
     @Override
     public User getUserByName(String username) {
         try ( Connection con = dbCon.getConnection()) {
@@ -107,6 +125,11 @@ public class UserManagerDBDAO implements UserManagerFacade {
         return null;
     }
 
+    /**
+     * Store a new user
+     * @param user
+     * @return boolean
+     */
     @Override
     public boolean storeUser(User user) {
         try ( Connection con = dbCon.getConnection()) {
@@ -138,6 +161,11 @@ public class UserManagerDBDAO implements UserManagerFacade {
         return false;
     }
 
+    /**
+     * Update a user
+     * @param user
+     * @return boolean
+     */
     @Override
     public boolean updateUser(User user) {
         try ( Connection con = dbCon.getConnection()) {
@@ -162,6 +190,11 @@ public class UserManagerDBDAO implements UserManagerFacade {
         return false;
     }
 
+    /**
+     * Delete a user
+     * @param user
+     * @return boolean
+     */
     @Override
     public boolean deleteUser(User user) {
         try ( Connection con = dbCon.getConnection()) {

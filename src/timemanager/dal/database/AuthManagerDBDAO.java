@@ -8,7 +8,7 @@ import timemanager.utils.auth.Password;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class AuthManagerDBDAO implements AuthManagerFacade{
     User user = null;

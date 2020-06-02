@@ -2,7 +2,7 @@ package timemanager.be;
 
 /**
  *
- * @author kaspe & andreasvillumsen
+ * @author kaspe & andreasvillumsen & Christian
  */
 public class User {
 

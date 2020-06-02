@@ -7,9 +7,15 @@ package timemanager.utils.text;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class Formatter {
+    /**
+     * Format the string to 2f
+     * @param d
+     * @param suffix
+     * @return 2f string
+     */
     public static String doubleTo2f(double d, String suffix) {
         return String.format("%,.2f", d) + " " + suffix;
     }

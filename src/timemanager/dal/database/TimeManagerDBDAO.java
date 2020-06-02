@@ -17,7 +17,7 @@ import timemanager.dal.TimeManagerFacade;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TimeManagerDBDAO implements TimeManagerFacade {
     private final MSSQLDatabaseConnector dbCon;
@@ -64,6 +64,11 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         return null;
     }
     
+    /**
+     * Get a list of timers for a task
+     * @param taskId
+     * @return timers
+     */
     @Override
     public ArrayList<Timer> getTimers(int taskId) {
         ArrayList<Timer> timers = new ArrayList<>();
@@ -215,6 +220,14 @@ public class TimeManagerDBDAO implements TimeManagerFacade {
         return false;
     }
 
+    /**
+     * Get timers for a task by a user between two dates.
+     * @param taskId
+     * @param user
+     * @param start
+     * @param end
+     * @return timers
+     */
     @Override
     public ArrayList<Timer> getStatTimers(int taskId, User user, LocalDate start, LocalDate end) {
         ArrayList<Timer> timers = new ArrayList<>();

@@ -46,7 +46,7 @@ import timemanager.utils.time.TimeConverter;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class StatisticsController implements Initializable {
     
@@ -142,6 +142,9 @@ public class StatisticsController implements Initializable {
         isAdmin();
     }    
     
+    /**
+     * Setup sidebar links according to admin status
+     */
     private void isAdmin() {
         if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
@@ -161,29 +164,52 @@ public class StatisticsController implements Initializable {
         }
     }
 
+    /**
+     * TimeLogger view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openTimeLogger(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "TimeLogger");
     }
     
+    /**
+     * Client view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openClients(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
+    /**
+     * User view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openUsers(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
 
+    /**
+     * Statistics view link
+     * @param event
+     * @throws Exception 
+     */
     private void openStatistics(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
 
+    /**
+     * Toggle the timer, start / stop timer
+     */
     private void toggleTimer() {
         if(timerButton.getText().equals("START")) {
             if(!selected(selectClient) || !selected(selectProject) || !selected(selectTask)) return;
@@ -193,6 +219,9 @@ public class StatisticsController implements Initializable {
         }
     }
     
+    /**
+     * Pause the timer
+     */
     private void pauseTimer() {
         if(pauseButton.getText().equals("PAUSE")) {
             pause();
@@ -201,36 +230,46 @@ public class StatisticsController implements Initializable {
         }
     }
     
+    /**
+     * Start the timer
+     */
     private void start() {
         timerButton.setText("STOP");
         pauseButton.setDisable(false);
         tlm.start(selectTask.getValue().getId(), billable.isSelected(), lm.getLoggedInUser().getId());
         disableCombos(true);
-        
-        //timeline.play();
     }
     
+    /**
+     * Stop the timer
+     */
     private void stop() {
         timerButton.setText("START");
         pauseButton.setText("PAUSE");
         pauseButton.setDisable(true);
         tlm.stop();
         disableCombos(false);
-        //timeline.stop();
     }
     
+    /**
+     * Pause the timer
+     */
     private void pause() {
         pauseButton.setText("RESUME");
         tlm.pause();
-        //timeline.pause();
     }
     
+    /**
+     * Resume running timer
+     */
     private void resume() {
         pauseButton.setText("PAUSE");
         tlm.unpause();
-        //timeline.play();
     }
 
+    /**
+     * Setup the timeline, to update time spent.
+     */
     private void setupTimeline() {
         timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
@@ -240,10 +279,18 @@ public class StatisticsController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
     
+    /**
+     * Check JFXComboBox selected status
+     * @param combo
+     * @return boolean
+     */
     private boolean selected(JFXComboBox combo) {
         return combo.getValue() != null;
     }
 
+    /**
+     * Initialize timeline according to if a timer is running or paused.
+     */
     private void initStartTimeline() {
         timeline.play();
         if(tlm.timerRunning() && tlm.lastTimer() != null) {
@@ -251,17 +298,19 @@ public class StatisticsController implements Initializable {
             pauseButton.setText("PAUSE");
             pauseButton.setDisable(false);
             disableCombos(true);
-            //timeline.play();
         } else if (!tlm.timerRunning() && tlm.lastTimer() != null) {
             timerButton.setText("STOP");
             pauseButton.setText("RESUME");
             pauseButton.setDisable(false);
             disableCombos(true);
-            //timeline.pause();
         }
         
     }
 
+    /**
+     * Select a client
+     * @param event 
+     */
     @FXML
     private void selectClient(ActionEvent event) {
         System.out.println(selectClient.getValue());
@@ -276,6 +325,10 @@ public class StatisticsController implements Initializable {
         }
     }
 
+    /**
+     * Select a project
+     * @param event 
+     */
     @FXML
     private void selectProject(ActionEvent event) {
         System.out.println(selectProject.getValue());
@@ -289,12 +342,21 @@ public class StatisticsController implements Initializable {
         }
     }
 
+    /**
+     * Select a task
+     * @param event 
+     */
     @FXML
     private void selectTask(ActionEvent event) {
         System.out.println(selectTask.getValue());
         System.out.println(selectTask.getSelectionModel().isEmpty());
     }
 
+    /**
+     * Mass setDisable for ComboBoxes
+     * Set combobox disable status to given boolean.
+     * @param b 
+     */
     private void disableCombos(boolean b) {
         selectClient.setDisable(b);
         selectProject.setDisable(b);
@@ -302,6 +364,10 @@ public class StatisticsController implements Initializable {
         billable.setDisable(b);
     }
     
+    /**
+     * Refresh statistics chart with refreshed data
+     * @throws ParseException 
+     */
     @FXML
     private void refreshData() throws ParseException {
         if(!inputFilled()) return;
@@ -331,6 +397,10 @@ public class StatisticsController implements Initializable {
         calcTotalTimeAndMoneyEarned(filteredTimers);
     }
     
+    /**
+     * Check if the required inputs are filled
+     * @return boolean
+     */
     private boolean inputFilled() {
         return !selectUser.getSelectionModel().isEmpty() && 
                 !statSelectProject.getSelectionModel().isEmpty() && 
@@ -338,10 +408,21 @@ public class StatisticsController implements Initializable {
                 endDate.getValue() != null;
     }
 
+    /**
+     * Refresh data
+     * @param event
+     * @throws ParseException 
+     */
     private void refreshData(ActionEvent event) throws ParseException {
         refreshData();
     }
     
+    /**
+     * Filter the list of timers, so every timer day has a list of timers.
+     * @param timers
+     * @return Map<LocalDate, List<Timer>>
+     * @throws ParseException 
+     */
     private Map<LocalDate, List<Timer>> filterTimersForChart(List<Timer> timers) throws ParseException {
         Map<LocalDate, List<Timer>> timersPerDate = timers.stream()
         .collect(Collectors.groupingBy(Timer::getDate));
@@ -349,6 +430,10 @@ public class StatisticsController implements Initializable {
         return timersPerDate;
     }
 
+    /**
+     * Calculate the time and money earned on a project between dates.
+     * @param filteredTimers 
+     */
     private void calcTotalTimeAndMoneyEarned(Map<LocalDate, List<Timer>> filteredTimers) {
         double totalMoneyEarned = 0;
         double totalNonBillable = 0;

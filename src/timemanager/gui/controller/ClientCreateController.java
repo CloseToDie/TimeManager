@@ -20,7 +20,7 @@ import timemanager.utils.validation.Validate;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class ClientCreateController implements Initializable {
     
@@ -37,6 +37,11 @@ public class ClientCreateController implements Initializable {
     @FXML
     private Label errorLabel;
     
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -46,11 +51,19 @@ public class ClientCreateController implements Initializable {
         }
     }
     
+    /**
+     * Set the client if we are updating a client.
+     * @param client 
+     */
     public void setClient(Client client) {
         this.client = client;
         if(client != null) setupFields();
     }
     
+    /**
+     * Create or Update client
+     * @param event 
+     */
     @FXML
     private void saveClient(ActionEvent event) {
         String name = clientName.getText();
@@ -69,16 +82,28 @@ public class ClientCreateController implements Initializable {
         }
     }
 
+    /**
+     * Close the window
+     * @param event 
+     */
     @FXML
     private void cancelSaveClient(ActionEvent event) {
         Stage window = (Stage) (cancelSaveClient.getScene().getWindow());
         window.close();
     }
     
+    /**
+     * Validate name
+     * @param name
+     * @return boolean
+     */
     private boolean validateName(String name) {
         return !(Validate.isNull(name) || !Validate.containsAtLeast(name, 3));
     }
 
+    /**
+     * Setup fields, if we are updating a client.
+     */
     private void setupFields() {
         clientName.setText(client.getName());
     }

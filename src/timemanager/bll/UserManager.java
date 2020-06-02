@@ -15,39 +15,75 @@ import timemanager.utils.auth.Password;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class UserManager {
     public ArrayList<User> users = new ArrayList<>();
     UserManagerFacade um;
     
-    
+    /**
+     * UserManager constructor
+     * @throws IOException 
+     */
     public UserManager() throws IOException {
         um = new UserManagerDBDAO();
     }
     
+    /**
+     * Get a list of users
+     * @return users
+     */
     public ArrayList<User> getUsers() {
         users = um.getUsers();
         return users;
     }
     
+    /**
+     * Get a user by its id
+     * @param id
+     * @return user
+     */
     public User getUserById(int id) {
         return um.getUserById(id);
     }
     
+    /**
+     * Get a user by its username
+     * @param name
+     * @return user
+     */
     public User getUserByName(String name) {
         return um.getUserByName(name);
     }
     
+    /**
+     * Store a new user to database
+     * @param name
+     * @param email
+     * @param password
+     * @param isAdmin
+     * @return boolean
+     * @throws NoSuchAlgorithmException 
+     */
     public boolean storeUser(String name, String email, String password, Boolean isAdmin) throws NoSuchAlgorithmException {
         byte[] salt = Password.getSalt();
         return um.storeUser(new User(0, name, email, Password.hash(password, salt, "SHA-512"), salt, isAdmin));
     }
     
+    /**
+     * Update a user in database
+     * @param user
+     * @return boolean
+     */
     public boolean updateUser(User user) {
         return um.updateUser(user);
     }
     
+    /**
+     * Deleting a user from database
+     * @param user
+     * @return boolean
+     */
     public boolean deleteUser(User user) {
         return um.deleteUser(user);
     }

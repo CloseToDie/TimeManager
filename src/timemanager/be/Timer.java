@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 /**
  * Timer BE Class
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class Timer {
     private int id;

@@ -10,15 +10,35 @@ import timemanager.be.Task;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public interface TaskManagerFacade {
+    /**
+     * Get all tasks for a project
+     * @param projectId
+     * @return tasks
+     */
     public ArrayList<Task> getTasks(int projectId);
     
+    /**
+     * Store a new task
+     * @param task
+     * @return boolean
+     */
     public boolean storeTask(Task task);
     
+    /**
+     * Update a task
+     * @param task
+     * @return boolean
+     */
     public boolean updateTask(Task task);
     
+    /**
+     * Delete a task
+     * @param task
+     * @return boolean
+     */
     public boolean deleteTask(Task task);
     
 }

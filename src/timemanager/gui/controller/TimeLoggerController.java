@@ -37,7 +37,7 @@ import timemanager.gui.model.TimeLoggerModel;
 /**
  * FXML Controller class
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TimeLoggerController implements Initializable {
     
@@ -114,6 +114,9 @@ public class TimeLoggerController implements Initializable {
         isAdmin();
     }
     
+    /**
+     * Setup sidebar links according to admin status
+     */
     private void isAdmin() {
         if(lm.getLoggedInUser().getIsAdmin()) {
             timeLoggerLink.setDisable(false);
@@ -133,24 +136,42 @@ public class TimeLoggerController implements Initializable {
         }
     }
     
+    /**
+     * Client view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openClients(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Client");
     }
 
+    /**
+     * User view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openUsers(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "User");
     }
 
+    /**
+     * Statistics view link
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     private void openStatistics(MouseEvent event) throws Exception {
         timeline.stop();
         tms.set((Stage) (selectProject.getScene().getWindow()), "Statistics");
     }
     
+    /**
+     * Toggle the timer, start / stop timer
+     */
     private void toggleTimer() {
         if(timerButton.getText().equals("START")) {
             if(!selected(selectClient) || !selected(selectProject) || !selected(selectTask)) return;
@@ -160,6 +181,9 @@ public class TimeLoggerController implements Initializable {
         }
     }
     
+    /**
+     * Pause the timer
+     */
     private void pauseTimer() {
         if(pauseButton.getText().equals("PAUSE")) {
             pause();
@@ -168,36 +192,46 @@ public class TimeLoggerController implements Initializable {
         }
     }
     
+    /**
+     * Start the timer
+     */
     private void start() {
         timerButton.setText("STOP");
         pauseButton.setDisable(false);
         tlm.start(selectTask.getValue().getId(), billable.isSelected(), lm.getLoggedInUser().getId());
         disableCombos(true);
-        
-        //timeline.play();
     }
     
+    /**
+     * Stop the timer
+     */
     private void stop() {
         timerButton.setText("START");
         pauseButton.setText("PAUSE");
         pauseButton.setDisable(true);
         tlm.stop();
         disableCombos(false);
-        //timeline.stop();
     }
     
+    /**
+     * Pause the timer
+     */
     private void pause() {
         pauseButton.setText("RESUME");
         tlm.pause();
-        //timeline.pause();
     }
     
+    /**
+     * Resume running timer
+     */
     private void resume() {
         pauseButton.setText("PAUSE");
         tlm.unpause();
-        //timeline.play();
     }
 
+    /**
+     * Setup the timeline, to update time spent.
+     */
     private void setupTimeline() {
         timeline = new Timeline(
             new KeyFrame(Duration.seconds(1), e -> {
@@ -207,10 +241,18 @@ public class TimeLoggerController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
     
+    /**
+     * Check JFXComboBox selected status
+     * @param combo
+     * @return boolean
+     */
     private boolean selected(JFXComboBox combo) {
         return combo.getValue() != null;
     }
 
+    /**
+     * Initialize timeline according to if a timer is running or paused.
+     */
     private void initStartTimeline() {
         timeline.play();
         if(tlm.timerRunning() && tlm.lastTimer() != null) {
@@ -218,17 +260,19 @@ public class TimeLoggerController implements Initializable {
             pauseButton.setText("PAUSE");
             pauseButton.setDisable(false);
             disableCombos(true);
-            //timeline.play();
         } else if (!tlm.timerRunning() && tlm.lastTimer() != null) {
             timerButton.setText("STOP");
             pauseButton.setText("RESUME");
             pauseButton.setDisable(false);
             disableCombos(true);
-            //timeline.pause();
         }
         
     }
 
+    /**
+     * Select a client
+     * @param event 
+     */
     @FXML
     private void selectClient(ActionEvent event) {
         System.out.println(selectClient.getValue());
@@ -243,6 +287,10 @@ public class TimeLoggerController implements Initializable {
         }
     }
 
+    /**
+     * Select a project
+     * @param event 
+     */
     @FXML
     private void selectProject(ActionEvent event) {
         System.out.println(selectProject.getValue());
@@ -256,6 +304,10 @@ public class TimeLoggerController implements Initializable {
         }
     }
 
+    /**
+     * Select a task
+     * @param event 
+     */
     @FXML
     private void selectTask(ActionEvent event) {
         System.out.println(selectTask.getValue());
@@ -268,6 +320,11 @@ public class TimeLoggerController implements Initializable {
         }
     }
 
+    /**
+     * Mass setDisable for ComboBoxes
+     * Set combobox disable status to given boolean.
+     * @param b 
+     */
     private void disableCombos(boolean b) {
         selectClient.setDisable(b);
         selectProject.setDisable(b);
@@ -275,6 +332,9 @@ public class TimeLoggerController implements Initializable {
         billable.setDisable(b);
     }
     
+    /**
+     * Setup table
+     */
     private void setupTable() {
         started.setCellFactory(column -> {
             TableCell<Timer, LocalDateTime> cell = new TableCell<Timer, LocalDateTime>() {

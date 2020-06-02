@@ -1,5 +1,16 @@
-INSERT INTO TimeManager.dbo.task (id, description, project_id) VALUES (20, N'Weird stuff', 6);
-INSERT INTO TimeManager.dbo.task (id, description, project_id) VALUES (16, N'New Task', 12);
-INSERT INTO TimeManager.dbo.task (id, description, project_id) VALUES (17, N'Login Feature', 13);
-INSERT INTO TimeManager.dbo.task (id, description, project_id) VALUES (21, N'Clients View', 13);
-INSERT INTO TimeManager.dbo.task (id, description, project_id) VALUES (22, N'Hejsa', 13);
+create table task
+(
+    id          int identity
+        constraint task_pk
+            primary key nonclustered,
+    description varchar(255),
+    project_id  int
+        constraint project_id
+            references project
+            on delete cascade
+)
+go
+
+create unique index task_id_uindex
+    on task (id)
+go

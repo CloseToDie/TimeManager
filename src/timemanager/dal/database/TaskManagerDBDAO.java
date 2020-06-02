@@ -18,15 +18,24 @@ import timemanager.dal.TaskManagerFacade;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class TaskManagerDBDAO implements TaskManagerFacade{
     private final MSSQLDatabaseConnector dbCon;
 
+    /**
+     * TaskManagerDBDAO constructor
+     * @throws IOException 
+     */
     public TaskManagerDBDAO() throws IOException {
         dbCon = new MSSQLDatabaseConnector();
     }
 
+    /**
+     * Get all tasks for a project
+     * @param projectId
+     * @return tasks
+     */
     @Override
     public ArrayList<Task> getTasks(int projectId) {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -53,6 +62,11 @@ public class TaskManagerDBDAO implements TaskManagerFacade{
         return null;
     }
 
+    /**
+     * Store a new task
+     * @param task
+     * @return boolean
+     */
     @Override
     public boolean storeTask(Task task) {
         try ( Connection con = dbCon.getConnection()) {
@@ -81,6 +95,11 @@ public class TaskManagerDBDAO implements TaskManagerFacade{
         return false;
     }
 
+    /**
+     * Update a task
+     * @param task
+     * @return boolean
+     */
     @Override
     public boolean updateTask(Task task) {
         try ( Connection con = dbCon.getConnection()) {
@@ -102,6 +121,11 @@ public class TaskManagerDBDAO implements TaskManagerFacade{
         return false;
     }
 
+    /**
+     * Delete a task
+     * @param task
+     * @return boolean
+     */
     @Override
     public boolean deleteTask(Task task) {
         try ( Connection con = dbCon.getConnection()) {

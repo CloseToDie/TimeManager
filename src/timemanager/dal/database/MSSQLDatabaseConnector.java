@@ -10,7 +10,7 @@ import java.util.Properties;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public class MSSQLDatabaseConnector {
 

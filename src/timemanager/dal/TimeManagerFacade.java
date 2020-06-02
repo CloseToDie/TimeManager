@@ -7,7 +7,7 @@ import timemanager.be.User;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public interface TimeManagerFacade {
     
@@ -17,6 +17,11 @@ public interface TimeManagerFacade {
      */
     public ArrayList<Timer> getTimers();
     
+    /**
+     * Get timers for a task
+     * @param taskId
+     * @return timers
+     */
     public ArrayList<Timer> getTimers(int taskId);
     
     /**

@@ -175,6 +175,11 @@
                      </columnResizePolicy>
                   </TableView>
                   <JFXButton layoutX="637.0" layoutY="28.0" onAction="#addTask" prefHeight="38.0" prefWidth="163.0" styleClass="startButton" text="ADD TASK" />
+                  <Label fx:id="projectName" layoutX="23.0" layoutY="35.0" prefHeight="24.0" prefWidth="381.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children></VBox>

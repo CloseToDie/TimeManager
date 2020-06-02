@@ -5,7 +5,7 @@ import timemanager.be.Project;
 
 /**
  *
- * @author andreasvillumsen
+ * @author andreasvillumsen & Christian
  */
 public interface ProjectManagerFacade {
     

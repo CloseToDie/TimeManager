@@ -28,13 +28,13 @@
       <Button fx:id="saveProjectButton" layoutX="31.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveProject" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Save" />
       <Line endX="100.0" layoutX="132.0" layoutY="64.0" startX="-100.0" stroke="#333333" />
       <Button fx:id="cancelSaveProject" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancelSaveProject" prefHeight="51.0" prefWidth="146.0" styleClass="addUserFormButton" text="Cancel" />
-      <Label fx:id="errorLabel" layoutX="33.0" layoutY="192.0" prefHeight="17.0" prefWidth="300.0" text="Whooops!! Your input does not meet the requirements!" textFill="RED" visible="false" />
+      <Label fx:id="errorLabel" layoutX="32.0" layoutY="328.0" prefHeight="17.0" prefWidth="300.0" text="Whooops!! Your input does not meet the requirements!" textFill="RED" visible="false" />
       <Label layoutX="33.0" layoutY="162.0" text="Salary">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="projectSalary" layoutX="32.0" layoutY="187.0" prefHeight="47.0" prefWidth="300.0" />
+      <TextField fx:id="projectSalary" layoutX="34.0" layoutY="184.0" prefHeight="47.0" prefWidth="300.0" />
       <Label layoutX="34.0" layoutY="237.0" text="Client">
          <font>
             <Font size="16.0" />
