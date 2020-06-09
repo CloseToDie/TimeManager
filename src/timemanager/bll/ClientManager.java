@@ -29,7 +29,7 @@ public class ClientManager {
      */
     public ArrayList<Client> getClients() {
         clients = cm.getClients();
-        return clients;
+        return clients; // return cm.getClients();
     }
     
     /**

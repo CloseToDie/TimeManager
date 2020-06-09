@@ -11,7 +11,7 @@ import timemanager.bll.ClientManager;
  * @author andreasvillumsen & Christian
  */
 public class ClientModel {
-    private static ClientModel single_instance = null; 
+    private static ClientModel single_instance = null;
     private ClientManager cm;
     private ObservableList<Client> clients;
     

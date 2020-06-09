@@ -35,7 +35,7 @@ public class UserManager {
      */
     public ArrayList<User> getUsers() {
         users = um.getUsers();
-        return users;
+        return users; // return um.getUsers();
     }
     
     /**

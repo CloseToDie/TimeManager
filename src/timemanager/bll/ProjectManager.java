@@ -38,7 +38,7 @@ public class ProjectManager {
      */
     public ArrayList<Project> getProjects(int clientId) {
         projects = pm.getProjects(clientId);
-        return projects;
+        return projects; // return pm.getProjects(clientId);
     }
     
     /**
